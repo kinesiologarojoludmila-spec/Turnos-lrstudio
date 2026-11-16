@@ -28,9 +28,8 @@
                         'blanco-calido': '#FAF9F6',
                     },
                     fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    }
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
                 }
             }
         }
@@ -44,7 +43,7 @@
             overflow-x: hidden;
         }
         h1, h2, h3, .font-editorial {
-            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-family: 'Montserrat', 'sans-serif';
         }
         /* Animaciones suaves para formas abstractas */
         @keyframes floatSlow {
@@ -760,7 +759,7 @@
         <span id="toast-message">Cambios guardados</span>
     </div>
 
-    <!-- ==================== LÓGICA JAVASCRIPT ==================== -->
+    <!-- ==================== LÓGICA JAVASCRIPT & FIREBASE ==================== -->
     <script>
         // --- 1. ESTADO INICIAL Y DATOS POR DEFECTO ---
         const STORAGE_KEYS = {
@@ -780,58 +779,36 @@
             {
                 id: 'srv-plantillas',
                 name: 'Plantillas Ortopédicas Personalizadas Ebers',
-                price: 45000,
+                price: 0,
+                priceLabel: 'Consultar',
                 description: 'Diseño y confección de plantillas ortopédicas a medida con tecnología Ebers, adaptadas exactamente a los resultados de tu estudio de la pisada.',
                 icon: 'footprints'
             },
             {
                 id: 'srv-puncion',
                 name: 'Punción Seca',
-                price: 22000,
+                price: 35000,
                 description: 'Técnica de fisioterapia invasiva de alta precisión para desactivar puntos gatillo miofasciales, aliviar contracturas rebeldes y reducir el dolor muscular.',
                 icon: 'target'
             }
         ];
 
         const DEFAULT_CONFIG = {
-            workingDays: [1, 2, 3, 4, 5], // Lunes a Viernes (0=Dom, 6=Sab)
+            workingDays: [1, 2, 3, 4, 5],
             startTime: '09:00',
             endTime: '18:00',
-            slotDuration: 60, // minutos
-            surchargeType: 'fixed', // 'fixed' o 'percent'
+            slotDuration: 60,
+            surchargeType: 'fixed',
             surchargeValue: 5000,
             whatsappNumber: '5492284000000'
         };
 
-        // Cargar o inicializar datos desde LocalStorage
         let services = JSON.parse(localStorage.getItem(STORAGE_KEYS.SERVICES)) || DEFAULT_SERVICES;
         let config = JSON.parse(localStorage.getItem(STORAGE_KEYS.CONFIG)) || DEFAULT_CONFIG;
         let bookings = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS)) || [];
+        window.horariosNube = window.horariosNube || [];
 
-        // Si es la primera vez que se abre, crear un turno de ejemplo para hoy/mañana para mostrar cómo se tacha
-        if (!localStorage.getItem(STORAGE_KEYS.BOOKINGS)) {
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            const tomorrowStr = formatDateISO(tomorrow);
-            bookings = [
-                {
-                    id: 'bk-demo-1',
-                    date: tomorrowStr,
-                    time: '10:00',
-                    patientName: 'Martín Gómez',
-                    serviceId: 'srv-postura',
-                    serviceName: 'Evaluación de la Postura y Estudio de la Pisada',
-                    reason: 'Dolor cervical y control de pisada para correr.',
-                    price: 28000,
-                    isSpecialHour: false,
-                    isManualBlock: false,
-                    status: 'Confirmado'
-                }
-            ];
-            saveBookings();
-        }
-
-        let selectedSlot = null; // { time: '10:00', isSpecial: false }
+        let selectedSlot = null;
 
         // --- 2. FUNCIONES DE UTILIDAD ---
         function saveServices() {
@@ -844,7 +821,9 @@
             localStorage.setItem(STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
         }
 
-        function formatCurrency(num) {
+        function formatCurrency(num, customLabel = null) {
+            if (customLabel && Number(num) === 0) return customLabel;
+            if (Number(num) === 0) return 'Consultar';
             return '$' + Number(num).toLocaleString('es-AR');
         }
 
@@ -926,7 +905,7 @@
                                 <i data-lucide="${iconName}" class="w-5 h-5"></i>
                             </div>
                             <span class="px-3.5 py-1 rounded-full bg-blanco-calido border border-nude text-xs font-semibold text-oliva">
-                                ${formatCurrency(srv.price)}
+                                ${formatCurrency(srv.price, srv.priceLabel)}
                             </span>
                         </div>
                         <h3 class="text-2xl font-semibold text-carbon leading-snug">${srv.name}</h3>
@@ -961,20 +940,18 @@
             const todayStr = formatDateISO(today);
             dateInput.min = todayStr;
             if (!dateInput.value) {
-                // Por defecto mañana si hoy ya es tarde
                 const tomorrow = new Date(today);
                 tomorrow.setDate(today.getDate() + 1);
                 dateInput.value = formatDateISO(tomorrow);
             }
 
-            // Llenar selector de servicios
             const srvSelect = document.getElementById('booking-service');
             const currentVal = srvSelect.value;
             srvSelect.innerHTML = '';
             services.forEach(s => {
                 const opt = document.createElement('option');
                 opt.value = s.id;
-                opt.textContent = `${s.name} — ${formatCurrency(s.price)}`;
+                opt.textContent = `${s.name} — ${formatCurrency(s.price, s.priceLabel)}`;
                 srvSelect.appendChild(opt);
             });
             if (currentVal && services.some(s => s.id === currentVal)) {
@@ -997,7 +974,7 @@
 
             const [y, m, d] = dateStr.split('-').map(Number);
             const dateObj = new Date(y, m - 1, d);
-            const dayOfWeek = dateObj.getDay(); // 0 = Dom, 1 = Lun ... 6 = Sab
+            const dayOfWeek = dateObj.getDay();
 
             dayLabel.textContent = formatDateReadable(dateStr);
 
@@ -1013,7 +990,6 @@
                 scheduleInfo.innerHTML = `<i data-lucide="clock" class="w-3.5 h-3.5 text-oliva"></i> Horario habitual de atención: <strong>${config.startTime} a ${config.endTime} hs</strong>.`;
             }
 
-            // Generar franja amplia del día (08:00 a 21:00) según duración de turno
             const dayStart = 8 * 60;
             const dayEnd = 21 * 60;
             const step = Number(config.slotDuration) || 60;
@@ -1023,24 +999,24 @@
 
             for (let mins = dayStart; mins < dayEnd; mins += step) {
                 const timeStr = minutesToTime(mins);
-                // Determinar si está dentro del horario habitual
                 const isRegularHour = isWorkingDay && (mins >= habitStartMins) && (mins < habitEndMins);
                 const isSpecialHour = !isRegularHour;
 
-                // Si el usuario desmarcó mostrar especiales y es especial, saltar
                 if (isSpecialHour && !showSpecial) continue;
 
                 slotsCount++;
 
-                // Verificar si el turno ya está ocupado o bloqueado en bookings
-                const existingBooking = bookings.find(b => b.date === dateStr && b.time === timeStr);
+                // CONEXIÓN CON FIREBASE: verificamos tanto en la nube (horariosNube) como local
+                const ocupadoEnNube = window.horariosNube.some(h => h.fecha === dateStr && h.hora === timeStr);
+                const ocupadoLocal = bookings.some(b => b.date === dateStr && b.time === timeStr);
+                const isOccupied = ocupadoEnNube || ocupadoLocal;
+
                 const isSelected = selectedSlot && selectedSlot.time === timeStr;
 
                 const btn = document.createElement('button');
                 btn.type = 'button';
 
-                if (existingBooking) {
-                    // HORARIO TACHADO / OCUPADO
+                if (isOccupied) {
                     btn.disabled = true;
                     btn.className = 'slot-tachado p-3 rounded-2xl border border-nude text-left opacity-75 cursor-not-allowed flex flex-col justify-between';
                     btn.innerHTML = `
@@ -1051,7 +1027,6 @@
                         <span class="text-[11px] font-medium text-carbon/50 mt-1">Turno ocupado</span>
                     `;
                 } else {
-                    // HORARIO DISPONIBLE (Habitual o Especial)
                     const baseClasses = 'p-3 rounded-2xl border text-left transition-all flex flex-col justify-between ';
                     const stateClasses = isSelected
                         ? 'bg-terracota text-blanco-calido border-terracota shadow-md scale-[1.02]'
@@ -1099,10 +1074,10 @@
 
             document.getElementById('booking-service-desc').textContent = service.description;
 
-            const basePrice = Number(service.price);
+            const basePrice = Number(service.price) || 0;
             let surcharge = 0;
 
-            if (selectedSlot && selectedSlot.isSpecial) {
+            if (selectedSlot && selectedSlot.isSpecial && basePrice > 0) {
                 if (config.surchargeType === 'percent') {
                     surcharge = Math.round(basePrice * (Number(config.surchargeValue) / 100));
                 } else {
@@ -1112,9 +1087,8 @@
 
             const total = basePrice + surcharge;
 
-            // Actualizar textos del resumen
-            document.getElementById('summary-base-price').textContent = formatCurrency(basePrice);
-            document.getElementById('summary-total-price').textContent = formatCurrency(total);
+            document.getElementById('summary-base-price').textContent = formatCurrency(basePrice, service.priceLabel);
+            document.getElementById('summary-total-price').textContent = basePrice === 0 ? 'A consultar' : formatCurrency(total);
 
             const surchargeRow = document.getElementById('summary-surcharge-row');
             const specialNotice = document.getElementById('special-hour-notice');
@@ -1128,11 +1102,11 @@
                     surchargeRow.classList.remove('hidden');
                     document.getElementById('summary-surcharge-amount').textContent = `+${formatCurrency(surcharge)}`;
                     specialNotice.classList.remove('hidden');
-                    confirmBtn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i><span>Solicitar Turno Especial (${formatCurrency(total)})</span>`;
+                    confirmBtn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i><span>Solicitar Turno Especial</span>`;
                 } else {
                     surchargeRow.classList.add('hidden');
                     specialNotice.classList.add('hidden');
-                    confirmBtn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Confirmar Turno (${formatCurrency(total)})</span>`;
+                    confirmBtn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Confirmar Turno</span>`;
                 }
             } else {
                 document.getElementById('summary-datetime').textContent = 'Seleccioná un horario';
@@ -1144,7 +1118,6 @@
             lucide.createIcons();
         }
 
-        // Eventos en vista de reserva
         document.getElementById('booking-date').addEventListener('change', () => {
             selectedSlot = null;
             renderTimeSlots();
@@ -1159,19 +1132,28 @@
 
         document.getElementById('booking-service').addEventListener('change', updateBookingCalculation);
 
-        // Envío del formulario de reserva
-        document.getElementById('booking-form').addEventListener('submit', (e) => {
+        // ENVÍO DEL FORMULARIO DE RESERVA HACIA FIREBASE Y POSTURALAB
+        document.getElementById('booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!selectedSlot) return;
+
+            const confirmBtn = document.getElementById('btn-confirm-booking');
+            confirmBtn.disabled = true;
+            confirmBtn.innerHTML = `<span>Guardando turno en agenda...</span>`;
 
             const dateStr = document.getElementById('booking-date').value;
             const serviceId = document.getElementById('booking-service').value;
             const service = services.find(s => s.id === serviceId);
-            const patientName = document.getElementById('booking-name').value.trim();
+            const fullName = document.getElementById('booking-name').value.trim();
             const reason = document.getElementById('booking-reason').value.trim();
 
-            const basePrice = Number(service.price);
-            const surcharge = selectedSlot.isSpecial
+            // Separar nombre y apellido para PosturaLab
+            const nameParts = fullName.split(' ');
+            const nombre = nameParts[0] || fullName;
+            const apellido = nameParts.slice(1).join(' ') || '';
+
+            const basePrice = Number(service.price) || 0;
+            const surcharge = (selectedSlot.isSpecial && basePrice > 0)
                 ? (config.surchargeType === 'percent' ? Math.round(basePrice * (Number(config.surchargeValue) / 100)) : Number(config.surchargeValue))
                 : 0;
             const totalPrice = basePrice + surcharge;
@@ -1180,7 +1162,7 @@
                 id: 'bk-' + Date.now(),
                 date: dateStr,
                 time: selectedSlot.time,
-                patientName,
+                patientName: fullName,
                 serviceId: service.id,
                 serviceName: service.name,
                 reason,
@@ -1190,19 +1172,33 @@
                 status: selectedSlot.isSpecial ? 'Pendiente confirmación (Horario especial)' : 'Confirmado'
             };
 
+            // Guardar en Firebase (Nube compartida con PosturaLab)
+            if (typeof window.reservarTurnoSeguro === 'function') {
+                await window.reservarTurnoSeguro({
+                    nombre,
+                    apellido,
+                    servicio: service.name,
+                    motivo: reason,
+                    fecha: dateStr,
+                    hora: selectedSlot.time,
+                    esEspecial: selectedSlot.isSpecial,
+                    precio: totalPrice
+                });
+            }
+
             bookings.push(newBooking);
             saveBookings();
 
             // Preparar enlace de WhatsApp
             const readableDate = dateStr.split('-').reverse().join('/');
+            const priceText = totalPrice === 0 ? 'A consultar' : formatCurrency(totalPrice);
             const waText = selectedSlot.isSpecial
-                ? `Hola Ludmila, solicito un *turno especial fuera de horario* en Ludmila Rojo Studio:%0A%0A• *Paciente:* ${patientName}%0A• *Servicio:* ${service.name}%0A• *Fecha y hora:* ${readableDate} a las ${selectedSlot.time} hs%0A• *Motivo:* ${reason}%0A• *Valor estimado (con adicional):* ${formatCurrency(totalPrice)}%0A%0AQuedo a la espera de tu confirmación.`
-                : `Hola Ludmila, acabo de reservar un turno en *Ludmila Rojo Studio*:%0A%0A• *Paciente:* ${patientName}%0A• *Servicio:* ${service.name}%0A• *Fecha y hora:* ${readableDate} a las ${selectedSlot.time} hs%0A• *Motivo:* ${reason}%0A• *Valor a abonar:* ${formatCurrency(totalPrice)}`;
+                ? `Hola Ludmila, solicito un *turno especial fuera de horario* en Ludmila Rojo Studio:%0A%0A• *Paciente:* ${fullName}%0A• *Servicio:* ${service.name}%0A• *Fecha y hora:* ${readableDate} a las ${selectedSlot.time} hs%0A• *Motivo:* ${reason}%0A• *Valor estimado (con adicional):* ${priceText}%0A%0AQuedo a la espera de tu confirmación.`
+                : `Hola Ludmila, acabo de reservar un turno en *Ludmila Rojo Studio*:%0A%0A• *Paciente:* ${fullName}%0A• *Servicio:* ${service.name}%0A• *Fecha y hora:* ${readableDate} a las ${selectedSlot.time} hs%0A• *Motivo:* ${reason}%0A• *Valor a abonar:* ${priceText}`;
 
             const cleanPhone = config.whatsappNumber.replace(/\D/g, '');
             document.getElementById('whatsapp-confirm-link').href = `https://wa.me/${cleanPhone}?text=${waText}`;
 
-            // Configurar Modal de Éxito
             document.getElementById('success-modal-title').textContent = selectedSlot.isSpecial
                 ? 'Solicitud Registrada'
                 : '¡Turno Confirmado!';
@@ -1211,14 +1207,13 @@
                 : 'El horario ya figura tachado en la agenda.';
 
             document.getElementById('success-modal-details').innerHTML = `
-                <p><strong>Paciente:</strong> ${patientName}</p>
+                <p><strong>Paciente:</strong> ${fullName}</p>
                 <p><strong>Servicio:</strong> ${service.name}</p>
                 <p><strong>Día y hora:</strong> ${readableDate} · ${selectedSlot.time} hs ${selectedSlot.isSpecial ? '(Horario Especial)' : ''}</p>
                 <p><strong>Motivo:</strong> ${reason}</p>
-                <p class="pt-1 border-t border-nude text-sm font-semibold text-terracota">Valor informado: ${formatCurrency(totalPrice)}</p>
+                <p class="pt-1 border-t border-nude text-sm font-semibold text-terracota">Valor informado: ${priceText}</p>
             `;
 
-            // Limpiar formulario y refrescar grilla
             document.getElementById('booking-name').value = '';
             document.getElementById('booking-reason').value = '';
             selectedSlot = null;
@@ -1269,7 +1264,6 @@
         }
 
         function initAdminView() {
-            // Inicializar fecha de bloqueo manual
             const blockDate = document.getElementById('block-date');
             if (!blockDate.value) blockDate.value = formatDateISO(new Date());
             populateBlockTimeOptions();
@@ -1289,18 +1283,22 @@
             }
         }
 
-        // Bloquear/tachar horario manualmente
-        document.getElementById('manual-block-form').addEventListener('submit', (e) => {
+        // Bloquear/tachar horario manualmente (también lo sube a Firebase para tacharlo en celulares)
+        document.getElementById('manual-block-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const date = document.getElementById('block-date').value;
             const time = document.getElementById('block-time').value;
             const note = document.getElementById('block-note').value.trim() || 'Bloqueado por Ludmila';
 
-            // Evitar duplicados exactos
-            const exists = bookings.some(b => b.date === date && b.time === time);
+            const exists = bookings.some(b => b.date === date && b.time === time) ||
+                           window.horariosNube.some(h => h.fecha === date && h.hora === time);
             if (exists) {
                 showToast('Ese horario ya está ocupado o tachado.');
                 return;
+            }
+
+            if (typeof window.bloquearHorarioNube === 'function') {
+                await window.bloquearHorarioNube(date, time);
             }
 
             bookings.push({
@@ -1334,7 +1332,6 @@
                 filtered = filtered.filter(b => b.date === filterDate);
             }
 
-            // Ordenar por fecha y hora
             filtered.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
 
             if (filtered.length === 0) {
@@ -1382,7 +1379,6 @@
             showToast('Horario liberado nuevamente');
         }
 
-        // Pestaña 2: Configuración de horarios
         function renderAdminScheduleConfig() {
             const daysContainer = document.getElementById('working-days-checkboxes');
             const daysNames = [
@@ -1430,7 +1426,6 @@
             showToast('Horarios y tarifa diferencial actualizados');
         });
 
-        // Pestaña 3: Gestión de Servicios y Precios
         function renderAdminServices() {
             const container = document.getElementById('admin-services-list');
             container.innerHTML = '';
@@ -1474,6 +1469,7 @@
             srv.name = document.getElementById(`edit-name-${id}`).value.trim();
             srv.price = Number(document.getElementById(`edit-price-${id}`).value);
             srv.description = document.getElementById(`edit-desc-${id}`).value.trim();
+            if (srv.price > 0) delete srv.priceLabel;
 
             saveServices();
             renderLandingServices();
@@ -1509,11 +1505,82 @@
             showToast('Nuevo servicio agregado');
         });
 
-        // --- INICIALIZACIÓN AL CARGAR ---
         window.addEventListener('DOMContentLoaded', () => {
             renderLandingServices();
             lucide.createIcons();
         });
+    </script>
+
+    <!-- ==================== CONEXIÓN FIREBASE EN TIEMPO REAL ==================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDE2i8RM8dBno0uQKb-qXEdRn81cYMqVl0",
+            authDomain: "lr-studio2026.firebaseapp.com",
+            projectId: "lr-studio2026",
+            storageBucket: "lr-studio2026.firebasestorage.app",
+            messagingSenderId: "955474523704",
+            appId: "1:955474523704:web:e4732b99f34a228f0f98cd",
+            measurementId: "G-47E2G85ESB"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Escuchar en tiempo real los horarios ocupados y refrescar la grilla de turnos
+        onSnapshot(collection(db, "horarios_ocupados"), (snapshot) => {
+            window.horariosNube = [];
+            snapshot.forEach((doc) => {
+                window.horariosNube.push(doc.data());
+            });
+            if (typeof renderTimeSlots === "function") {
+                renderTimeSlots();
+            }
+        });
+
+        // Bloqueo manual desde el panel admin hacia la nube
+        window.bloquearHorarioNube = async function(fecha, hora) {
+            try {
+                await addDoc(collection(db, "horarios_ocupados"), {
+                    fecha,
+                    hora,
+                    ocupado: true
+                });
+            } catch (error) {
+                console.error("Error al bloquear horario en nube:", error);
+            }
+        };
+
+        // Guardar turno del paciente en ambas colecciones (pública anónima + privada para PosturaLab)
+        window.reservarTurnoSeguro = async function(datosTurno) {
+            try {
+                await addDoc(collection(db, "horarios_ocupados"), {
+                    fecha: datosTurno.fecha,
+                    hora: datosTurno.hora,
+                    ocupado: true
+                });
+
+                await addDoc(collection(db, "turnos_privados"), {
+                    nombre: datosTurno.nombre,
+                    apellido: datosTurno.apellido,
+                    servicio: datosTurno.servicio,
+                    motivo: datosTurno.motivo,
+                    fecha: datosTurno.fecha,
+                    hora: datosTurno.hora,
+                    esEspecial: datosTurno.esEspecial,
+                    precio: datosTurno.precio,
+                    estado: "pendiente",
+                    creadoEl: new Date().toISOString()
+                });
+
+                return true;
+            } catch (error) {
+                console.error("Error al guardar el turno en Firebase:", error);
+                return false;
+            }
+        };
     </script>
 </body>
 </html>
