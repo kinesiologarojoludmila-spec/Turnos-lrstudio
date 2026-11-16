@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludmila Rojo Studio · Kinesiología & Postura</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        greige: '#F4F1EA',
+                        nude: '#EAE3D9',
+                        terracota: '#C27D63',
+                        'terracota-dark': '#A8664E',
+                        oliva: '#6B705C',
+                        'oliva-light': '#848A73',
+                        carbon: '#2F2E2C',
+                        'blanco-calido': '#FAF9F6',
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados complementarios */
+        body {
+            background-color: #FAF9F6;
+            color: #2F2E2C;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .font-editorial {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+        }
+        /* Animaciones suaves para formas abstractas */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1.5deg); }
+        }
+        .animate-float {
+            animation: floatSlow 8s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: floatSlow 10s ease-in-out 2s infinite;
+        }
+        /* Estilo para horarios tachados */
+        .slot-tachado {
+            background-image: repeating-linear-gradient(
+                -45deg,
+                #EAE3D9,
+                #EAE3D9 8px,
+                #F4F1EA 8px,
+                #F4F1EA 16px
+            );
+        }
+        /* Scrollbar estética */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F4F1EA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C27D63;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-terracota/20 selection:text-carbon">
+
+    <!-- ==================== NAVBAR GLOBAL ==================== -->
+    <header class="sticky top-0 z-40 bg-blanco-calido/90 backdrop-blur-md border-b border-nude/80 transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo Textual -->
+            <a href="#" onclick="navigateTo('landing'); return false;" class="group flex flex-col">
+                <div class="flex items-baseline gap-1.5">
+                    <span class="font-editorial text-2xl sm:text-3xl font-semibold tracking-tight text-carbon">Ludmila</span>
+                    <span class="font-editorial text-2xl sm:text-3xl font-normal italic text-terracota">Rojo</span>
+                </div>
+                <span class="text-[10px] sm:text-xs uppercase tracking-[0.22em] text-oliva font-medium -mt-1">
+                    Studio · Kinesiología & Postura
+                </span>
+            </a>
+
+            <!-- Navegación Desktop -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-carbon/80">
+                <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors">Servicios</a>
+                <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors">Sobre Mí</a>
+                <button onclick="navigateTo('booking')" class="bg-terracota hover:bg-terracota-dark text-blanco-calido px-5 py-2.5 rounded-full transition-all shadow-sm hover:shadow flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    <span>Sacar Turno</span>
+                </button>
+                <button onclick="openAdminGate()" title="Panel de Gestión Profesional" class="text-oliva hover:text-carbon p-2 rounded-full hover:bg-greige transition-colors flex items-center gap-1.5 text-xs border border-transparent hover:border-nude">
+                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                    <span>Gestión</span>
+                </button>
+            </nav>
+
+            <!-- Botones Móvil -->
+            <div class="flex md:hidden items-center gap-2">
+                <button onclick="navigateTo('booking')" class="bg-terracota text-blanco-calido px-3.5 py-2 rounded-full text-xs font-medium shadow-sm flex items-center gap-1.5">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+                    <span>Turnos</span>
+                </button>
+                <button onclick="openAdminGate()" class="p-2 text-oliva hover:bg-greige rounded-full" aria-label="Gestión">
+                    <i data-lucide="lock" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== VISTA 1: LANDING PAGE ==================== -->
+    <main id="view-landing" class="block">
+        
+        <!-- SECCIÓN HERO -->
+        <section class="relative overflow-hidden pt-10 pb-20 sm:pt-16 sm:pb-28 bg-gradient-to-b from-blanco-calido via-greige/50 to-blanco-calido">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Columna Texto (7 cols) -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-nude/70 border border-nude text-oliva text-xs font-medium tracking-wide">
+                            <span class="w-2 h-2 rounded-full bg-terracota"></span>
+                            <span>Kinesiología Integrativa & Reeducación Postural</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold text-carbon leading-[1.1] tracking-tight">
+                            El equilibrio de tu cuerpo comienza por <span class="italic font-normal text-terracota">escuchar tu postura</span>.
+                        </h1>
+                        
+                        <p class="text-base sm:text-lg text-carbon/75 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                            Abordaje kinésico personalizado en Olavarría. Combinamos evaluación biomecánica de precisión, plantillas ortopédicas a medida y terapias miofasciales para aliviar el dolor y devolverle fluidez a tu movimiento.
+                        </p>
+                        
+                        <div class="pt-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <button onclick="navigateTo('booking')" class="w-full sm:w-auto bg-terracota hover:bg-terracota-dark text-blanco-calido px-8 py-4 rounded-full font-medium text-sm tracking-wide transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2.5">
+                                <span>Reservar mi turno</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                            <a href="#servicios" class="w-full sm:w-auto px-7 py-4 rounded-full border border-oliva/30 text-oliva hover:bg-greige transition-colors text-sm font-medium text-center">
+                                Conocer tratamientos
+                            </a>
+                        </div>
+
+                        <!-- Indicadores de confianza -->
+                        <div class="pt-6 grid grid-cols-3 gap-4 max-w-md mx-auto lg:mx-0 border-t border-nude">
+                            <div>
+                                <p class="font-editorial text-2xl font-semibold text-carbon">+10 años</p>
+                                <p class="text-xs text-carbon/60">de experiencia clínica</p>
+                            </div>
+                            <div>
+                                <p class="font-editorial text-2xl font-semibold text-carbon">1 a 1</p>
+                                <p class="text-xs text-carbon/60">Atención personalizada</p>
+                            </div>
+                            <div>
+                                <p class="font-editorial text-2xl font-semibold text-carbon">Ebers</p>
+                                <p class="text-xs text-carbon/60">Plantillas a medida</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Arte Abstracto Minimalista (5 cols) -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-[2.5rem] bg-greige border border-nude p-6 shadow-sm flex items-center justify-center overflow-hidden">
+                            <!-- Composición SVG Abstracta: Equilibrio, Arcos y Tensegridad Postural -->
+                            <svg viewBox="0 0 400 500" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Fondo suave orgánico -->
+                                <defs>
+                                    <linearGradient id="terracotaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#C27D63" stop-opacity="0.88"/>
+                                        <stop offset="100%" stop-color="#D99B82" stop-opacity="0.65"/>
+                                    </linearGradient>
+                                    <linearGradient id="olivaGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#6B705C" stop-opacity="0.85"/>
+                                        <stop offset="100%" stop-color="#969C84" stop-opacity="0.5"/>
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Arco Arena de base -->
+                                <path d="M 70 440 L 70 220 A 130 130 0 0 1 330 220 L 330 440 Z" fill="#EAE3D9" opacity="0.75"/>
+                                
+                                <!-- Forma orgánica Oliva (Equilibrio) -->
+                                <path class="animate-float" d="M 115 390 C 90 310, 140 210, 220 205 C 295 200, 325 285, 290 365 C 265 420, 140 450, 115 390 Z" fill="url(#olivaGrad)"/>
+
+                                <!-- Círculo solar Terracota -->
+                                <circle class="animate-float-delayed" cx="245" cy="155" r="68" fill="url(#terracotaGrad)"/>
+
+                                <!-- Curva minimalista de columna / eje postural -->
+                                <path d="M 195 75 Q 235 185, 185 275 T 205 445" fill="none" stroke="#2F2E2C" stroke-width="1.5" stroke-linecap="round" opacity="0.65"/>
+                                
+                                <!-- Puntos de apoyo / nodos biomecánicos -->
+                                <circle cx="209" cy="145" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.5"/>
+                                <circle cx="195" cy="248" r="5.5" fill="#C27D63" stroke="#FAF9F6" stroke-width="1.5"/>
+                                <circle cx="196" cy="355" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.5"/>
+
+                                <!-- Líneas geométricas sutiles de alineación -->
+                                <line x1="95" y1="248" x2="305" y2="248" stroke="#2F2E2C" stroke-width="0.75" stroke-dasharray="4 4" opacity="0.35"/>
+                                <circle cx="135" cy="130" r="22" fill="none" stroke="#6B705C" stroke-width="1.2" opacity="0.6"/>
+                            </svg>
+
+                            <!-- Etiqueta flotante minimalista -->
+                            <div class="absolute bottom-6 left-6 right-6 bg-blanco-calido/90 backdrop-blur-sm border border-nude rounded-2xl p-3.5 flex items-center justify-between">
+                                <div>
+                                    <p class="text-xs font-medium text-carbon">Alineación & Movimiento</p>
+                                    <p class="text-[11px] text-oliva">Estudio integral del cuerpo</p>
+                                </div>
+                                <span class="w-8 h-8 rounded-full bg-terracota/15 text-terracota flex items-center justify-center">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN SERVICIOS (Dinámica desde LocalStorage) -->
+        <section id="servicios" class="py-20 bg-blanco-calido border-t border-nude/60">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-2xl mx-auto text-center mb-14 space-y-3">
+                    <span class="text-xs uppercase tracking-[0.2em] text-terracota font-semibold">Especialidades</span>
+                    <h2 class="text-3xl sm:text-4xl font-semibold text-carbon">Tratamientos diseñados para vos</h2>
+                    <p class="text-sm sm:text-base text-carbon/70 font-light">
+                        Cada sesión parte de una mirada integral para detectar el origen de tus molestias y construir soluciones duraderas.
+                    </p>
+                </div>
+
+                <!-- Contenedor de tarjetas de servicios renderizadas por JS -->
+                <div id="landing-services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-7">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN QUIÉN SOY (Misión, Visión y Valores) -->
+        <section id="sobre-mi" class="py-20 bg-greige/60 border-t border-nude">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Presentación Ludmila (5 cols) -->
+                    <div class="lg:col-span-5 space-y-5">
+                        <span class="text-xs uppercase tracking-[0.2em] text-oliva font-semibold">Sobre Mí</span>
+                        <h2 class="text-3xl sm:text-4xl font-semibold text-carbon leading-tight">
+                            Hola, soy <span class="italic text-terracota">Ludmila Rojo</span>
+                        </h2>
+                        <p class="text-sm sm:text-base text-carbon/80 leading-relaxed">
+                            Soy Licenciada en Kinesiología y Fisiatría con más de <strong>10 años de trayectoria</strong> acompañando a personas adultas en el cuidado de su postura, el alivio del dolor crónico y la mejora de su calidad de movimiento.
+                        </p>
+                        <p class="text-sm sm:text-base text-carbon/75 leading-relaxed font-light">
+                            En mi estudio de Olavarría creé un espacio cálido, pausado y libre de apuros. Entiendo que cada cuerpo cuenta una historia distinta; por eso, mi enfoque combina la biomecánica precisa —como el análisis de la pisada en cinta y plantillas Ebers— con técnicas manuales e invasivas como la punción seca.
+                        </p>
+                        <div class="pt-2">
+                            <div class="inline-flex items-center gap-3 bg-blanco-calido px-4 py-3 rounded-2xl border border-nude">
+                                <div class="w-10 h-10 rounded-full bg-oliva/15 text-oliva flex items-center justify-center">
+                                    <i data-lucide="award" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-semibold text-carbon">Lic. Ludmila Rojo</p>
+                                    <p class="text-[11px] text-carbon/60">Kinesiología Postural & Biomecánica</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bloques Misión, Visión y Valores (7 cols) -->
+                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <!-- Misión -->
+                        <div class="bg-blanco-calido p-7 rounded-3xl border border-nude shadow-sm space-y-3">
+                            <div class="w-10 h-10 rounded-2xl bg-terracota/15 text-terracota flex items-center justify-center">
+                                <i data-lucide="compass" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-carbon">Misión</h3>
+                            <p class="text-sm text-carbon/75 leading-relaxed">
+                                Brindar atención kinésica personalizada y de excelencia, identificando la raíz biomecánica y postural de cada dolencia para devolver bienestar, autonomía y movimiento sin dolor.
+                            </p>
+                        </div>
+
+                        <!-- Visión -->
+                        <div class="bg-blanco-calido p-7 rounded-3xl border border-nude shadow-sm space-y-3">
+                            <div class="w-10 h-10 rounded-2xl bg-oliva/15 text-oliva flex items-center justify-center">
+                                <i data-lucide="eye" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold text-carbon">Visión</h3>
+                            <p class="text-sm text-carbon/75 leading-relaxed">
+                                Ser un espacio de referencia en kinesiología postural integrativa en Olavarría, transformando la manera en que las personas habitan y cuidan su cuerpo a lo largo de la vida.
+                            </p>
+                        </div>
+
+                        <!-- Valores (ocupa 2 columnas en sm+) -->
+                        <div class="sm:col-span-2 bg-blanco-calido p-7 rounded-3xl border border-nude shadow-sm space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-2xl bg-nude text-carbon flex items-center justify-center">
+                                    <i data-lucide="heart-handshake" class="w-5 h-5 text-terracota"></i>
+                                </div>
+                                <h3 class="text-2xl font-semibold text-carbon">Valores que guían cada sesión</h3>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
+                                <div class="p-3.5 rounded-2xl bg-greige/70">
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-terracota mb-1">Escucha Activa</p>
+                                    <p class="text-xs text-carbon/75 leading-relaxed">Tiempo dedicado exclusivamente a vos, sin protocolos genéricos.</p>
+                                </div>
+                                <div class="p-3.5 rounded-2xl bg-greige/70">
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-oliva mb-1">Precisión Clínica</p>
+                                    <p class="text-xs text-carbon/75 leading-relaxed">Evaluación objetiva de la postura y la pisada respaldada por evidencia.</p>
+                                </div>
+                                <div class="p-3.5 rounded-2xl bg-greige/70">
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-carbon mb-1">Calidez Humana</p>
+                                    <p class="text-xs text-carbon/75 leading-relaxed">Un entorno sereno y contenedor para tu proceso de recuperación.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNER CTA FINAL -->
+        <section class="py-16 bg-oliva text-blanco-calido">
+            <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
+                <h2 class="text-3xl sm:text-4xl font-semibold">¿Listo para darle atención a tu postura?</h2>
+                <p class="text-sm sm:text-base text-blanco-calido/85 max-w-xl mx-auto font-light">
+                    Consultá disponibilidad online, conocé el valor exacto de tu sesión al instante y reservá tu lugar en la agenda.
+                </p>
+                <button onclick="navigateTo('booking')" class="bg-blanco-calido text-carbon hover:bg-greige px-8 py-4 rounded-full font-medium text-sm transition-all shadow-md inline-flex items-center gap-2">
+                    <i data-lucide="calendar-check" class="w-4 h-4 text-terracota"></i>
+                    <span>Ir a la Agenda de Turnos</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== VISTA 2: RESERVA DE TURNOS ==================== -->
+    <section id="view-booking" class="hidden min-h-[85vh] py-10 sm:py-14 bg-greige/40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Barra superior de navegación -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                <button onclick="navigateTo('landing')" class="inline-flex items-center gap-2 text-sm text-oliva hover:text-carbon font-medium bg-blanco-calido px-4 py-2 rounded-full border border-nude shadow-sm transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span>Volver al estudio</span>
+                </button>
+                <div class="text-right">
+                    <span class="text-xs uppercase tracking-widest text-terracota font-semibold">Agenda Online</span>
+                    <h1 class="text-2xl sm:text-3xl font-semibold text-carbon">Reservá tu turno</h1>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- COLUMNA IZQUIERDA: Fecha y Grilla de Horarios (7 cols) -->
+                <div class="lg:col-span-7 bg-blanco-calido rounded-3xl border border-nude p-6 sm:p-8 shadow-sm space-y-6">
+                    
+                    <!-- Selector de Fecha -->
+                    <div>
+                        <label for="booking-date" class="block text-xs uppercase tracking-wider text-oliva font-semibold mb-2">
+                            1. Seleccioná el día de tu consulta
+                        </label>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                            <input type="date" id="booking-date" class="w-full sm:w-auto px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-carbon text-sm font-medium focus:outline-none focus:border-terracota">
+                            <span id="booking-day-label" class="text-sm text-carbon/70 font-medium capitalize"></span>
+                        </div>
+                        <p id="booking-schedule-info" class="text-xs text-oliva mt-2 flex items-center gap-1.5">
+                            <!-- Info dinámica de horario habitual -->
+                        </p>
+                    </div>
+
+                    <!-- Leyenda de estados -->
+                    <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-nude/70 text-xs">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-blanco-calido border border-oliva"></span>
+                            <span class="text-carbon/80">Horario habitual</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-terracota/20 border border-terracota"></span>
+                            <span class="text-terracota-dark font-medium">Turno especial (+recargo)</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-nude border border-carbon/30"></span>
+                            <span class="text-carbon/50 line-through">Ocupado / Tachado</span>
+                        </div>
+                    </div>
+
+                    <!-- Grilla de Horarios -->
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <label class="block text-xs uppercase tracking-wider text-oliva font-semibold">
+                                2. Elegí un horario disponible
+                            </label>
+                            <label class="inline-flex items-center gap-2 cursor-pointer text-xs text-terracota-dark font-medium">
+                                <input type="checkbox" id="toggle-special-hours" class="rounded accent-terracota" checked>
+                                <span>Mostrar horarios especiales fuera de agenda</span>
+                            </label>
+                        </div>
+
+                        <div id="time-slots-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <!-- Slots generados dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COLUMNA DERECHA: Formulario y Resumen de Precio (5 cols) -->
+                <div class="lg:col-span-5 bg-blanco-calido rounded-3xl border border-nude p-6 sm:p-8 shadow-sm space-y-5 sticky top-24">
+                    <h2 class="text-2xl font-semibold text-carbon border-b border-nude pb-3">Detalle de tu reserva</h2>
+                    
+                    <form id="booking-form" class="space-y-4">
+                        <!-- Servicio -->
+                        <div>
+                            <label for="booking-service" class="block text-xs font-semibold text-carbon/80 mb-1.5">Servicio requerido *</label>
+                            <select id="booking-service" required class="w-full px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-sm text-carbon focus:outline-none focus:border-terracota">
+                                <!-- Opciones dinámicas -->
+                            </select>
+                            <p id="booking-service-desc" class="text-xs text-carbon/60 mt-1.5 leading-relaxed"></p>
+                        </div>
+
+                        <!-- Nombre y Apellido -->
+                        <div>
+                            <label for="booking-name" class="block text-xs font-semibold text-carbon/80 mb-1.5">Nombre y Apellido *</label>
+                            <input type="text" id="booking-name" required placeholder="Ej. Sofía Martínez" class="w-full px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-sm text-carbon focus:outline-none focus:border-terracota">
+                        </div>
+
+                        <!-- Motivo de consulta -->
+                        <div>
+                            <label for="booking-reason" class="block text-xs font-semibold text-carbon/80 mb-1.5">Motivo de la consulta *</label>
+                            <textarea id="booking-reason" rows="2" required placeholder="Contame brevemente qué te trae a consulta (ej. dolor lumbar, control de pisada...)" class="w-full px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-sm text-carbon focus:outline-none focus:border-terracota resize-none"></textarea>
+                        </div>
+
+                        <!-- Tarjeta de Cálculo de Precio en Tiempo Real -->
+                        <div class="p-4 rounded-2xl bg-greige border border-nude space-y-2.5">
+                            <div class="flex justify-between text-xs text-carbon/75">
+                                <span>Fecha y hora elegida:</span>
+                                <span id="summary-datetime" class="font-semibold text-carbon">Seleccioná un horario</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-carbon/75">
+                                <span>Valor base del servicio:</span>
+                                <span id="summary-base-price">$0</span>
+                            </div>
+                            
+                            <!-- Fila condicional de recargo fuera de horario -->
+                            <div id="summary-surcharge-row" class="hidden flex justify-between text-xs text-terracota-dark font-medium pt-1 border-t border-nude">
+                                <span>Adicional horario especial:</span>
+                                <span id="summary-surcharge-amount">+$0</span>
+                            </div>
+
+                            <div class="flex justify-between items-baseline pt-2 border-t border-carbon/15">
+                                <span class="text-sm font-semibold text-carbon">Total a abonar:</span>
+                                <span id="summary-total-price" class="font-editorial text-2xl font-bold text-terracota">$0</span>
+                            </div>
+                        </div>
+
+                        <!-- Alerta cuando es horario fuera de rango -->
+                        <div id="special-hour-notice" class="hidden p-3.5 rounded-2xl bg-terracota/10 border border-terracota/30 text-xs text-carbon space-y-1">
+                            <p class="font-semibold text-terracota-dark flex items-center gap-1.5">
+                                <i data-lucide="clock-alert" class="w-4 h-4"></i>
+                                <span>Horario fuera de atención habitual</span>
+                            </p>
+                            <p class="text-carbon/80 leading-relaxed">
+                                Este turno tiene un valor diferencial y queda <strong>sujeto a confirmación previa</strong> de Ludmila. Al reservar, podrás enviarlo directo por WhatsApp para su aprobación.
+                            </p>
+                        </div>
+
+                        <button type="submit" id="btn-confirm-booking" disabled class="w-full bg-terracota disabled:bg-carbon/20 disabled:cursor-not-allowed hover:bg-terracota-dark text-blanco-calido py-3.5 px-6 rounded-full font-medium text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                            <span>Confirmar y Agendar Turno</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== VISTA 3: PANEL DE ADMINISTRACIÓN PROFESIONAL ==================== -->
+    <section id="view-admin" class="hidden min-h-[85vh] py-10 bg-greige/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header del Panel -->
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-nude">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full bg-oliva text-blanco-calido text-[10px] uppercase tracking-wider font-semibold">Modo Profesional</span>
+                        <span class="text-xs text-carbon/60">Ludmila Rojo Studio</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-semibold text-carbon mt-1">Gestión de Consultorio y Agenda</h1>
+                </div>
+                <button onclick="navigateTo('landing')" class="inline-flex items-center gap-2 text-xs font-medium bg-blanco-calido hover:bg-nude/50 text-carbon px-4 py-2.5 rounded-full border border-nude transition-colors">
+                    <i data-lucide="log-out" class="w-3.5 h-3.5 text-terracota"></i>
+                    <span>Salir a la Web Pública</span>
+                </button>
+            </div>
+
+            <!-- Pestañas de Navegación Admin -->
+            <div class="flex flex-wrap gap-2 mb-8">
+                <button onclick="switchAdminTab('agenda')" id="tab-btn-agenda" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-carbon text-blanco-calido shadow-sm flex items-center gap-2">
+                    <i data-lucide="calendar-days" class="w-4 h-4"></i>
+                    <span>1. Agenda y Turnos Tachados</span>
+                </button>
+                <button onclick="switchAdminTab('schedule')" id="tab-btn-schedule" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-blanco-calido text-carbon border border-nude hover:bg-nude/40 flex items-center gap-2">
+                    <i data-lucide="clock" class="w-4 h-4"></i>
+                    <span>2. Horarios y Tarifa Diferencial</span>
+                </button>
+                <button onclick="switchAdminTab('services')" id="tab-btn-services" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-blanco-calido text-carbon border border-nude hover:bg-nude/40 flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>3. Servicios y Precios</span>
+                </button>
+            </div>
+
+            <!-- PESTAÑA 1: AGENDA Y BLOQUEO MANUAL -->
+            <div id="admin-tab-agenda" class="admin-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Bloquear / Tachar horario manualmente (4 cols) -->
+                <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-sm space-y-4 h-fit">
+                    <h3 class="text-xl font-semibold text-carbon flex items-center gap-2">
+                        <i data-lucide="ban" class="w-5 h-5 text-terracota"></i>
+                        <span>Tachar Horario Manualmente</span>
+                    </h3>
+                    <p class="text-xs text-carbon/70 leading-relaxed">
+                        Bloqueá un horario para que aparezca tachado en la agenda pública (por turnos dados por teléfono o compromisos personales).
+                    </p>
+                    <form id="manual-block-form" class="space-y-3.5">
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1">Fecha *</label>
+                            <input type="date" id="block-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1">Hora *</label>
+                            <select id="block-time" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                                <!-- Se llena dinámicamente con las franjas -->
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1">Etiqueta / Paciente (opcional)</label>
+                            <input type="text" id="block-note" placeholder="Ej. Bloqueado personal / Turno WhatsApp" class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                        </div>
+                        <button type="submit" class="w-full bg-oliva hover:bg-oliva-light text-blanco-calido py-3 rounded-full text-xs font-semibold tracking-wide transition-colors">
+                            Tachar en la Agenda
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Listado de Turnos Reservados y Bloqueados (8 cols) -->
+                <div class="lg:col-span-8 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-sm space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-nude pb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-carbon">Turnos Agendados y Horarios Tachados</h3>
+                            <p class="text-xs text-carbon/60">Detalle completo visible solo para vos (Nombre, Apellido, Servicio y Motivo).</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="date" id="admin-filter-date" class="px-3 py-1.5 rounded-xl bg-greige border border-nude text-xs">
+                            <button onclick="document.getElementById('admin-filter-date').value=''; renderAdminBookings();" class="text-xs text-terracota underline">Ver todos</button>
+                        </div>
+                    </div>
+
+                    <div id="admin-bookings-list" class="space-y-3">
+                        <!-- Lista generada dinámicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 2: HORARIOS Y TARIFA DIFERENCIAL -->
+            <div id="admin-tab-schedule" class="admin-tab-content hidden max-w-3xl bg-blanco-calido p-6 sm:p-8 rounded-3xl border border-nude shadow-sm space-y-6">
+                <div>
+                    <h3 class="text-2xl font-semibold text-carbon">Configuración de Agenda y Recargo Especial</h3>
+                    <p class="text-xs text-carbon/70 mt-1">
+                        Definí tu franja de atención habitual. Todo turno pedido fuera de ese rango aplicará automáticamente el recargo y te pedirá confirmación.
+                    </p>
+                </div>
+
+                <form id="schedule-config-form" class="space-y-6">
+                    <!-- Días de atención habitual -->
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-oliva font-semibold mb-2.5">Días de atención habitual</label>
+                        <div class="flex flex-wrap gap-2" id="working-days-checkboxes">
+                            <!-- Checkboxes Lunes a Sábado -->
+                        </div>
+                    </div>
+
+                    <!-- Rango horario habitual y duración -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1.5">Inicio horario habitual</label>
+                            <input type="time" id="config-start-time" required class="w-full px-4 py-2.5 rounded-2xl bg-greige/60 border border-nude text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1.5">Fin horario habitual</label>
+                            <input type="time" id="config-end-time" required class="w-full px-4 py-2.5 rounded-2xl bg-greige/60 border border-nude text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1.5">Duración de cada turno</label>
+                            <select id="config-slot-duration" class="w-full px-4 py-2.5 rounded-2xl bg-greige/60 border border-nude text-sm">
+                                <option value="45">45 minutos</option>
+                                <option value="60">60 minutos (1 hora)</option>
+                                <option value="90">90 minutos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Configuración de Tarifa Diferencial -->
+                    <div class="p-5 rounded-2xl bg-greige/70 border border-nude space-y-4">
+                        <div class="flex items-center gap-2 text-terracota-dark font-semibold text-sm">
+                            <i data-lucide="badge-dollar-sign" class="w-4 h-4"></i>
+                            <span>Valor diferencial fuera de horario</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-carbon/80 mb-1.5">Tipo de recargo</label>
+                                <select id="config-surcharge-type" class="w-full px-4 py-2.5 rounded-2xl bg-blanco-calido border border-nude text-sm">
+                                    <option value="fixed">Monto fijo adicional ($)</option>
+                                    <option value="percent">Porcentaje adicional (%)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-carbon/80 mb-1.5">Valor del recargo</label>
+                                <input type="number" id="config-surcharge-value" min="0" required class="w-full px-4 py-2.5 rounded-2xl bg-blanco-calido border border-nude text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1.5">Tu número de WhatsApp (para recibir pedidos)</label>
+                            <input type="text" id="config-whatsapp" placeholder="Ej. 5492284000000" required class="w-full px-4 py-2.5 rounded-2xl bg-blanco-calido border border-nude text-sm">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="bg-terracota hover:bg-terracota-dark text-blanco-calido px-7 py-3 rounded-full text-sm font-medium transition-colors shadow-sm">
+                        Guardar Configuración de Horarios
+                    </button>
+                </form>
+            </div>
+
+            <!-- PESTAÑA 3: GESTIÓN DE SERVICIOS Y PRECIOS -->
+            <div id="admin-tab-services" class="admin-tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Agregar nuevo servicio (4 cols) -->
+                <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-sm space-y-4 h-fit">
+                    <h3 class="text-xl font-semibold text-carbon">Agregar Servicio</h3>
+                    <form id="add-service-form" class="space-y-3.5">
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1">Nombre del servicio *</label>
+                            <input type="text" id="new-service-name" required placeholder="Ej. Drenaje Linfático" class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1">Precio ($) *</label>
+                            <input type="number" id="new-service-price" required min="0" placeholder="25000" class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-carbon/80 mb-1">Descripción breve *</label>
+                            <textarea id="new-service-desc" rows="3" required placeholder="Explicación para el paciente..." class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-terracota hover:bg-terracota-dark text-blanco-calido py-3 rounded-full text-xs font-semibold tracking-wide transition-colors">
+                            + Agregar al Consultorio
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Lista editable de servicios existentes (8 cols) -->
+                <div class="lg:col-span-8 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-sm space-y-4">
+                    <div class="border-b border-nude pb-3">
+                        <h3 class="text-xl font-semibold text-carbon">Servicios Activos y Precios</h3>
+                        <p class="text-xs text-carbon/60">Modificá los valores o textos. Los cambios impactan al instante en la web y en los turnos.</p>
+                    </div>
+                    <div id="admin-services-list" class="space-y-4">
+                        <!-- Tarjetas editables generadas por JS -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER MINIMALISTA ==================== -->
+    <footer class="bg-blanco-calido border-t border-nude py-12 text-carbon/75">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <p class="font-editorial text-2xl font-semibold text-carbon">Ludmila <span class="italic font-normal text-terracota">Rojo</span></p>
+                <p class="text-xs text-oliva mt-0.5">Studio · Kinesiología & Postura · Olavarría, Buenos Aires</p>
+            </div>
+            
+            <div class="flex flex-wrap items-center justify-center gap-6 text-xs">
+                <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors">Servicios</a>
+                <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors">Sobre Mí</a>
+                <button onclick="navigateTo('booking')" class="text-terracota font-semibold hover:underline">Reservar Turno</button>
+            </div>
+
+            <p class="text-[11px] text-carbon/50">
+                © 2026 Ludmila Rojo Studio · Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL: ACCESO PIN PROFESIONAL ==================== -->
+    <div id="modal-pin" class="hidden fixed inset-0 z-50 bg-carbon/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-blanco-calido rounded-3xl border border-nude max-w-sm w-full p-7 shadow-xl space-y-5 text-center">
+            <div class="w-12 h-12 rounded-2xl bg-oliva/15 text-oliva mx-auto flex items-center justify-center">
+                <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <div>
+                <h3 class="text-2xl font-semibold text-carbon">Acceso Profesional</h3>
+                <p class="text-xs text-carbon/70 mt-1">Ingresá tu PIN para administrar horarios, precios y agenda.</p>
+                <span class="inline-block mt-2 px-3 py-1 rounded-full bg-greige text-[11px] text-oliva font-medium">
+                    PIN de demostración: <strong>1234</strong>
+                </span>
+            </div>
+            <form id="pin-form" class="space-y-4">
+                <input type="password" id="pin-input" maxlength="4" placeholder="••••" required class="w-40 mx-auto block text-center tracking-[0.6em] text-xl font-semibold px-4 py-3 rounded-2xl bg-greige border border-nude focus:outline-none focus:border-terracota">
+                <p id="pin-error" class="hidden text-xs text-terracota-dark font-medium">PIN incorrecto. Probá con 1234.</p>
+                <div class="flex gap-3 pt-1">
+                    <button type="button" onclick="closeModal('modal-pin')" class="flex-1 py-2.5 rounded-full border border-nude text-xs font-medium text-carbon/70 hover:bg-greige">Cancelar</button>
+                    <button type="submit" class="flex-1 py-2.5 rounded-full bg-carbon text-blanco-calido text-xs font-medium hover:bg-carbon/90">Ingresar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL: CONFIRMACIÓN DE TURNO + WHATSAPP ==================== -->
+    <div id="modal-booking-success" class="hidden fixed inset-0 z-50 bg-carbon/50 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-blanco-calido rounded-3xl border border-nude max-w-md w-full p-7 shadow-xl space-y-5">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-oliva/15 text-oliva flex items-center justify-center shrink-0">
+                    <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 id="success-modal-title" class="text-2xl font-semibold text-carbon">¡Turno Agendado!</h3>
+                    <p id="success-modal-subtitle" class="text-xs text-oliva font-medium">El horario ya quedó reservado en la agenda.</p>
+                </div>
+            </div>
+
+            <div id="success-modal-details" class="p-4 rounded-2xl bg-greige/80 border border-nude text-xs space-y-2 text-carbon/85">
+                <!-- Detalles generados dinámicamente -->
+            </div>
+
+            <div class="space-y-2.5 pt-1">
+                <a id="whatsapp-confirm-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 px-5 rounded-full font-medium text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Enviar comprobante por WhatsApp</span>
+                </a>
+                <button onclick="closeModal('modal-booking-success')" class="w-full py-2.5 rounded-full border border-nude text-xs font-medium text-carbon/70 hover:bg-greige">
+                    Cerrar y volver a la agenda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== NOTIFICACIÓN TOAST FLOTANTE ==================== -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-carbon text-blanco-calido px-5 py-3 rounded-2xl shadow-lg text-xs font-medium flex items-center gap-2.5">
+        <i data-lucide="check" class="w-4 h-4 text-terracota"></i>
+        <span id="toast-message">Cambios guardados</span>
+    </div>
+
+    <!-- ==================== LÓGICA JAVASCRIPT ==================== -->
+    <script>
+        // --- 1. ESTADO INICIAL Y DATOS POR DEFECTO ---
+        const STORAGE_KEYS = {
+            SERVICES: 'ludmila_studio_services_v1',
+            CONFIG: 'ludmila_studio_config_v1',
+            BOOKINGS: 'ludmila_studio_bookings_v1'
+        };
+
+        const DEFAULT_SERVICES = [
+            {
+                id: 'srv-postura',
+                name: 'Evaluación de la Postura y Estudio de la Pisada',
+                price: 28000,
+                description: 'Análisis postural integral estático y dinámico, complementado con estudio biomecánico de la marcha en cinta para detectar desequilibrios y sobrecargas.',
+                icon: 'scan-line'
+            },
+            {
+                id: 'srv-plantillas',
+                name: 'Plantillas Ortopédicas Personalizadas Ebers',
+                price: 45000,
+                description: 'Diseño y confección de plantillas ortopédicas a medida con tecnología Ebers, adaptadas exactamente a los resultados de tu estudio de la pisada.',
+                icon: 'footprints'
+            },
+            {
+                id: 'srv-puncion',
+                name: 'Punción Seca',
+                price: 22000,
+                description: 'Técnica de fisioterapia invasiva de alta precisión para desactivar puntos gatillo miofasciales, aliviar contracturas rebeldes y reducir el dolor muscular.',
+                icon: 'target'
+            }
+        ];
+
+        const DEFAULT_CONFIG = {
+            workingDays: [1, 2, 3, 4, 5], // Lunes a Viernes (0=Dom, 6=Sab)
+            startTime: '09:00',
+            endTime: '18:00',
+            slotDuration: 60, // minutos
+            surchargeType: 'fixed', // 'fixed' o 'percent'
+            surchargeValue: 5000,
+            whatsappNumber: '5492284000000'
+        };
+
+        // Cargar o inicializar datos desde LocalStorage
+        let services = JSON.parse(localStorage.getItem(STORAGE_KEYS.SERVICES)) || DEFAULT_SERVICES;
+        let config = JSON.parse(localStorage.getItem(STORAGE_KEYS.CONFIG)) || DEFAULT_CONFIG;
+        let bookings = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS)) || [];
+
+        // Si es la primera vez que se abre, crear un turno de ejemplo para hoy/mañana para mostrar cómo se tacha
+        if (!localStorage.getItem(STORAGE_KEYS.BOOKINGS)) {
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const tomorrowStr = formatDateISO(tomorrow);
+            bookings = [
+                {
+                    id: 'bk-demo-1',
+                    date: tomorrowStr,
+                    time: '10:00',
+                    patientName: 'Martín Gómez',
+                    serviceId: 'srv-postura',
+                    serviceName: 'Evaluación de la Postura y Estudio de la Pisada',
+                    reason: 'Dolor cervical y control de pisada para correr.',
+                    price: 28000,
+                    isSpecialHour: false,
+                    isManualBlock: false,
+                    status: 'Confirmado'
+                }
+            ];
+            saveBookings();
+        }
+
+        let selectedSlot = null; // { time: '10:00', isSpecial: false }
+
+        // --- 2. FUNCIONES DE UTILIDAD ---
+        function saveServices() {
+            localStorage.setItem(STORAGE_KEYS.SERVICES, JSON.stringify(services));
+        }
+        function saveConfig() {
+            localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(config));
+        }
+        function saveBookings() {
+            localStorage.setItem(STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
+        }
+
+        function formatCurrency(num) {
+            return '$' + Number(num).toLocaleString('es-AR');
+        }
+
+        function formatDateISO(dateObj) {
+            const y = dateObj.getFullYear();
+            const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const d = String(dateObj.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function formatDateReadable(isoStr) {
+            if (!isoStr) return '';
+            const [y, m, d] = isoStr.split('-').map(Number);
+            const date = new Date(y, m - 1, d);
+            return date.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+        }
+
+        function timeToMinutes(timeStr) {
+            const [h, m] = timeStr.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        function minutesToTime(mins) {
+            const h = String(Math.floor(mins / 60)).padStart(2, '0');
+            const m = String(mins % 60).padStart(2, '0');
+            return `${h}:${m}`;
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notification');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // --- 3. NAVEGACIÓN SPA ---
+        function navigateTo(viewName, sectionId = null) {
+            document.getElementById('view-landing').classList.add('hidden');
+            document.getElementById('view-booking').classList.add('hidden');
+            document.getElementById('view-admin').classList.add('hidden');
+
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+
+            if (viewName === 'landing') {
+                renderLandingServices();
+                if (sectionId) {
+                    setTimeout(() => {
+                        const el = document.getElementById(sectionId);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }, 50);
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else if (viewName === 'booking') {
+                initBookingView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (viewName === 'admin') {
+                initAdminView();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            lucide.createIcons();
+        }
+
+        // --- 4. RENDERIZADO DE LANDING PAGE ---
+        function renderLandingServices() {
+            const container = document.getElementById('landing-services-grid');
+            container.innerHTML = '';
+
+            services.forEach((srv, idx) => {
+                const iconName = srv.icon || (idx === 0 ? 'scan-line' : idx === 1 ? 'footprints' : 'target');
+                const card = document.createElement('div');
+                card.className = 'bg-greige/50 hover:bg-greige border border-nude rounded-3xl p-7 flex flex-col justify-between transition-all hover:shadow-md group';
+                card.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="w-12 h-12 rounded-2xl bg-blanco-calido border border-nude text-terracota flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <i data-lucide="${iconName}" class="w-5 h-5"></i>
+                            </div>
+                            <span class="px-3.5 py-1 rounded-full bg-blanco-calido border border-nude text-xs font-semibold text-oliva">
+                                ${formatCurrency(srv.price)}
+                            </span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-carbon leading-snug">${srv.name}</h3>
+                        <p class="text-sm text-carbon/75 leading-relaxed font-light">${srv.description}</p>
+                    </div>
+                    <div class="pt-6 mt-6 border-t border-nude/80 flex items-center justify-between">
+                        <span class="text-xs text-carbon/60">Sesión individual</span>
+                        <button onclick="selectServiceAndBook('${srv.id}')" class="text-xs font-semibold text-terracota hover:text-terracota-dark inline-flex items-center gap-1">
+                            <span>Sacar turno</span>
+                            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function selectServiceAndBook(serviceId) {
+            navigateTo('booking');
+            const select = document.getElementById('booking-service');
+            if (select) {
+                select.value = serviceId;
+                updateBookingCalculation();
+            }
+        }
+
+        // --- 5. VISTA DE RESERVA DE TURNOS (PACIENTES) ---
+        function initBookingView() {
+            const dateInput = document.getElementById('booking-date');
+            const today = new Date();
+            const todayStr = formatDateISO(today);
+            dateInput.min = todayStr;
+            if (!dateInput.value) {
+                // Por defecto mañana si hoy ya es tarde
+                const tomorrow = new Date(today);
+                tomorrow.setDate(today.getDate() + 1);
+                dateInput.value = formatDateISO(tomorrow);
+            }
+
+            // Llenar selector de servicios
+            const srvSelect = document.getElementById('booking-service');
+            const currentVal = srvSelect.value;
+            srvSelect.innerHTML = '';
+            services.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.id;
+                opt.textContent = `${s.name} — ${formatCurrency(s.price)}`;
+                srvSelect.appendChild(opt);
+            });
+            if (currentVal && services.some(s => s.id === currentVal)) {
+                srvSelect.value = currentVal;
+            }
+
+            selectedSlot = null;
+            renderTimeSlots();
+            updateBookingCalculation();
+        }
+
+        function renderTimeSlots() {
+            const dateStr = document.getElementById('booking-date').value;
+            const showSpecial = document.getElementById('toggle-special-hours').checked;
+            const grid = document.getElementById('time-slots-grid');
+            const dayLabel = document.getElementById('booking-day-label');
+            const scheduleInfo = document.getElementById('booking-schedule-info');
+
+            if (!dateStr) return;
+
+            const [y, m, d] = dateStr.split('-').map(Number);
+            const dateObj = new Date(y, m - 1, d);
+            const dayOfWeek = dateObj.getDay(); // 0 = Dom, 1 = Lun ... 6 = Sab
+
+            dayLabel.textContent = formatDateReadable(dateStr);
+
+            const isWorkingDay = config.workingDays.includes(dayOfWeek);
+            const habitStartMins = timeToMinutes(config.startTime);
+            const habitEndMins = timeToMinutes(config.endTime);
+
+            if (dayOfWeek === 0) {
+                scheduleInfo.innerHTML = `<i data-lucide="info" class="w-3.5 h-3.5 text-terracota"></i> Domingo: atención únicamente con turno especial sujeto a confirmación.`;
+            } else if (!isWorkingDay) {
+                scheduleInfo.innerHTML = `<i data-lucide="info" class="w-3.5 h-3.5 text-terracota"></i> Día fuera de agenda habitual (se aplica tarifa especial).`;
+            } else {
+                scheduleInfo.innerHTML = `<i data-lucide="clock" class="w-3.5 h-3.5 text-oliva"></i> Horario habitual de atención: <strong>${config.startTime} a ${config.endTime} hs</strong>.`;
+            }
+
+            // Generar franja amplia del día (08:00 a 21:00) según duración de turno
+            const dayStart = 8 * 60;
+            const dayEnd = 21 * 60;
+            const step = Number(config.slotDuration) || 60;
+
+            grid.innerHTML = '';
+            let slotsCount = 0;
+
+            for (let mins = dayStart; mins < dayEnd; mins += step) {
+                const timeStr = minutesToTime(mins);
+                // Determinar si está dentro del horario habitual
+                const isRegularHour = isWorkingDay && (mins >= habitStartMins) && (mins < habitEndMins);
+                const isSpecialHour = !isRegularHour;
+
+                // Si el usuario desmarcó mostrar especiales y es especial, saltar
+                if (isSpecialHour && !showSpecial) continue;
+
+                slotsCount++;
+
+                // Verificar si el turno ya está ocupado o bloqueado en bookings
+                const existingBooking = bookings.find(b => b.date === dateStr && b.time === timeStr);
+                const isSelected = selectedSlot && selectedSlot.time === timeStr;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+
+                if (existingBooking) {
+                    // HORARIO TACHADO / OCUPADO
+                    btn.disabled = true;
+                    btn.className = 'slot-tachado p-3 rounded-2xl border border-nude text-left opacity-75 cursor-not-allowed flex flex-col justify-between';
+                    btn.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-carbon/50 line-through">${timeStr} hs</span>
+                            <i data-lucide="x-circle" class="w-3.5 h-3.5 text-carbon/40"></i>
+                        </div>
+                        <span class="text-[11px] font-medium text-carbon/50 mt-1">Turno ocupado</span>
+                    `;
+                } else {
+                    // HORARIO DISPONIBLE (Habitual o Especial)
+                    const baseClasses = 'p-3 rounded-2xl border text-left transition-all flex flex-col justify-between ';
+                    const stateClasses = isSelected
+                        ? 'bg-terracota text-blanco-calido border-terracota shadow-md scale-[1.02]'
+                        : isSpecialHour
+                            ? 'bg-terracota/5 hover:bg-terracota/15 border-terracota/40 text-carbon'
+                            : 'bg-blanco-calido hover:bg-greige border-nude text-carbon';
+
+                    btn.className = baseClasses + stateClasses;
+                    btn.innerHTML = `
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold">${timeStr} hs</span>
+                            ${isSpecialHour 
+                                ? `<span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-blanco-calido/20 text-blanco-calido' : 'bg-terracota/15 text-terracota-dark'} font-semibold">Especial</span>`
+                                : `<span class="w-2 h-2 rounded-full ${isSelected ? 'bg-blanco-calido' : 'bg-oliva'}"></span>`
+                            }
+                        </div>
+                        <span class="text-[11px] mt-1 ${isSelected ? 'text-blanco-calido/90' : isSpecialHour ? 'text-terracota-dark' : 'text-oliva'}">
+                            ${isSpecialHour ? 'Con recargo · Consultar' : 'Disponible'}
+                        </span>
+                    `;
+
+                    btn.onclick = () => {
+                        selectedSlot = { time: timeStr, isSpecial: isSpecialHour };
+                        renderTimeSlots();
+                        updateBookingCalculation();
+                    };
+                }
+
+                grid.appendChild(btn);
+            }
+
+            if (slotsCount === 0) {
+                grid.innerHTML = `<p class="col-span-full text-xs text-carbon/60 py-6 text-center bg-greige/50 rounded-2xl">No hay horarios habituales para este día. Activá "Mostrar horarios especiales" para solicitar un turno fuera de agenda.</p>`;
+            }
+
+            lucide.createIcons();
+        }
+
+        function updateBookingCalculation() {
+            const serviceId = document.getElementById('booking-service').value;
+            const service = services.find(s => s.id === serviceId) || services[0];
+            const dateStr = document.getElementById('booking-date').value;
+
+            if (!service) return;
+
+            document.getElementById('booking-service-desc').textContent = service.description;
+
+            const basePrice = Number(service.price);
+            let surcharge = 0;
+
+            if (selectedSlot && selectedSlot.isSpecial) {
+                if (config.surchargeType === 'percent') {
+                    surcharge = Math.round(basePrice * (Number(config.surchargeValue) / 100));
+                } else {
+                    surcharge = Number(config.surchargeValue);
+                }
+            }
+
+            const total = basePrice + surcharge;
+
+            // Actualizar textos del resumen
+            document.getElementById('summary-base-price').textContent = formatCurrency(basePrice);
+            document.getElementById('summary-total-price').textContent = formatCurrency(total);
+
+            const surchargeRow = document.getElementById('summary-surcharge-row');
+            const specialNotice = document.getElementById('special-hour-notice');
+            const confirmBtn = document.getElementById('btn-confirm-booking');
+
+            if (selectedSlot) {
+                document.getElementById('summary-datetime').textContent = `${dateStr.split('-').reverse().join('/')} · ${selectedSlot.time} hs`;
+                confirmBtn.disabled = false;
+
+                if (selectedSlot.isSpecial) {
+                    surchargeRow.classList.remove('hidden');
+                    document.getElementById('summary-surcharge-amount').textContent = `+${formatCurrency(surcharge)}`;
+                    specialNotice.classList.remove('hidden');
+                    confirmBtn.innerHTML = `<i data-lucide="send" class="w-4 h-4"></i><span>Solicitar Turno Especial (${formatCurrency(total)})</span>`;
+                } else {
+                    surchargeRow.classList.add('hidden');
+                    specialNotice.classList.add('hidden');
+                    confirmBtn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Confirmar Turno (${formatCurrency(total)})</span>`;
+                }
+            } else {
+                document.getElementById('summary-datetime').textContent = 'Seleccioná un horario';
+                surchargeRow.classList.add('hidden');
+                specialNotice.classList.add('hidden');
+                confirmBtn.disabled = true;
+                confirmBtn.innerHTML = `<i data-lucide="calendar" class="w-4 h-4"></i><span>Elegí un horario para continuar</span>`;
+            }
+            lucide.createIcons();
+        }
+
+        // Eventos en vista de reserva
+        document.getElementById('booking-date').addEventListener('change', () => {
+            selectedSlot = null;
+            renderTimeSlots();
+            updateBookingCalculation();
+        });
+
+        document.getElementById('toggle-special-hours').addEventListener('change', () => {
+            selectedSlot = null;
+            renderTimeSlots();
+            updateBookingCalculation();
+        });
+
+        document.getElementById('booking-service').addEventListener('change', updateBookingCalculation);
+
+        // Envío del formulario de reserva
+        document.getElementById('booking-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!selectedSlot) return;
+
+            const dateStr = document.getElementById('booking-date').value;
+            const serviceId = document.getElementById('booking-service').value;
+            const service = services.find(s => s.id === serviceId);
+            const patientName = document.getElementById('booking-name').value.trim();
+            const reason = document.getElementById('booking-reason').value.trim();
+
+            const basePrice = Number(service.price);
+            const surcharge = selectedSlot.isSpecial
+                ? (config.surchargeType === 'percent' ? Math.round(basePrice * (Number(config.surchargeValue) / 100)) : Number(config.surchargeValue))
+                : 0;
+            const totalPrice = basePrice + surcharge;
+
+            const newBooking = {
+                id: 'bk-' + Date.now(),
+                date: dateStr,
+                time: selectedSlot.time,
+                patientName,
+                serviceId: service.id,
+                serviceName: service.name,
+                reason,
+                price: totalPrice,
+                isSpecialHour: selectedSlot.isSpecial,
+                isManualBlock: false,
+                status: selectedSlot.isSpecial ? 'Pendiente confirmación (Horario especial)' : 'Confirmado'
+            };
+
+            bookings.push(newBooking);
+            saveBookings();
+
+            // Preparar enlace de WhatsApp
+            const readableDate = dateStr.split('-').reverse().join('/');
+            const waText = selectedSlot.isSpecial
+                ? `Hola Ludmila, solicito un *turno especial fuera de horario* en Ludmila Rojo Studio:%0A%0A• *Paciente:* ${patientName}%0A• *Servicio:* ${service.name}%0A• *Fecha y hora:* ${readableDate} a las ${selectedSlot.time} hs%0A• *Motivo:* ${reason}%0A• *Valor estimado (con adicional):* ${formatCurrency(totalPrice)}%0A%0AQuedo a la espera de tu confirmación.`
+                : `Hola Ludmila, acabo de reservar un turno en *Ludmila Rojo Studio*:%0A%0A• *Paciente:* ${patientName}%0A• *Servicio:* ${service.name}%0A• *Fecha y hora:* ${readableDate} a las ${selectedSlot.time} hs%0A• *Motivo:* ${reason}%0A• *Valor a abonar:* ${formatCurrency(totalPrice)}`;
+
+            const cleanPhone = config.whatsappNumber.replace(/\D/g, '');
+            document.getElementById('whatsapp-confirm-link').href = `https://wa.me/${cleanPhone}?text=${waText}`;
+
+            // Configurar Modal de Éxito
+            document.getElementById('success-modal-title').textContent = selectedSlot.isSpecial
+                ? 'Solicitud Registrada'
+                : '¡Turno Confirmado!';
+            document.getElementById('success-modal-subtitle').textContent = selectedSlot.isSpecial
+                ? 'El horario quedó bloqueado provisoriamente. Envialo por WhatsApp para que Ludmila lo apruebe.'
+                : 'El horario ya figura tachado en la agenda.';
+
+            document.getElementById('success-modal-details').innerHTML = `
+                <p><strong>Paciente:</strong> ${patientName}</p>
+                <p><strong>Servicio:</strong> ${service.name}</p>
+                <p><strong>Día y hora:</strong> ${readableDate} · ${selectedSlot.time} hs ${selectedSlot.isSpecial ? '(Horario Especial)' : ''}</p>
+                <p><strong>Motivo:</strong> ${reason}</p>
+                <p class="pt-1 border-t border-nude text-sm font-semibold text-terracota">Valor informado: ${formatCurrency(totalPrice)}</p>
+            `;
+
+            // Limpiar formulario y refrescar grilla
+            document.getElementById('booking-name').value = '';
+            document.getElementById('booking-reason').value = '';
+            selectedSlot = null;
+            renderTimeSlots();
+            updateBookingCalculation();
+
+            document.getElementById('modal-booking-success').classList.remove('hidden');
+            lucide.createIcons();
+        });
+
+        // --- 6. PANEL DE ADMINISTRACIÓN PROFESIONAL ---
+        function openAdminGate() {
+            document.getElementById('pin-input').value = '';
+            document.getElementById('pin-error').classList.add('hidden');
+            document.getElementById('modal-pin').classList.remove('hidden');
+            setTimeout(() => document.getElementById('pin-input').focus(), 100);
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        document.getElementById('pin-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pin = document.getElementById('pin-input').value;
+            if (pin === '1234') {
+                closeModal('modal-pin');
+                navigateTo('admin');
+            } else {
+                document.getElementById('pin-error').classList.remove('hidden');
+            }
+        });
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.className = 'admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-blanco-calido text-carbon border border-nude hover:bg-nude/40 flex items-center gap-2';
+            });
+            const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+            activeBtn.className = 'admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-carbon text-blanco-calido shadow-sm flex items-center gap-2';
+
+            if (tabName === 'agenda') renderAdminBookings();
+            if (tabName === 'schedule') renderAdminScheduleConfig();
+            if (tabName === 'services') renderAdminServices();
+            lucide.createIcons();
+        }
+
+        function initAdminView() {
+            // Inicializar fecha de bloqueo manual
+            const blockDate = document.getElementById('block-date');
+            if (!blockDate.value) blockDate.value = formatDateISO(new Date());
+            populateBlockTimeOptions();
+            switchAdminTab('agenda');
+        }
+
+        function populateBlockTimeOptions() {
+            const select = document.getElementById('block-time');
+            select.innerHTML = '';
+            const step = Number(config.slotDuration) || 60;
+            for (let mins = 8 * 60; mins < 21 * 60; mins += step) {
+                const t = minutesToTime(mins);
+                const opt = document.createElement('option');
+                opt.value = t;
+                opt.textContent = `${t} hs`;
+                select.appendChild(opt);
+            }
+        }
+
+        // Bloquear/tachar horario manualmente
+        document.getElementById('manual-block-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const date = document.getElementById('block-date').value;
+            const time = document.getElementById('block-time').value;
+            const note = document.getElementById('block-note').value.trim() || 'Bloqueado por Ludmila';
+
+            // Evitar duplicados exactos
+            const exists = bookings.some(b => b.date === date && b.time === time);
+            if (exists) {
+                showToast('Ese horario ya está ocupado o tachado.');
+                return;
+            }
+
+            bookings.push({
+                id: 'blk-' + Date.now(),
+                date,
+                time,
+                patientName: note,
+                serviceId: 'manual',
+                serviceName: 'Horario Bloqueado Manualmente',
+                reason: 'No disponible en agenda',
+                price: 0,
+                isSpecialHour: false,
+                isManualBlock: true,
+                status: 'Bloqueado'
+            });
+
+            saveBookings();
+            document.getElementById('block-note').value = '';
+            renderAdminBookings();
+            showToast('Horario tachado en la agenda');
+        });
+
+        document.getElementById('admin-filter-date').addEventListener('change', renderAdminBookings);
+
+        function renderAdminBookings() {
+            const container = document.getElementById('admin-bookings-list');
+            const filterDate = document.getElementById('admin-filter-date').value;
+
+            let filtered = [...bookings];
+            if (filterDate) {
+                filtered = filtered.filter(b => b.date === filterDate);
+            }
+
+            // Ordenar por fecha y hora
+            filtered.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-xs text-carbon/60 py-8 text-center bg-greige/50 rounded-2xl">No hay turnos agendados ni horarios bloqueados para mostrar.</p>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            filtered.forEach(bk => {
+                const readableDate = bk.date.split('-').reverse().join('/');
+                const card = document.createElement('div');
+                card.className = `p-4 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+                    bk.isManualBlock ? 'bg-greige/70 border-nude' : bk.isSpecialHour ? 'bg-terracota/5 border-terracota/30' : 'bg-blanco-calido border-nude'
+                }`;
+
+                card.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-lg bg-carbon text-blanco-calido text-xs font-semibold">
+                                ${readableDate} · ${bk.time} hs
+                            </span>
+                            <span class="text-sm font-semibold text-carbon">${bk.patientName}</span>
+                            ${bk.isSpecialHour ? `<span class="px-2 py-0.5 rounded-full bg-terracota/20 text-terracota-dark text-[10px] font-semibold">Horario Especial</span>` : ''}
+                            ${bk.isManualBlock ? `<span class="px-2 py-0.5 rounded-full bg-oliva/20 text-oliva text-[10px] font-semibold">Bloqueo Manual</span>` : ''}
+                        </div>
+                        <p class="text-xs font-medium text-oliva">${bk.serviceName} ${bk.price > 0 ? `· <strong>${formatCurrency(bk.price)}</strong>` : ''}</p>
+                        ${!bk.isManualBlock ? `<p class="text-xs text-carbon/75"><strong>Motivo:</strong> ${bk.reason}</p>` : ''}
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="deleteBooking('${bk.id}')" class="px-3.5 py-2 rounded-xl border border-terracota/40 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                            <span>Liberar horario</span>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function deleteBooking(id) {
+            bookings = bookings.filter(b => b.id !== id);
+            saveBookings();
+            renderAdminBookings();
+            showToast('Horario liberado nuevamente');
+        }
+
+        // Pestaña 2: Configuración de horarios
+        function renderAdminScheduleConfig() {
+            const daysContainer = document.getElementById('working-days-checkboxes');
+            const daysNames = [
+                { val: 1, label: 'Lunes' },
+                { val: 2, label: 'Martes' },
+                { val: 3, label: 'Miércoles' },
+                { val: 4, label: 'Jueves' },
+                { val: 5, label: 'Viernes' },
+                { val: 6, label: 'Sábado' }
+            ];
+
+            daysContainer.innerHTML = '';
+            daysNames.forEach(d => {
+                const checked = config.workingDays.includes(d.val);
+                const label = document.createElement('label');
+                label.className = 'cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-nude bg-greige/50 text-xs font-medium';
+                label.innerHTML = `
+                    <input type="checkbox" value="${d.val}" class="working-day-chk accent-terracota" ${checked ? 'checked' : ''}>
+                    <span>${d.label}</span>
+                `;
+                daysContainer.appendChild(label);
+            });
+
+            document.getElementById('config-start-time').value = config.startTime;
+            document.getElementById('config-end-time').value = config.endTime;
+            document.getElementById('config-slot-duration').value = config.slotDuration;
+            document.getElementById('config-surcharge-type').value = config.surchargeType;
+            document.getElementById('config-surcharge-value').value = config.surchargeValue;
+            document.getElementById('config-whatsapp').value = config.whatsappNumber;
+        }
+
+        document.getElementById('schedule-config-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const selectedDays = Array.from(document.querySelectorAll('.working-day-chk:checked')).map(cb => Number(cb.value));
+            config.workingDays = selectedDays;
+            config.startTime = document.getElementById('config-start-time').value;
+            config.endTime = document.getElementById('config-end-time').value;
+            config.slotDuration = Number(document.getElementById('config-slot-duration').value);
+            config.surchargeType = document.getElementById('config-surcharge-type').value;
+            config.surchargeValue = Number(document.getElementById('config-surcharge-value').value);
+            config.whatsappNumber = document.getElementById('config-whatsapp').value.trim();
+
+            saveConfig();
+            populateBlockTimeOptions();
+            showToast('Horarios y tarifa diferencial actualizados');
+        });
+
+        // Pestaña 3: Gestión de Servicios y Precios
+        function renderAdminServices() {
+            const container = document.getElementById('admin-services-list');
+            container.innerHTML = '';
+
+            services.forEach((srv) => {
+                const item = document.createElement('div');
+                item.className = 'p-4 rounded-2xl bg-greige/60 border border-nude space-y-3';
+                item.innerHTML = `
+                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+                        <div class="sm:col-span-8">
+                            <label class="block text-[11px] font-semibold text-carbon/70 mb-1">Nombre del servicio</label>
+                            <input type="text" id="edit-name-${srv.id}" value="${srv.name}" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-nude text-xs font-medium">
+                        </div>
+                        <div class="sm:col-span-4">
+                            <label class="block text-[11px] font-semibold text-carbon/70 mb-1">Precio ($)</label>
+                            <input type="number" id="edit-price-${srv.id}" value="${srv.price}" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-nude text-xs font-semibold text-terracota">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-carbon/70 mb-1">Descripción</label>
+                        <textarea id="edit-desc-${srv.id}" rows="2" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-nude text-xs resize-none">${srv.description}</textarea>
+                    </div>
+                    <div class="flex items-center justify-end gap-2 pt-1">
+                        ${services.length > 1 ? `
+                            <button type="button" onclick="deleteService('${srv.id}')" class="px-3 py-1.5 rounded-xl text-xs text-terracota-dark hover:bg-terracota/10 transition-colors">
+                                Eliminar
+                            </button>
+                        ` : ''}
+                        <button type="button" onclick="updateService('${srv.id}')" class="px-4 py-1.5 rounded-xl bg-oliva hover:bg-oliva-light text-blanco-calido text-xs font-medium transition-colors">
+                            Guardar cambios
+                        </button>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function updateService(id) {
+            const srv = services.find(s => s.id === id);
+            if (!srv) return;
+            srv.name = document.getElementById(`edit-name-${id}`).value.trim();
+            srv.price = Number(document.getElementById(`edit-price-${id}`).value);
+            srv.description = document.getElementById(`edit-desc-${id}`).value.trim();
+
+            saveServices();
+            renderLandingServices();
+            showToast('Servicio y precio actualizados');
+        }
+
+        function deleteService(id) {
+            services = services.filter(s => s.id !== id);
+            saveServices();
+            renderAdminServices();
+            renderLandingServices();
+            showToast('Servicio eliminado');
+        }
+
+        document.getElementById('add-service-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('new-service-name').value.trim();
+            const price = Number(document.getElementById('new-service-price').value);
+            const description = document.getElementById('new-service-desc').value.trim();
+
+            services.push({
+                id: 'srv-' + Date.now(),
+                name,
+                price,
+                description,
+                icon: 'sparkles'
+            });
+
+            saveServices();
+            document.getElementById('add-service-form').reset();
+            renderAdminServices();
+            renderLandingServices();
+            showToast('Nuevo servicio agregado');
+        });
+
+        // --- INICIALIZACIÓN AL CARGAR ---
+        window.addEventListener('DOMContentLoaded', () => {
+            renderLandingServices();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
