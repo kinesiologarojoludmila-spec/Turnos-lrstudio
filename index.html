@@ -31,13 +31,17 @@
                         sans: ['Montserrat', 'sans-serif'],
                         editorial: ['Cormorant Garamond', 'serif'],
                     },
+                    boxShadow: {
+                        'editorial': '0 12px 32px -12px rgba(47, 46, 44, 0.10)',
+                        'card-hover': '0 20px 42px -15px rgba(194, 125, 99, 0.18)',
+                    }
                 }
             }
         }
     </script>
     <style>
         body {
-            background-color: #FAF9F6;
+            background-color: #F4F1EA;
             color: #2F2E2C;
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
@@ -46,9 +50,16 @@
         .font-editorial {
             font-family: 'Cormorant Garamond', serif;
         }
+        /* Trama sutil de grilla postural estilo PosturaLab */
+        .bg-posture-grid {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(47, 46, 44, 0.045) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(47, 46, 44, 0.045) 1px, transparent 1px);
+        }
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(1deg); }
+            50% { transform: translateY(-7px) rotate(0.8deg); }
         }
         .animate-float {
             animation: floatSlow 9s ease-in-out infinite;
@@ -59,17 +70,17 @@
         .slot-tachado {
             background-image: repeating-linear-gradient(
                 -45deg,
-                #EAE3D9,
-                #EAE3D9 8px,
-                #F4F1EA 8px,
-                #F4F1EA 16px
+                #DFD7CB,
+                #DFD7CB 6px,
+                #EAE3D9 6px,
+                #EAE3D9 12px
             );
         }
         ::-webkit-scrollbar {
-            width: 7px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #F4F1EA;
+            background: #EAE3D9;
         }
         ::-webkit-scrollbar-thumb {
             background: #C27D63;
@@ -77,31 +88,37 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-terracota/20 selection:text-carbon">
+<body class="antialiased selection:bg-terracota/25 selection:text-carbon">
 
     <!-- ==================== NAVBAR GLOBAL ==================== -->
-    <header class="sticky top-0 z-40 bg-blanco-calido/95 backdrop-blur-md border-b border-nude/70 transition-all">
+    <header class="sticky top-0 z-40 bg-greige/90 backdrop-blur-md border-b border-carbon/10 transition-all">
         <div class="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
             <!-- Logo Textual -->
-            <a href="#" onclick="navigateTo('landing'); return false;" class="group flex flex-col">
-                <div class="flex items-baseline gap-1.5">
-                    <span class="font-editorial text-2xl sm:text-3xl font-semibold tracking-tight text-carbon">Ludmila</span>
-                    <span class="font-editorial text-2xl sm:text-3xl font-normal italic text-terracota">Rojo</span>
+            <a href="#" onclick="navigateTo('landing'); return false;" class="group flex items-center gap-3.5">
+                <div class="w-9 h-9 rounded-xl bg-blanco-calido border border-carbon/12 flex items-center justify-center text-terracota group-hover:border-terracota/60 transition-colors shadow-xs">
+                    <span class="font-editorial text-xl font-semibold tracking-tighter">LR</span>
                 </div>
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.26em] text-oliva font-medium -mt-1">
-                    Studio · Kinesiología & Postura
-                </span>
+                <div class="flex flex-col">
+                    <div class="flex items-baseline gap-1.5">
+                        <span class="font-editorial text-2xl sm:text-[1.75rem] font-semibold tracking-tight text-carbon leading-none">Ludmila</span>
+                        <span class="font-editorial text-2xl sm:text-[1.75rem] font-normal italic text-terracota leading-none">Rojo</span>
+                    </div>
+                    <span class="text-[9px] uppercase tracking-[0.26em] text-oliva font-medium mt-1">
+                        Studio · Kinesiología & Postura
+                    </span>
+                </div>
             </a>
 
             <!-- Navegación Desktop -->
-            <nav class="hidden md:flex items-center gap-9 text-xs uppercase tracking-[0.14em] font-medium text-carbon/75">
-                <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors">Especialidades</a>
-                <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors">Sobre Mí</a>
-                <button onclick="navigateTo('booking')" class="bg-carbon hover:bg-terracota text-blanco-calido px-6 py-3 rounded-full transition-all duration-300 shadow-xs flex items-center gap-2.5 text-[11px] uppercase tracking-[0.15em] font-medium">
-                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-terracota group-hover:text-blanco-calido"></i>
+            <nav class="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.16em] font-medium text-carbon/80">
+                <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors py-1">Especialidades</a>
+                <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors py-1">Sobre Mí</a>
+                <div class="h-4 w-px bg-carbon/15"></div>
+                <button onclick="navigateTo('booking')" class="bg-carbon hover:bg-terracota text-blanco-calido px-6 py-3 rounded-full transition-all duration-300 shadow-editorial flex items-center gap-2.5 text-[11px] uppercase tracking-[0.15em] font-medium group">
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-terracota group-hover:text-blanco-calido transition-colors"></i>
                     <span>Consulta | Turnos</span>
                 </button>
-                <button onclick="openAdminGate()" title="Panel de Gestión Profesional" class="text-oliva/80 hover:text-carbon p-2 rounded-full hover:bg-greige transition-colors flex items-center gap-1.5 text-[11px] normal-case tracking-normal">
+                <button onclick="openAdminGate()" title="Panel de Gestión Profesional" class="text-oliva hover:text-carbon px-3 py-2 rounded-full border border-transparent hover:border-carbon/12 hover:bg-blanco-calido/70 transition-all flex items-center gap-1.5 text-[11px] normal-case tracking-normal">
                     <i data-lucide="lock" class="w-3.5 h-3.5"></i>
                     <span>Gestión</span>
                 </button>
@@ -109,11 +126,12 @@
 
             <!-- Botones Móvil -->
             <div class="flex md:hidden items-center gap-2">
-                <button onclick="navigateTo('booking')" class="bg-carbon text-blanco-calido px-4 py-2.5 rounded-full text-[11px] uppercase tracking-wider font-medium shadow-xs flex items-center gap-1.5">
-                    <span>Consulta | Turnos</span>
+                <button onclick="navigateTo('booking')" class="bg-carbon text-blanco-calido px-4 py-2.5 rounded-full text-[10px] uppercase tracking-[0.14em] font-medium shadow-editorial flex items-center gap-1.5">
+                    <span>Turnos</span>
+                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-terracota"></i>
                 </button>
-                <button onclick="openAdminGate()" class="p-2 text-oliva hover:bg-greige rounded-full" aria-label="Gestión">
-                    <i data-lucide="lock" class="w-4 h-4"></i>
+                <button onclick="openAdminGate()" class="p-2.5 text-oliva bg-blanco-calido/80 border border-carbon/12 rounded-full" aria-label="Gestión">
+                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
                 </button>
             </div>
         </div>
@@ -122,85 +140,118 @@
     <!-- ==================== VISTA 1: LANDING PAGE ==================== -->
     <main id="view-landing" class="block">
         
-        <!-- SECCIÓN HERO -->
-        <section class="relative overflow-hidden pt-12 pb-24 sm:pt-20 sm:pb-32 bg-gradient-to-b from-blanco-calido via-greige/40 to-blanco-calido">
-            <div class="max-w-6xl mx-auto px-5 sm:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-center">
+        <!-- SECCIÓN HERO (Fondo greige + grilla técnica) -->
+        <section class="relative overflow-hidden pt-12 pb-24 sm:pt-20 sm:pb-28 bg-greige bg-posture-grid border-b border-carbon/10">
+            <!-- Halo decorativo cálido -->
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-nude blur-3xl opacity-90 pointer-events-none"></div>
+
+            <div class="max-w-6xl mx-auto px-5 sm:px-8 relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
                     
                     <!-- Columna Texto (7 cols) -->
                     <div class="lg:col-span-7 space-y-7 text-center lg:text-left">
-                        <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-greige border border-nude text-oliva text-[11px] uppercase tracking-[0.16em] font-medium">
-                            <span class="w-1.5 h-1.5 rounded-full bg-terracota"></span>
-                            <span>Kinesiología Integrativa & Postura</span>
+                        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-blanco-calido border border-carbon/12 shadow-editorial text-oliva text-[10px] uppercase tracking-[0.18em] font-semibold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-terracota animate-pulse"></span>
+                            <span>Kinesiología Integrativa & Posturología · Olavarría</span>
                         </div>
                         
-                        <h1 class="font-editorial text-4xl sm:text-5xl lg:text-[3.65rem] font-medium text-carbon leading-[1.08] tracking-tight">
+                        <h1 class="font-editorial text-4xl sm:text-5xl lg:text-[3.75rem] font-medium text-carbon leading-[1.06] tracking-tight">
                             El equilibrio de tu cuerpo comienza por <span class="italic font-normal text-terracota">escuchar tu postura</span>.
                         </h1>
                         
-                        <p class="text-sm sm:text-base text-carbon/70 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
-                            Abordaje kinésico personalizado en Olavarría. Combinamos evaluación biomecánica de precisión, plantillas ortopédicas a medida y terapias miofasciales para aliviar el dolor y devolverle fluidez a tu movimiento.
+                        <p class="text-sm sm:text-[15px] text-carbon/75 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                            Abordaje clínico personalizado. Combinamos evaluación biomecánica de precisión, plantillas ortopédicas a medida y terapia miofascial para detectar el origen del dolor y devolverle fluidez a tu movimiento.
                         </p>
                         
-                        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                            <button onclick="navigateTo('booking')" class="w-full sm:w-auto bg-terracota hover:bg-terracota-dark text-blanco-calido px-8 py-4 rounded-full font-medium text-xs uppercase tracking-[0.16em] transition-all shadow-sm hover:shadow flex items-center justify-center gap-3">
-                                <span>Consulta | Turnos</span>
+                        <div class="pt-1 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5">
+                            <button onclick="navigateTo('booking')" class="w-full sm:w-auto bg-terracota hover:bg-terracota-dark text-blanco-calido px-8 py-4 rounded-full font-medium text-xs uppercase tracking-[0.16em] transition-all shadow-editorial hover:shadow-card-hover flex items-center justify-center gap-3">
+                                <span>Agendar Consulta</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
-                            <a href="#servicios" class="w-full sm:w-auto px-7 py-4 rounded-full border border-nude hover:border-oliva/40 text-carbon/80 hover:bg-greige/60 transition-colors text-xs uppercase tracking-[0.14em] font-medium text-center">
-                                Conocer tratamientos
+                            <a href="#servicios" class="w-full sm:w-auto px-7 py-4 rounded-full bg-blanco-calido border border-carbon/12 hover:border-oliva/60 text-carbon/85 hover:bg-nude/60 transition-colors text-xs uppercase tracking-[0.14em] font-medium text-center">
+                                Explorar Especialidades
                             </a>
                         </div>
 
-                        <!-- Indicadores de confianza -->
-                        <div class="pt-8 grid grid-cols-3 gap-6 max-w-md mx-auto lg:mx-0 border-t border-nude/80">
-                            <div>
-                                <p class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon">+10 años</p>
-                                <p class="text-[11px] text-carbon/55 mt-0.5">Experiencia clínica</p>
+                        <!-- Indicadores de confianza estilo ficha técnica -->
+                        <div class="pt-7 grid grid-cols-3 gap-4 sm:gap-6 max-w-lg mx-auto lg:mx-0 border-t border-carbon/12">
+                            <div class="border-l-2 border-terracota pl-3.5 text-left">
+                                <p class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon leading-none">+10 años</p>
+                                <p class="text-[10px] uppercase tracking-wider text-oliva mt-1.5 font-medium">Experiencia clínica</p>
                             </div>
-                            <div>
-                                <p class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon">1 a 1</p>
-                                <p class="text-[11px] text-carbon/55 mt-0.5">Atención dedicada</p>
+                            <div class="border-l-2 border-oliva pl-3.5 text-left">
+                                <p class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon leading-none">1 a 1</p>
+                                <p class="text-[10px] uppercase tracking-wider text-oliva mt-1.5 font-medium">Sesión exclusiva</p>
                             </div>
-                            <div>
-                                <p class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon">Ebers</p>
-                                <p class="text-[11px] text-carbon/55 mt-0.5">Plantillas a medida</p>
+                            <div class="border-l-2 border-carbon/25 pl-3.5 text-left">
+                                <p class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon leading-none">Ebers</p>
+                                <p class="text-[10px] uppercase tracking-wider text-oliva mt-1.5 font-medium">Biomecánica podal</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Columna Arte Abstracto Minimalista (5 cols) -->
+                    <!-- Columna Arte Postural Minimalista (5 cols) -->
                     <div class="lg:col-span-5 flex justify-center">
-                        <div class="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-[2.5rem] bg-greige/80 border border-nude p-6 shadow-xs flex items-center justify-center overflow-hidden">
-                            <svg viewBox="0 0 400 500" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="terracotaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#C27D63" stop-opacity="0.88"/>
-                                        <stop offset="100%" stop-color="#D99B82" stop-opacity="0.65"/>
-                                    </linearGradient>
-                                    <linearGradient id="olivaGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#6B705C" stop-opacity="0.85"/>
-                                        <stop offset="100%" stop-color="#969C84" stop-opacity="0.5"/>
-                                    </linearGradient>
-                                </defs>
-                                <path d="M 70 440 L 70 220 A 130 130 0 0 1 330 220 L 330 440 Z" fill="#EAE3D9" opacity="0.7"/>
-                                <path class="animate-float" d="M 115 390 C 90 310, 140 210, 220 205 C 295 200, 325 285, 290 365 C 265 420, 140 450, 115 390 Z" fill="url(#olivaGrad)"/>
-                                <circle class="animate-float-delayed" cx="245" cy="155" r="68" fill="url(#terracotaGrad)"/>
-                                <path d="M 195 75 Q 235 185, 185 275 T 205 445" fill="none" stroke="#2F2E2C" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
-                                <circle cx="209" cy="145" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.4"/>
-                                <circle cx="195" cy="248" r="5.5" fill="#C27D63" stroke="#FAF9F6" stroke-width="1.4"/>
-                                <circle cx="196" cy="355" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.4"/>
-                                <line x1="95" y1="248" x2="305" y2="248" stroke="#2F2E2C" stroke-width="0.75" stroke-dasharray="4 4" opacity="0.3"/>
-                                <circle cx="135" cy="130" r="22" fill="none" stroke="#6B705C" stroke-width="1.2" opacity="0.55"/>
-                            </svg>
+                        <div class="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-[2rem] bg-blanco-calido border border-carbon/12 p-5 shadow-editorial flex flex-col justify-between overflow-hidden">
+                            <!-- Cabecera técnica estilo PosturaLab -->
+                            <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold z-10 px-1">
+                                <span class="flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-oliva"></span>
+                                    Eje Postural
+                                </span>
+                                <span>Análisis 01</span>
+                            </div>
 
-                            <div class="absolute bottom-6 left-6 right-6 bg-blanco-calido/95 backdrop-blur-xs border border-nude rounded-2xl px-4 py-3.5 flex items-center justify-between">
+                            <!-- SVG Biomecánico & Orgánico -->
+                            <div class="relative flex-1 flex items-center justify-center my-2 rounded-2xl bg-nude/55 border border-carbon/10 overflow-hidden">
+                                <svg viewBox="0 0 400 460" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="terracotaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#C27D63" stop-opacity="0.9"/>
+                                            <stop offset="100%" stop-color="#A8664E" stop-opacity="0.68"/>
+                                        </linearGradient>
+                                        <linearGradient id="olivaGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#6B705C" stop-opacity="0.85"/>
+                                            <stop offset="100%" stop-color="#848A73" stop-opacity="0.5"/>
+                                        </linearGradient>
+                                    </defs>
+                                    
+                                    <!-- Retícula de calibración postural -->
+                                    <line x1="200" y1="25" x2="200" y2="435" stroke="#6B705C" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.5"/>
+                                    <line x1="65" y1="145" x2="335" y2="145" stroke="#2F2E2C" stroke-width="0.65" stroke-dasharray="3 3" opacity="0.25"/>
+                                    <line x1="65" y1="245" x2="335" y2="245" stroke="#2F2E2C" stroke-width="0.65" stroke-dasharray="3 3" opacity="0.25"/>
+                                    <line x1="65" y1="345" x2="335" y2="345" stroke="#2F2E2C" stroke-width="0.65" stroke-dasharray="3 3" opacity="0.25"/>
+
+                                    <!-- Arco orgánico -->
+                                    <path d="M 75 415 L 75 205 A 125 125 0 0 1 325 205 L 325 415 Z" fill="#EAE3D9" opacity="0.85"/>
+                                    
+                                    <!-- Formas flotantes -->
+                                    <path class="animate-float" d="M 118 370 C 95 295, 142 200, 218 195 C 290 190, 318 270, 285 345 C 260 398, 142 425, 118 370 Z" fill="url(#olivaGrad)"/>
+                                    <circle class="animate-float-delayed" cx="242" cy="148" r="62" fill="url(#terracotaGrad)"/>
+                                    
+                                    <!-- Curva raquídea -->
+                                    <path d="M 196 68 Q 232 175, 188 260 T 204 415" fill="none" stroke="#2F2E2C" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+                                    
+                                    <!-- Nodos de referencia anatómica -->
+                                    <circle cx="208" cy="145" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.5"/>
+                                    <circle cx="196" cy="245" r="5.5" fill="#C27D63" stroke="#FAF9F6" stroke-width="1.5"/>
+                                    <circle cx="197" cy="345" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.5"/>
+                                    
+                                    <!-- Marcas de medición laterales -->
+                                    <text x="72" y="140" fill="#2F2E2C" font-size="8" font-family="Montserrat" font-weight="500" opacity="0.65">CINTURA ESCAPULAR</text>
+                                    <text x="72" y="240" fill="#2F2E2C" font-size="8" font-family="Montserrat" font-weight="500" opacity="0.65">CENTRO DE GRAVEDAD</text>
+                                    <text x="72" y="340" fill="#2F2E2C" font-size="8" font-family="Montserrat" font-weight="500" opacity="0.65">APOYO PLANTAR</text>
+                                </svg>
+                            </div>
+
+                            <!-- Tarjeta inferior integrada -->
+                            <div class="bg-greige border border-carbon/10 rounded-2xl px-4 py-3 flex items-center justify-between z-10">
                                 <div>
-                                    <p class="text-xs font-medium text-carbon">Alineación & Movimiento</p>
-                                    <p class="text-[11px] text-oliva font-light">Estudio integral del cuerpo</p>
+                                    <p class="text-xs font-semibold text-carbon">Evaluación & Cadenas Miofasciales</p>
+                                    <p class="text-[11px] text-oliva font-normal">Abordaje global sin apuros</p>
                                 </div>
-                                <span class="w-8 h-8 rounded-full bg-terracota/12 text-terracota flex items-center justify-center">
-                                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                                <span class="w-8 h-8 rounded-xl bg-blanco-calido border border-carbon/10 text-terracota flex items-center justify-center shrink-0">
+                                    <i data-lucide="activity" class="w-4 h-4"></i>
                                 </span>
                             </div>
                         </div>
@@ -210,49 +261,59 @@
             </div>
         </section>
 
-        <!-- SECCIÓN SERVICIOS (Sin precios en portada) -->
-        <section id="servicios" class="py-24 bg-blanco-calido border-t border-nude/60">
+        <!-- SECCIÓN SERVICIOS (Fondo nude más profundo para resaltar tarjetas blanco-calido) -->
+        <section id="servicios" class="py-24 bg-nude/75 border-b border-carbon/10">
             <div class="max-w-6xl mx-auto px-5 sm:px-8">
-                <div class="max-w-2xl mx-auto text-center mb-16 space-y-3">
-                    <span class="text-[11px] uppercase tracking-[0.24em] text-terracota font-medium">Especialidades</span>
-                    <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[2.65rem] font-medium text-carbon">Tratamientos diseñados para vos</h2>
-                    <p class="text-sm text-carbon/65 font-light leading-relaxed">
-                        Cada sesión parte de una mirada integral para detectar el origen de tus molestias y construir soluciones duraderas.
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 border-b border-carbon/12 pb-8">
+                    <div class="space-y-2.5 max-w-xl">
+                        <span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-terracota-dark font-semibold">
+                            <span class="w-4 h-px bg-terracota-dark"></span>
+                            Especialidades Clínicas
+                        </span>
+                        <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[2.75rem] font-medium text-carbon leading-tight">
+                            Tratamientos diseñados para vos
+                        </h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-carbon/70 font-light leading-relaxed max-w-md">
+                        Cada sesión parte de una mirada integral para detectar la causa biomecánica de tus molestias y construir soluciones duraderas.
                     </p>
                 </div>
 
                 <!-- Contenedor de tarjetas de servicios renderizadas por JS -->
-                <div id="landing-services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div id="landing-services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-7">
                     <!-- Se llena dinámicamente -->
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN QUIÉN SOY (Misión, Visión y Valores) -->
-        <section id="sobre-mi" class="py-24 bg-greige/50 border-t border-nude/80">
+        <!-- SECCIÓN QUIÉN SOY (Fondo greige con tarjetas blanco-calido) -->
+        <section id="sobre-mi" class="py-24 bg-greige">
             <div class="max-w-6xl mx-auto px-5 sm:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
                     
                     <!-- Presentación Ludmila (5 cols) -->
                     <div class="lg:col-span-5 space-y-6">
-                        <span class="text-[11px] uppercase tracking-[0.24em] text-oliva font-medium">Sobre Mí</span>
-                        <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[2.65rem] font-medium text-carbon leading-tight">
+                        <span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-oliva font-semibold">
+                            <span class="w-4 h-px bg-oliva"></span>
+                            Sobre Mí
+                        </span>
+                        <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[2.75rem] font-medium text-carbon leading-tight">
                             Hola, soy <span class="italic text-terracota">Ludmila Rojo</span>
                         </h2>
-                        <p class="text-sm text-carbon/80 leading-relaxed font-normal">
-                            Soy Licenciada en Kinesiología y Fisiatría con más de <strong class="font-medium text-carbon">10 años de trayectoria</strong> acompañando a personas adultas en el cuidado de su postura, el alivio del dolor crónico y la mejora de su calidad de movimiento.
+                        <p class="text-sm text-carbon/85 leading-relaxed font-normal">
+                            Soy Licenciada en Kinesiología y Fisiatría con más de <strong class="font-semibold text-carbon">10 años de trayectoria</strong> acompañando a personas adultas en el cuidado de su postura, el alivio del dolor crónico y la mejora de su calidad de movimiento.
                         </p>
-                        <p class="text-sm text-carbon/70 leading-relaxed font-light">
-                            En mi estudio de Olavarría creé un espacio cálido, pausado y libre de apuros. Entiendo que cada cuerpo cuenta una historia distinta; por eso, mi enfoque combina la biomecánica precisa —como el análisis de la pisada en cinta y plantillas Ebers— con técnicas manuales e invasivas como la punción seca.
+                        <p class="text-sm text-carbon/75 leading-relaxed font-light">
+                            En mi estudio de Olavarría creé un espacio cálido, pausado y libre de apuros. Entiendo que cada cuerpo cuenta una historia distinta; por eso, mi enfoque combina la biomecánica precisa —como el análisis de la pisada y plantillas Ebers— con técnicas manuales e invasivas como la punción seca.
                         </p>
                         <div class="pt-2">
-                            <div class="inline-flex items-center gap-3.5 bg-blanco-calido px-5 py-3.5 rounded-2xl border border-nude">
-                                <div class="w-10 h-10 rounded-full bg-oliva/12 text-oliva flex items-center justify-center">
-                                    <i data-lucide="award" class="w-4 h-4"></i>
+                            <div class="flex items-center gap-4 bg-blanco-calido p-4 rounded-2xl border border-carbon/12 shadow-editorial">
+                                <div class="w-11 h-11 rounded-xl bg-oliva/15 text-oliva flex items-center justify-center shrink-0">
+                                    <i data-lucide="award" class="w-5 h-5"></i>
                                 </div>
                                 <div>
-                                    <p class="text-xs font-medium text-carbon">Lic. Ludmila Rojo</p>
-                                    <p class="text-[11px] text-carbon/55 font-light">Kinesiología Postural & Biomecánica</p>
+                                    <p class="text-xs font-semibold text-carbon">Lic. Ludmila Rojo</p>
+                                    <p class="text-[11px] text-oliva font-normal mt-0.5">Kinesiología Postural & Biomecánica · Olavarría</p>
                                 </div>
                             </div>
                         </div>
@@ -261,47 +322,56 @@
                     <!-- Bloques Misión, Visión y Valores (7 cols) -->
                     <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <!-- Misión -->
-                        <div class="bg-blanco-calido p-8 rounded-3xl border border-nude/90 space-y-3.5">
-                            <div class="w-10 h-10 rounded-2xl bg-terracota/12 text-terracota flex items-center justify-center">
-                                <i data-lucide="compass" class="w-4 h-4"></i>
+                        <div class="bg-blanco-calido p-7 sm:p-8 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-terracota/15 text-terracota flex items-center justify-center">
+                                    <i data-lucide="compass" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-carbon/45 font-semibold">01</span>
                             </div>
                             <h3 class="font-editorial text-2xl font-semibold text-carbon">Misión</h3>
-                            <p class="text-xs sm:text-[13px] text-carbon/70 leading-relaxed font-light">
+                            <p class="text-xs sm:text-[13px] text-carbon/75 leading-relaxed font-light">
                                 Brindar atención kinésica personalizada y de excelencia, identificando la raíz biomecánica y postural de cada dolencia para devolver bienestar, autonomía y movimiento sin dolor.
                             </p>
                         </div>
 
                         <!-- Visión -->
-                        <div class="bg-blanco-calido p-8 rounded-3xl border border-nude/90 space-y-3.5">
-                            <div class="w-10 h-10 rounded-2xl bg-oliva/12 text-oliva flex items-center justify-center">
-                                <i data-lucide="eye" class="w-4 h-4"></i>
+                        <div class="bg-blanco-calido p-7 sm:p-8 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-3.5">
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-oliva/15 text-oliva flex items-center justify-center">
+                                    <i data-lucide="eye" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-carbon/45 font-semibold">02</span>
                             </div>
                             <h3 class="font-editorial text-2xl font-semibold text-carbon">Visión</h3>
-                            <p class="text-xs sm:text-[13px] text-carbon/70 leading-relaxed font-light">
+                            <p class="text-xs sm:text-[13px] text-carbon/75 leading-relaxed font-light">
                                 Ser un espacio de referencia en kinesiología postural integrativa en Olavarría, transformando la manera en que las personas habitan y cuidan su cuerpo a lo largo de la vida.
                             </p>
                         </div>
 
                         <!-- Valores -->
-                        <div class="sm:col-span-2 bg-blanco-calido p-8 rounded-3xl border border-nude/90 space-y-5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-2xl bg-greige text-carbon flex items-center justify-center">
-                                    <i data-lucide="heart-handshake" class="w-4 h-4 text-terracota"></i>
+                        <div class="sm:col-span-2 bg-blanco-calido p-7 sm:p-8 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-5">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-nude border border-carbon/10 text-terracota flex items-center justify-center">
+                                        <i data-lucide="heart-handshake" class="w-4 h-4"></i>
+                                    </div>
+                                    <h3 class="font-editorial text-2xl font-semibold text-carbon">Valores que guían cada sesión</h3>
                                 </div>
-                                <h3 class="font-editorial text-2xl font-semibold text-carbon">Valores que guían cada sesión</h3>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-carbon/45 font-semibold">03</span>
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-                                <div class="p-4 rounded-2xl bg-greige/60">
-                                    <p class="text-[11px] font-medium uppercase tracking-wider text-terracota mb-1.5">Escucha Activa</p>
-                                    <p class="text-xs text-carbon/70 leading-relaxed font-light">Tiempo dedicado exclusivamente a vos, sin protocolos genéricos.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
+                                <div class="p-4 rounded-2xl bg-greige border border-carbon/10">
+                                    <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-terracota-dark mb-1.5">Escucha Activa</p>
+                                    <p class="text-xs text-carbon/75 leading-relaxed font-light">Tiempo dedicado exclusivamente a vos, sin protocolos genéricos.</p>
                                 </div>
-                                <div class="p-4 rounded-2xl bg-greige/60">
-                                    <p class="text-[11px] font-medium uppercase tracking-wider text-oliva mb-1.5">Precisión Clínica</p>
-                                    <p class="text-xs text-carbon/70 leading-relaxed font-light">Evaluación objetiva de la postura y la pisada respaldada por evidencia.</p>
+                                <div class="p-4 rounded-2xl bg-greige border border-carbon/10">
+                                    <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-oliva mb-1.5">Precisión Clínica</p>
+                                    <p class="text-xs text-carbon/75 leading-relaxed font-light">Evaluación objetiva de la postura y la pisada respaldada por evidencia.</p>
                                 </div>
-                                <div class="p-4 rounded-2xl bg-greige/60">
-                                    <p class="text-[11px] font-medium uppercase tracking-wider text-carbon mb-1.5">Calidez Humana</p>
-                                    <p class="text-xs text-carbon/70 leading-relaxed font-light">Un entorno sereno y contenedor para tu proceso de recuperación.</p>
+                                <div class="p-4 rounded-2xl bg-greige border border-carbon/10">
+                                    <p class="text-[10px] font-semibold uppercase tracking-[0.14em] text-carbon mb-1.5">Calidez Humana</p>
+                                    <p class="text-xs text-carbon/75 leading-relaxed font-light">Un entorno sereno y contenedor para tu proceso de recuperación.</p>
                                 </div>
                             </div>
                         </div>
@@ -312,14 +382,19 @@
         </section>
 
         <!-- BANNER CTA FINAL -->
-        <section class="py-20 bg-oliva text-blanco-calido">
-            <div class="max-w-3xl mx-auto px-5 text-center space-y-6">
-                <h2 class="font-editorial text-3xl sm:text-4xl lg:text-5xl font-normal">¿Listo para darle atención a tu postura?</h2>
-                <p class="text-sm text-blanco-calido/80 max-w-lg mx-auto font-light leading-relaxed">
-                    Consultá disponibilidad online y reservá tu lugar en la agenda de atención personalizada.
+        <section class="py-20 bg-oliva text-blanco-calido relative overflow-hidden">
+            <div class="max-w-3xl mx-auto px-5 text-center space-y-6 relative z-10">
+                <span class="inline-block text-[10px] uppercase tracking-[0.25em] text-blanco-calido/80 font-medium">
+                    Agenda Abierta · Atención Individual
+                </span>
+                <h2 class="font-editorial text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight">
+                    ¿Listo para darle atención a tu postura?
+                </h2>
+                <p class="text-sm text-blanco-calido/90 max-w-lg mx-auto font-light leading-relaxed">
+                    Consultá disponibilidad online en tiempo real y reservá tu lugar en el estudio.
                 </p>
                 <div class="pt-2">
-                    <button onclick="navigateTo('booking')" class="bg-blanco-calido text-carbon hover:bg-greige px-8 py-4 rounded-full font-medium text-xs uppercase tracking-[0.16em] transition-all shadow-sm inline-flex items-center gap-2.5">
+                    <button onclick="navigateTo('booking')" class="bg-blanco-calido text-carbon hover:bg-greige px-8 py-4 rounded-full font-medium text-xs uppercase tracking-[0.16em] transition-all shadow-editorial inline-flex items-center gap-2.5">
                         <i data-lucide="calendar-check" class="w-4 h-4 text-terracota"></i>
                         <span>Consulta | Turnos</span>
                     </button>
@@ -329,17 +404,17 @@
     </main>
 
     <!-- ==================== VISTA 2: RESERVA DE TURNOS ==================== -->
-    <section id="view-booking" class="hidden min-h-[85vh] py-10 sm:py-14 bg-greige/40">
+    <section id="view-booking" class="hidden min-h-[85vh] py-10 sm:py-14 bg-greige bg-posture-grid">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Barra superior de navegación -->
-            <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-                <button onclick="navigateTo('landing')" class="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-oliva hover:text-carbon font-medium bg-blanco-calido px-4 py-2.5 rounded-full border border-nude shadow-xs transition-colors">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-5 border-b border-carbon/12">
+                <button onclick="navigateTo('landing')" class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-oliva hover:text-carbon font-medium bg-blanco-calido px-4 py-2.5 rounded-full border border-carbon/12 shadow-editorial transition-colors">
                     <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
                     <span>Volver al estudio</span>
                 </button>
                 <div class="text-right">
-                    <span class="text-[11px] uppercase tracking-[0.2em] text-terracota font-medium">Agenda Online</span>
+                    <span class="text-[10px] uppercase tracking-[0.22em] text-terracota-dark font-semibold">Agenda Online</span>
                     <h1 class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon">Consulta | Turnos</h1>
                 </div>
             </div>
@@ -347,113 +422,116 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
                 <!-- COLUMNA IZQUIERDA: Fecha y Grilla de Horarios (7 cols) -->
-                <div class="lg:col-span-7 bg-blanco-calido rounded-3xl border border-nude p-6 sm:p-8 shadow-xs space-y-6">
+                <div class="lg:col-span-7 bg-blanco-calido rounded-[1.75rem] border border-carbon/12 p-6 sm:p-8 shadow-editorial space-y-6">
                     
                     <!-- Selector de Fecha -->
                     <div>
-                        <label for="booking-date" class="block text-[11px] uppercase tracking-wider text-oliva font-semibold mb-2">
-                            1. Seleccioná el día de tu consulta
+                        <label for="booking-date" class="block text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold mb-2.5">
+                            01 · Seleccioná el día de tu consulta
                         </label>
                         <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-                            <input type="date" id="booking-date" class="w-full sm:w-auto px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-carbon text-sm font-medium focus:outline-none focus:border-terracota">
-                            <span id="booking-day-label" class="text-sm text-carbon/70 font-medium capitalize"></span>
+                            <input type="date" id="booking-date" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-carbon text-sm font-medium focus:outline-none focus:border-terracota transition-colors">
+                            <span id="booking-day-label" class="text-sm text-carbon font-medium capitalize"></span>
                         </div>
-                        <p id="booking-schedule-info" class="text-xs text-oliva mt-2 flex items-center gap-1.5">
+                        <p id="booking-schedule-info" class="text-xs text-oliva mt-2.5 flex items-center gap-1.5">
                         </p>
                     </div>
 
                     <!-- Leyenda de estados -->
-                    <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-nude/70 text-xs">
+                    <div class="flex flex-wrap items-center gap-4 py-2.5 px-3.5 rounded-xl bg-greige border border-carbon/10 text-[11px]">
                         <div class="flex items-center gap-1.5">
-                            <span class="w-3 h-3 rounded-full bg-blanco-calido border border-oliva"></span>
-                            <span class="text-carbon/80">Horario habitual</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-oliva"></span>
+                            <span class="text-carbon/85">Horario habitual</span>
                         </div>
                         <div class="flex items-center gap-1.5">
-                            <span class="w-3 h-3 rounded-full bg-terracota/20 border border-terracota"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-terracota"></span>
                             <span class="text-terracota-dark font-medium">Turno especial (+recargo)</span>
                         </div>
                         <div class="flex items-center gap-1.5">
-                            <span class="w-3 h-3 rounded-full bg-nude border border-carbon/30"></span>
-                            <span class="text-carbon/50 line-through">Ocupado / Tachado</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-nude border border-carbon/30"></span>
+                            <span class="text-carbon/55 line-through">Ocupado</span>
                         </div>
                     </div>
 
                     <!-- Grilla de Horarios -->
                     <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <label class="block text-[11px] uppercase tracking-wider text-oliva font-semibold">
-                                2. Elegí un horario disponible
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                            <label class="block text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold">
+                                02 · Elegí un horario disponible
                             </label>
                             <label class="inline-flex items-center gap-2 cursor-pointer text-xs text-terracota-dark font-medium">
                                 <input type="checkbox" id="toggle-special-hours" class="rounded accent-terracota" checked>
-                                <span>Mostrar horarios especiales fuera de agenda</span>
+                                <span>Mostrar horarios especiales</span>
                             </label>
                         </div>
 
-                        <div id="time-slots-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div id="time-slots-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                         </div>
                     </div>
                 </div>
 
                 <!-- COLUMNA DERECHA: Formulario y Resumen de Precio (5 cols) -->
-                <div class="lg:col-span-5 bg-blanco-calido rounded-3xl border border-nude p-6 sm:p-8 shadow-xs space-y-5 sticky top-24">
-                    <h2 class="font-editorial text-2xl font-semibold text-carbon border-b border-nude pb-3">Detalle de tu reserva</h2>
+                <div class="lg:col-span-5 bg-blanco-calido rounded-[1.75rem] border border-carbon/12 p-6 sm:p-8 shadow-editorial space-y-5 sticky top-24">
+                    <div class="border-b border-carbon/12 pb-3.5 flex items-center justify-between">
+                        <h2 class="font-editorial text-2xl font-semibold text-carbon">Detalle de tu reserva</h2>
+                        <span class="text-[10px] uppercase tracking-widest text-oliva font-semibold">Paso 03</span>
+                    </div>
                     
                     <form id="booking-form" class="space-y-4">
                         <!-- Servicio -->
                         <div>
-                            <label for="booking-service" class="block text-xs font-medium text-carbon/80 mb-1.5">Servicio requerido *</label>
-                            <select id="booking-service" required class="w-full px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-sm text-carbon focus:outline-none focus:border-terracota">
+                            <label for="booking-service" class="block text-xs font-medium text-carbon/85 mb-1.5">Servicio requerido *</label>
+                            <select id="booking-service" required class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota">
                             </select>
-                            <p id="booking-service-desc" class="text-xs text-carbon/60 mt-1.5 leading-relaxed font-light"></p>
+                            <p id="booking-service-desc" class="text-[11px] text-carbon/65 mt-1.5 leading-relaxed font-light"></p>
                         </div>
 
                         <!-- Nombre y Apellido -->
                         <div>
-                            <label for="booking-name" class="block text-xs font-medium text-carbon/80 mb-1.5">Nombre y Apellido *</label>
-                            <input type="text" id="booking-name" required placeholder="Ej. Sofía Martínez" class="w-full px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-sm text-carbon focus:outline-none focus:border-terracota">
+                            <label for="booking-name" class="block text-xs font-medium text-carbon/85 mb-1.5">Nombre y Apellido *</label>
+                            <input type="text" id="booking-name" required placeholder="Ej. Sofía Martínez" class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota">
                         </div>
 
                         <!-- Motivo de consulta -->
                         <div>
-                            <label for="booking-reason" class="block text-xs font-medium text-carbon/80 mb-1.5">Motivo de la consulta *</label>
-                            <textarea id="booking-reason" rows="2" required placeholder="Contame brevemente qué te trae a consulta (ej. dolor lumbar, control de pisada...)" class="w-full px-4 py-3 rounded-2xl bg-greige/60 border border-nude text-sm text-carbon focus:outline-none focus:border-terracota resize-none"></textarea>
+                            <label for="booking-reason" class="block text-xs font-medium text-carbon/85 mb-1.5">Motivo de la consulta *</label>
+                            <textarea id="booking-reason" rows="2" required placeholder="Contame brevemente qué te trae a consulta (ej. dolor lumbar, control de pisada...)" class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota resize-none"></textarea>
                         </div>
 
                         <!-- Tarjeta de Cálculo de Precio en Tiempo Real -->
-                        <div class="p-4 rounded-2xl bg-greige border border-nude space-y-2.5">
+                        <div class="p-4 rounded-2xl bg-greige border border-carbon/12 space-y-2.5">
                             <div class="flex justify-between text-xs text-carbon/75">
                                 <span>Fecha y hora elegida:</span>
                                 <span id="summary-datetime" class="font-semibold text-carbon">Seleccioná un horario</span>
                             </div>
                             <div class="flex justify-between text-xs text-carbon/75">
                                 <span>Valor base de la sesión:</span>
-                                <span id="summary-base-price">$0</span>
+                                <span id="summary-base-price" class="font-medium">$0</span>
                             </div>
                             
-                            <div id="summary-surcharge-row" class="hidden flex justify-between text-xs text-terracota-dark font-medium pt-1 border-t border-nude">
+                            <div id="summary-surcharge-row" class="hidden flex justify-between text-xs text-terracota-dark font-medium pt-1.5 border-t border-carbon/10">
                                 <span>Adicional horario especial:</span>
                                 <span id="summary-surcharge-amount">+$0</span>
                             </div>
 
-                            <div class="flex justify-between items-baseline pt-2 border-t border-carbon/15">
-                                <span class="text-xs uppercase tracking-wider font-semibold text-carbon">Honorarios estimados:</span>
+                            <div class="flex justify-between items-baseline pt-2.5 border-t border-carbon/15">
+                                <span class="text-[11px] uppercase tracking-wider font-semibold text-carbon">Honorarios estimados:</span>
                                 <span id="summary-total-price" class="font-editorial text-2xl font-bold text-terracota">$0</span>
                             </div>
                         </div>
 
                         <!-- Alerta cuando es horario fuera de rango -->
-                        <div id="special-hour-notice" class="hidden p-3.5 rounded-2xl bg-terracota/10 border border-terracota/30 text-xs text-carbon space-y-1">
+                        <div id="special-hour-notice" class="hidden p-3.5 rounded-2xl bg-terracota/12 border border-terracota/35 text-xs text-carbon space-y-1">
                             <p class="font-semibold text-terracota-dark flex items-center gap-1.5">
                                 <i data-lucide="clock-alert" class="w-4 h-4"></i>
                                 <span>Horario fuera de atención habitual</span>
                             </p>
-                            <p class="text-carbon/80 leading-relaxed font-light">
+                            <p class="text-carbon/85 leading-relaxed font-light text-[11px]">
                                 Este turno tiene un valor diferencial y queda <strong>sujeto a confirmación previa</strong> de Ludmila. Al reservar, podrás enviarlo directo por WhatsApp para su aprobación.
                             </p>
                         </div>
 
-                        <button type="submit" id="btn-confirm-booking" disabled class="w-full bg-terracota disabled:bg-carbon/20 disabled:cursor-not-allowed hover:bg-terracota-dark text-blanco-calido py-3.5 px-6 rounded-full font-medium text-xs uppercase tracking-wider transition-all shadow-xs flex items-center justify-center gap-2">
+                        <button type="submit" id="btn-confirm-booking" disabled class="w-full bg-terracota disabled:bg-carbon/20 disabled:cursor-not-allowed hover:bg-terracota-dark text-blanco-calido py-3.5 px-6 rounded-full font-medium text-xs uppercase tracking-[0.14em] transition-all shadow-editorial flex items-center justify-center gap-2">
                             <i data-lucide="check-circle-2" class="w-4 h-4"></i>
                             <span>Confirmar y Agendar Turno</span>
                         </button>
@@ -465,35 +543,35 @@
     </section>
 
     <!-- ==================== VISTA 3: PANEL DE ADMINISTRACIÓN PROFESIONAL ==================== -->
-    <section id="view-admin" class="hidden min-h-[85vh] py-10 bg-greige/50">
+    <section id="view-admin" class="hidden min-h-[85vh] py-10 bg-greige">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Header del Panel -->
-            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-nude">
+            <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-carbon/12">
                 <div>
-                    <div class="flex items-center gap-2">
-                        <span class="px-2.5 py-0.5 rounded-full bg-oliva text-blanco-calido text-[10px] uppercase tracking-wider font-semibold">Modo Profesional</span>
-                        <span class="text-xs text-carbon/60">Ludmila Rojo Studio</span>
+                    <div class="flex items-center gap-2.5">
+                        <span class="px-2.5 py-0.5 rounded-full bg-oliva text-blanco-calido text-[10px] uppercase tracking-[0.16em] font-semibold">Modo Profesional</span>
+                        <span class="text-xs text-oliva font-medium">Ludmila Rojo Studio</span>
                     </div>
-                    <h1 class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon mt-1">Gestión de Consultorio y Agenda</h1>
+                    <h1 class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon mt-1.5">Gestión de Consultorio y Agenda</h1>
                 </div>
-                <button onclick="navigateTo('landing')" class="inline-flex items-center gap-2 text-xs font-medium bg-blanco-calido hover:bg-nude/50 text-carbon px-4 py-2.5 rounded-full border border-nude transition-colors">
+                <button onclick="navigateTo('landing')" class="inline-flex items-center gap-2 text-xs font-medium bg-blanco-calido hover:bg-nude text-carbon px-4 py-2.5 rounded-full border border-carbon/12 shadow-editorial transition-colors">
                     <i data-lucide="log-out" class="w-3.5 h-3.5 text-terracota"></i>
                     <span>Salir a la Web Pública</span>
                 </button>
             </div>
 
             <!-- Pestañas de Navegación Admin -->
-            <div class="flex flex-wrap gap-2 mb-8">
-                <button onclick="switchAdminTab('agenda')" id="tab-btn-agenda" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-carbon text-blanco-calido shadow-xs flex items-center gap-2">
+            <div class="flex flex-wrap gap-2.5 mb-8">
+                <button onclick="switchAdminTab('agenda')" id="tab-btn-agenda" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-carbon text-blanco-calido shadow-editorial flex items-center gap-2">
                     <i data-lucide="calendar-days" class="w-4 h-4"></i>
                     <span>1. Agenda y Turnos Tachados</span>
                 </button>
-                <button onclick="switchAdminTab('schedule')" id="tab-btn-schedule" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-blanco-calido text-carbon border border-nude hover:bg-nude/40 flex items-center gap-2">
+                <button onclick="switchAdminTab('schedule')" id="tab-btn-schedule" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-blanco-calido text-carbon border border-carbon/12 hover:bg-nude flex items-center gap-2">
                     <i data-lucide="clock" class="w-4 h-4"></i>
                     <span>2. Horarios y Tarifa Diferencial</span>
                 </button>
-                <button onclick="switchAdminTab('services')" id="tab-btn-services" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-blanco-calido text-carbon border border-nude hover:bg-nude/40 flex items-center gap-2">
+                <button onclick="switchAdminTab('services')" id="tab-btn-services" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-blanco-calido text-carbon border border-carbon/12 hover:bg-nude flex items-center gap-2">
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
                     <span>3. Servicios y Precios</span>
                 </button>
@@ -502,43 +580,43 @@
             <!-- PESTAÑA 1: AGENDA Y BLOQUEO MANUAL -->
             <div id="admin-tab-agenda" class="admin-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
-                <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-xs space-y-4 h-fit">
+                <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-4 h-fit">
                     <h3 class="font-editorial text-xl font-semibold text-carbon flex items-center gap-2">
                         <i data-lucide="ban" class="w-4 h-4 text-terracota"></i>
                         <span>Tachar Horario Manualmente</span>
                     </h3>
-                    <p class="text-xs text-carbon/70 leading-relaxed font-light">
+                    <p class="text-xs text-carbon/75 leading-relaxed font-light">
                         Bloqueá un horario para que aparezca tachado en la agenda pública (por turnos dados por teléfono o compromisos personales).
                     </p>
                     <form id="manual-block-form" class="space-y-3.5">
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1">Fecha *</label>
-                            <input type="date" id="block-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                            <input type="date" id="block-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1">Hora *</label>
-                            <select id="block-time" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                            <select id="block-time" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1">Etiqueta / Paciente (opcional)</label>
-                            <input type="text" id="block-note" placeholder="Ej. Bloqueado personal / Turno WhatsApp" class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                            <input type="text" id="block-note" placeholder="Ej. Bloqueado personal / Turno WhatsApp" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
                         </div>
-                        <button type="submit" class="w-full bg-oliva hover:bg-oliva-light text-blanco-calido py-3 rounded-full text-xs font-medium tracking-wide transition-colors">
+                        <button type="submit" class="w-full bg-oliva hover:bg-oliva-light text-blanco-calido py-3 rounded-full text-xs uppercase tracking-wider font-medium transition-colors">
                             Tachar en la Agenda
                         </button>
                     </form>
                 </div>
 
-                <div class="lg:col-span-8 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-xs space-y-5">
-                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-nude pb-4">
+                <div class="lg:col-span-8 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-carbon/12 pb-4">
                         <div>
                             <h3 class="font-editorial text-xl font-semibold text-carbon">Turnos Agendados y Horarios Tachados</h3>
-                            <p class="text-xs text-carbon/60 font-light">Detalle completo visible solo para vos.</p>
+                            <p class="text-xs text-carbon/65 font-light">Detalle completo visible solo para vos.</p>
                         </div>
                         <div class="flex items-center gap-2">
-                            <input type="date" id="admin-filter-date" class="px-3 py-1.5 rounded-xl bg-greige border border-nude text-xs">
-                            <button onclick="document.getElementById('admin-filter-date').value=''; renderAdminBookings();" class="text-xs text-terracota underline">Ver todos</button>
+                            <input type="date" id="admin-filter-date" class="px-3 py-1.5 rounded-xl bg-greige border border-carbon/15 text-xs">
+                            <button onclick="document.getElementById('admin-filter-date').value=''; renderAdminBookings();" class="text-xs text-terracota-dark font-medium hover:underline">Ver todos</button>
                         </div>
                     </div>
 
@@ -548,17 +626,17 @@
             </div>
 
             <!-- PESTAÑA 2: HORARIOS Y TARIFA DIFERENCIAL -->
-            <div id="admin-tab-schedule" class="admin-tab-content hidden max-w-3xl bg-blanco-calido p-6 sm:p-8 rounded-3xl border border-nude shadow-xs space-y-6">
+            <div id="admin-tab-schedule" class="admin-tab-content hidden max-w-3xl bg-blanco-calido p-6 sm:p-8 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-6">
                 <div>
                     <h3 class="font-editorial text-2xl font-semibold text-carbon">Configuración de Agenda y Recargo Especial</h3>
-                    <p class="text-xs text-carbon/70 mt-1 font-light">
+                    <p class="text-xs text-carbon/75 mt-1 font-light">
                         Definí tu franja de atención habitual. Todo turno pedido fuera de ese rango aplicará automáticamente el recargo y te pedirá confirmación.
                     </p>
                 </div>
 
                 <form id="schedule-config-form" class="space-y-6">
                     <div>
-                        <label class="block text-xs uppercase tracking-wider text-oliva font-semibold mb-2.5">Días de atención habitual</label>
+                        <label class="block text-[11px] uppercase tracking-wider text-oliva font-semibold mb-2.5">Días de atención habitual</label>
                         <div class="flex flex-wrap gap-2" id="working-days-checkboxes">
                         </div>
                     </div>
@@ -566,15 +644,15 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1.5">Inicio horario habitual</label>
-                            <input type="time" id="config-start-time" required class="w-full px-4 py-2.5 rounded-2xl bg-greige/60 border border-nude text-sm">
+                            <input type="time" id="config-start-time" required class="w-full px-4 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1.5">Fin horario habitual</label>
-                            <input type="time" id="config-end-time" required class="w-full px-4 py-2.5 rounded-2xl bg-greige/60 border border-nude text-sm">
+                            <input type="time" id="config-end-time" required class="w-full px-4 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1.5">Duración de cada turno</label>
-                            <select id="config-slot-duration" class="w-full px-4 py-2.5 rounded-2xl bg-greige/60 border border-nude text-sm">
+                            <select id="config-slot-duration" class="w-full px-4 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
                                 <option value="45">45 minutos</option>
                                 <option value="60">60 minutos (1 hora)</option>
                                 <option value="90">90 minutos</option>
@@ -582,7 +660,7 @@
                         </div>
                     </div>
 
-                    <div class="p-5 rounded-2xl bg-greige/70 border border-nude space-y-4">
+                    <div class="p-5 rounded-2xl bg-greige border border-carbon/12 space-y-4">
                         <div class="flex items-center gap-2 text-terracota-dark font-semibold text-sm">
                             <i data-lucide="badge-dollar-sign" class="w-4 h-4"></i>
                             <span>Valor diferencial fuera de horario</span>
@@ -590,23 +668,23 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-medium text-carbon/80 mb-1.5">Tipo de recargo</label>
-                                <select id="config-surcharge-type" class="w-full px-4 py-2.5 rounded-2xl bg-blanco-calido border border-nude text-sm">
+                                <select id="config-surcharge-type" class="w-full px-4 py-2.5 rounded-xl bg-blanco-calido border border-carbon/15 text-sm">
                                     <option value="fixed">Monto fijo adicional ($)</option>
                                     <option value="percent">Porcentaje adicional (%)</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-carbon/80 mb-1.5">Valor del recargo</label>
-                                <input type="number" id="config-surcharge-value" min="0" required class="w-full px-4 py-2.5 rounded-2xl bg-blanco-calido border border-nude text-sm">
+                                <input type="number" id="config-surcharge-value" min="0" required class="w-full px-4 py-2.5 rounded-xl bg-blanco-calido border border-carbon/15 text-sm">
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1.5">Tu número de WhatsApp (para recibir pedidos)</label>
-                            <input type="text" id="config-whatsapp" placeholder="Ej. 5492284323833" required class="w-full px-4 py-2.5 rounded-2xl bg-blanco-calido border border-nude text-sm">
+                            <input type="text" id="config-whatsapp" placeholder="Ej. 5492284323833" required class="w-full px-4 py-2.5 rounded-xl bg-blanco-calido border border-carbon/15 text-sm">
                         </div>
                     </div>
 
-                    <button type="submit" class="bg-terracota hover:bg-terracota-dark text-blanco-calido px-7 py-3 rounded-full text-xs uppercase tracking-wider font-medium transition-colors shadow-xs">
+                    <button type="submit" class="bg-terracota hover:bg-terracota-dark text-blanco-calido px-7 py-3.5 rounded-full text-xs uppercase tracking-wider font-medium transition-colors shadow-editorial">
                         Guardar Configuración de Horarios
                     </button>
                 </form>
@@ -615,31 +693,31 @@
             <!-- PESTAÑA 3: GESTIÓN DE SERVICIOS Y PRECIOS -->
             <div id="admin-tab-services" class="admin-tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
-                <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-xs space-y-4 h-fit">
+                <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-4 h-fit">
                     <h3 class="font-editorial text-xl font-semibold text-carbon">Agregar Servicio</h3>
                     <form id="add-service-form" class="space-y-3.5">
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1">Nombre del servicio *</label>
-                            <input type="text" id="new-service-name" required placeholder="Ej. Drenaje Linfático" class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                            <input type="text" id="new-service-name" required placeholder="Ej. Drenaje Linfático" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1">Precio ($) *</label>
-                            <input type="number" id="new-service-price" required min="0" placeholder="25000" class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm">
+                            <input type="number" id="new-service-price" required min="0" placeholder="25000" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1">Descripción breve *</label>
-                            <textarea id="new-service-desc" rows="3" required placeholder="Explicación para el paciente..." class="w-full px-3.5 py-2.5 rounded-xl bg-greige/60 border border-nude text-sm resize-none"></textarea>
+                            <textarea id="new-service-desc" rows="3" required placeholder="Explicación para el paciente..." class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm resize-none"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-terracota hover:bg-terracota-dark text-blanco-calido py-3 rounded-full text-xs font-medium tracking-wide transition-colors">
+                        <button type="submit" class="w-full bg-terracota hover:bg-terracota-dark text-blanco-calido py-3 rounded-full text-xs uppercase tracking-wider font-medium transition-colors">
                             + Agregar al Consultorio
                         </button>
                     </form>
                 </div>
 
-                <div class="lg:col-span-8 bg-blanco-calido p-6 rounded-3xl border border-nude shadow-xs space-y-4">
-                    <div class="border-b border-nude pb-3">
+                <div class="lg:col-span-8 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-4">
+                    <div class="border-b border-carbon/12 pb-3">
                         <h3 class="font-editorial text-xl font-semibold text-carbon">Servicios Activos y Precios</h3>
-                        <p class="text-xs text-carbon/60 font-light">Modificá los valores o textos. Los precios se muestran únicamente al reservar turno.</p>
+                        <p class="text-xs text-carbon/65 font-light">Modificá los valores o textos. Los precios se muestran únicamente al reservar turno.</p>
                     </div>
                     <div id="admin-services-list" class="space-y-4">
                     </div>
@@ -650,43 +728,59 @@
     </section>
 
     <!-- ==================== FOOTER MINIMALISTA ==================== -->
-    <footer class="bg-blanco-calido border-t border-nude py-14 text-carbon/70">
+    <footer class="bg-nude border-t border-carbon/12 py-14 text-carbon/75">
         <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="text-center md:text-left">
                 <p class="font-editorial text-2xl font-semibold text-carbon">Ludmila <span class="italic font-normal text-terracota">Rojo</span></p>
-                <p class="text-[11px] uppercase tracking-[0.18em] text-oliva mt-1">Studio · Kinesiología & Postura · Olavarría</p>
+                <p class="text-[10px] uppercase tracking-[0.22em] text-oliva mt-1 font-medium">Studio · Kinesiología & Postura · Olavarría</p>
             </div>
             
-            <div class="flex flex-wrap items-center justify-center gap-7 text-xs uppercase tracking-wider">
+            <div class="flex flex-wrap items-center justify-center gap-7 text-[11px] uppercase tracking-[0.15em] font-medium">
                 <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors">Especialidades</a>
                 <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors">Sobre Mí</a>
-                <button onclick="navigateTo('booking')" class="text-terracota font-medium hover:underline">Consulta | Turnos</button>
+                <button onclick="navigateTo('booking')" class="text-terracota-dark font-semibold hover:underline">Consulta | Turnos</button>
             </div>
 
-            <p class="text-[11px] text-carbon/45 font-light">
+            <p class="text-[11px] text-carbon/50 font-light">
                 © 2026 Ludmila Rojo Studio
             </p>
         </div>
     </footer>
 
+    <!-- ==================== BOTÓN FLOTANTE DE WHATSAPP ==================== -->
+    <a id="floating-whatsapp-btn"
+       href="https://wa.me/5492284323833?text=Hola%20Ludmila%2C%20te%20escribo%20desde%20la%20web%20de%20Ludmila%20Rojo%20Studio%20para%20hacerte%20una%20consulta."
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Consultar por WhatsApp"
+       class="fixed bottom-6 right-6 z-40 group flex items-center gap-3 bg-carbon hover:bg-oliva text-blanco-calido pl-4 pr-3.5 py-3 rounded-full shadow-editorial hover:shadow-card-hover border border-blanco-calido/15 transition-all duration-300">
+        <span class="hidden sm:inline text-[11px] uppercase tracking-[0.14em] font-medium text-blanco-calido/95">
+            Consultas
+        </span>
+        <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#25D366] text-white shrink-0 group-hover:scale-105 transition-transform">
+            <i data-lucide="message-circle" class="w-4 h-4 fill-current"></i>
+            <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-terracota ring-2 ring-carbon"></span>
+        </span>
+    </a>
+
     <!-- ==================== MODAL: ACCESO PIN PROFESIONAL ==================== -->
-    <div id="modal-pin" class="hidden fixed inset-0 z-50 bg-carbon/50 backdrop-blur-xs flex items-center justify-center p-4">
-        <div class="bg-blanco-calido rounded-3xl border border-nude max-w-sm w-full p-7 shadow-xl space-y-5 text-center">
+    <div id="modal-pin" class="hidden fixed inset-0 z-50 bg-carbon/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-blanco-calido rounded-[1.75rem] border border-carbon/15 max-w-sm w-full p-7 shadow-xl space-y-5 text-center">
             <div class="w-12 h-12 rounded-2xl bg-oliva/15 text-oliva mx-auto flex items-center justify-center">
                 <i data-lucide="shield-check" class="w-6 h-6"></i>
             </div>
             <div>
                 <h3 class="font-editorial text-2xl font-semibold text-carbon">Acceso Profesional</h3>
-                <p class="text-xs text-carbon/70 mt-1 font-light">Ingresá tu PIN para administrar horarios, precios y agenda.</p>
-                <span class="inline-block mt-2 px-3 py-1 rounded-full bg-greige text-[11px] text-oliva font-medium">
+                <p class="text-xs text-carbon/75 mt-1 font-light">Ingresá tu PIN para administrar horarios, precios y agenda.</p>
+                <span class="inline-block mt-2.5 px-3 py-1 rounded-full bg-greige border border-carbon/12 text-[11px] text-oliva font-medium">
                     PIN de demostración: <strong>1234</strong>
                 </span>
             </div>
             <form id="pin-form" class="space-y-4">
-                <input type="password" id="pin-input" maxlength="4" placeholder="••••" required class="w-40 mx-auto block text-center tracking-[0.6em] text-xl font-semibold px-4 py-3 rounded-2xl bg-greige border border-nude focus:outline-none focus:border-terracota">
+                <input type="password" id="pin-input" maxlength="4" placeholder="••••" required class="w-40 mx-auto block text-center tracking-[0.6em] text-xl font-semibold px-4 py-3 rounded-2xl bg-greige border border-carbon/15 focus:outline-none focus:border-terracota">
                 <p id="pin-error" class="hidden text-xs text-terracota-dark font-medium">PIN incorrecto. Probá con 1234.</p>
                 <div class="flex gap-3 pt-1">
-                    <button type="button" onclick="closeModal('modal-pin')" class="flex-1 py-2.5 rounded-full border border-nude text-xs font-medium text-carbon/70 hover:bg-greige">Cancelar</button>
+                    <button type="button" onclick="closeModal('modal-pin')" class="flex-1 py-2.5 rounded-full border border-carbon/15 text-xs font-medium text-carbon/75 hover:bg-greige">Cancelar</button>
                     <button type="submit" class="flex-1 py-2.5 rounded-full bg-carbon text-blanco-calido text-xs font-medium hover:bg-carbon/90">Ingresar</button>
                 </div>
             </form>
@@ -694,9 +788,9 @@
     </div>
 
     <!-- ==================== MODAL: CONFIRMACIÓN DE TURNO + WHATSAPP ==================== -->
-    <div id="modal-booking-success" class="hidden fixed inset-0 z-50 bg-carbon/50 backdrop-blur-xs flex items-center justify-center p-4">
-        <div class="bg-blanco-calido rounded-3xl border border-nude max-w-md w-full p-7 shadow-xl space-y-5">
-            <div class="flex items-center gap-3">
+    <div id="modal-booking-success" class="hidden fixed inset-0 z-50 bg-carbon/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-blanco-calido rounded-[1.75rem] border border-carbon/15 max-w-md w-full p-7 shadow-xl space-y-5">
+            <div class="flex items-center gap-3.5">
                 <div class="w-12 h-12 rounded-2xl bg-oliva/15 text-oliva flex items-center justify-center shrink-0">
                     <i data-lucide="calendar-check" class="w-6 h-6"></i>
                 </div>
@@ -706,15 +800,15 @@
                 </div>
             </div>
 
-            <div id="success-modal-details" class="p-4 rounded-2xl bg-greige/80 border border-nude text-xs space-y-2 text-carbon/85">
+            <div id="success-modal-details" class="p-4 rounded-2xl bg-greige border border-carbon/12 text-xs space-y-2 text-carbon/85">
             </div>
 
             <div class="space-y-2.5 pt-1">
-                <a id="whatsapp-confirm-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 px-5 rounded-full font-medium text-sm transition-all shadow-xs flex items-center justify-center gap-2">
+                <a id="whatsapp-confirm-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 px-5 rounded-full font-medium text-sm transition-all shadow-editorial flex items-center justify-center gap-2">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
                     <span>Enviar comprobante por WhatsApp</span>
                 </a>
-                <button onclick="closeModal('modal-booking-success')" class="w-full py-2.5 rounded-full border border-nude text-xs font-medium text-carbon/70 hover:bg-greige">
+                <button onclick="closeModal('modal-booking-success')" class="w-full py-2.5 rounded-full border border-carbon/15 text-xs font-medium text-carbon/75 hover:bg-greige">
                     Cerrar y volver a la agenda
                 </button>
             </div>
@@ -722,7 +816,7 @@
     </div>
 
     <!-- ==================== NOTIFICACIÓN TOAST FLOTANTE ==================== -->
-    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-carbon text-blanco-calido px-5 py-3 rounded-2xl shadow-lg text-xs font-medium flex items-center gap-2.5">
+    <div id="toast-notification" class="fixed bottom-24 right-6 z-50 transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300 bg-carbon text-blanco-calido px-5 py-3 rounded-2xl shadow-lg text-xs font-medium flex items-center gap-2.5">
         <i data-lucide="check" class="w-4 h-4 text-terracota"></i>
         <span id="toast-message">Cambios guardados</span>
     </div>
@@ -787,9 +881,18 @@
         }
         function saveConfig() {
             localStorage.setItem(STORAGE_KEYS.CONFIG, JSON.stringify(config));
+            updateFloatingWhatsappLink();
         }
         function saveBookings() {
             localStorage.setItem(STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
+        }
+
+        function updateFloatingWhatsappLink() {
+            const btn = document.getElementById('floating-whatsapp-btn');
+            if (!btn) return;
+            const cleanPhone = (config.whatsappNumber || '5492284323833').replace(/\D/g, '');
+            const msg = encodeURIComponent('Hola Ludmila, te escribo desde la web de Ludmila Rojo Studio para hacerte una consulta.');
+            btn.href = `https://wa.me/${cleanPhone}?text=${msg}`;
         }
 
         function formatCurrency(num, customLabel = null) {
@@ -860,7 +963,7 @@
             lucide.createIcons();
         }
 
-        // --- 4. RENDERIZADO DE LANDING PAGE (SIN PRECIOS, ESTILO EDITORIAL) ---
+        // --- 4. RENDERIZADO DE LANDING PAGE (ESTILO FICHA CLÍNICA POSTURALAB) ---
         function renderLandingServices() {
             const container = document.getElementById('landing-services-grid');
             container.innerHTML = '';
@@ -868,25 +971,35 @@
             services.forEach((srv, idx) => {
                 const iconName = srv.icon || (idx === 0 ? 'scan-line' : idx === 1 ? 'footprints' : 'target');
                 const tagLabel = srv.tag || 'Atención Personalizada';
+                const indexNumber = String(idx + 1).padStart(2, '0');
                 const card = document.createElement('div');
-                card.className = 'bg-greige/45 hover:bg-greige/80 border border-nude/90 rounded-[2rem] p-8 flex flex-col justify-between transition-all duration-300 hover:border-terracota/40 group';
+                card.className = 'bg-blanco-calido hover:bg-blanco-calido border border-carbon/12 rounded-[1.75rem] p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:border-terracota/60 shadow-editorial hover:shadow-card-hover group';
                 card.innerHTML = `
                     <div class="space-y-5">
                         <div class="flex items-center justify-between">
-                            <div class="w-11 h-11 rounded-2xl bg-blanco-calido border border-nude text-terracota flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <div class="w-11 h-11 rounded-xl bg-greige border border-carbon/10 text-terracota flex items-center justify-center group-hover:bg-terracota group-hover:text-blanco-calido transition-colors duration-300">
                                 <i data-lucide="${iconName}" class="w-5 h-5"></i>
                             </div>
-                            <span class="text-[10px] uppercase tracking-[0.18em] text-oliva font-medium">
-                                ${tagLabel}
+                            <span class="font-editorial text-lg italic text-oliva font-medium">
+                                ${indexNumber}
                             </span>
                         </div>
-                        <h3 class="font-editorial text-2xl sm:text-[1.65rem] font-semibold text-carbon leading-snug">${srv.name}</h3>
-                        <p class="text-xs sm:text-[13px] text-carbon/70 leading-relaxed font-light">${srv.description}</p>
+                        <div class="space-y-2.5">
+                            <span class="inline-block text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold">
+                                ${tagLabel}
+                            </span>
+                            <h3 class="font-editorial text-2xl sm:text-[1.65rem] font-semibold text-carbon leading-snug">
+                                ${srv.name}
+                            </h3>
+                        </div>
+                        <p class="text-xs sm:text-[13px] text-carbon/75 leading-relaxed font-light">
+                            ${srv.description}
+                        </p>
                     </div>
-                    <div class="pt-6 mt-7 border-t border-nude/80 flex items-center justify-between">
-                        <span class="text-[11px] text-carbon/50 font-light">Sesión individual</span>
-                        <button onclick="selectServiceAndBook('${srv.id}')" class="text-[11px] uppercase tracking-[0.14em] font-medium text-terracota hover:text-terracota-dark inline-flex items-center gap-1.5 transition-colors">
-                            <span>Consulta | Turnos</span>
+                    <div class="pt-6 mt-7 border-t border-carbon/10 flex items-center justify-between">
+                        <span class="text-[11px] text-carbon/55 font-normal">Atención 1 a 1</span>
+                        <button onclick="selectServiceAndBook('${srv.id}')" class="text-[11px] uppercase tracking-[0.14em] font-semibold text-terracota-dark hover:text-terracota inline-flex items-center gap-1.5 transition-colors">
+                            <span>Reservar turno</span>
                             <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
                         </button>
                     </div>
@@ -989,33 +1102,33 @@
 
                 if (isOccupied) {
                     btn.disabled = true;
-                    btn.className = 'slot-tachado p-3 rounded-2xl border border-nude text-left opacity-75 cursor-not-allowed flex flex-col justify-between';
+                    btn.className = 'slot-tachado p-3 rounded-xl border border-carbon/12 text-left opacity-75 cursor-not-allowed flex flex-col justify-between';
                     btn.innerHTML = `
                         <div class="flex items-center justify-between">
                             <span class="text-sm font-semibold text-carbon/50 line-through">${timeStr} hs</span>
                             <i data-lucide="x-circle" class="w-3.5 h-3.5 text-carbon/40"></i>
                         </div>
-                        <span class="text-[11px] font-medium text-carbon/50 mt-1">Turno ocupado</span>
+                        <span class="text-[10px] uppercase tracking-wider font-medium text-carbon/50 mt-1">Ocupado</span>
                     `;
                 } else {
-                    const baseClasses = 'p-3 rounded-2xl border text-left transition-all flex flex-col justify-between ';
+                    const baseClasses = 'p-3 rounded-xl border text-left transition-all flex flex-col justify-between ';
                     const stateClasses = isSelected
-                        ? 'bg-terracota text-blanco-calido border-terracota shadow-sm scale-[1.02]'
+                        ? 'bg-terracota text-blanco-calido border-terracota shadow-editorial scale-[1.02]'
                         : isSpecialHour
-                            ? 'bg-terracota/5 hover:bg-terracota/15 border-terracota/40 text-carbon'
-                            : 'bg-blanco-calido hover:bg-greige border-nude text-carbon';
+                            ? 'bg-terracota/8 hover:bg-terracota/15 border-terracota/40 text-carbon'
+                            : 'bg-greige/70 hover:bg-nude border-carbon/12 text-carbon';
 
                     btn.className = baseClasses + stateClasses;
                     btn.innerHTML = `
                         <div class="flex items-center justify-between">
                             <span class="text-sm font-semibold">${timeStr} hs</span>
                             ${isSpecialHour 
-                                ? `<span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-full ${isSelected ? 'bg-blanco-calido/20 text-blanco-calido' : 'bg-terracota/15 text-terracota-dark'} font-semibold">Especial</span>`
+                                ? `<span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-md ${isSelected ? 'bg-blanco-calido/20 text-blanco-calido' : 'bg-terracota/15 text-terracota-dark'} font-semibold">Especial</span>`
                                 : `<span class="w-2 h-2 rounded-full ${isSelected ? 'bg-blanco-calido' : 'bg-oliva'}"></span>`
                             }
                         </div>
                         <span class="text-[11px] mt-1 ${isSelected ? 'text-blanco-calido/90' : isSpecialHour ? 'text-terracota-dark' : 'text-oliva'}">
-                            ${isSpecialHour ? 'Con recargo · Consultar' : 'Disponible'}
+                            ${isSpecialHour ? 'Con recargo' : 'Disponible'}
                         </span>
                     `;
 
@@ -1030,7 +1143,7 @@
             }
 
             if (slotsCount === 0) {
-                grid.innerHTML = `<p class="col-span-full text-xs text-carbon/60 py-6 text-center bg-greige/50 rounded-2xl">No hay horarios habituales para este día. Activá "Mostrar horarios especiales" para solicitar un turno fuera de agenda.</p>`;
+                grid.innerHTML = `<p class="col-span-full text-xs text-carbon/65 py-6 text-center bg-greige rounded-2xl border border-carbon/10">No hay horarios habituales para este día. Activá "Mostrar horarios especiales" para solicitar un turno fuera de agenda.</p>`;
             }
 
             lucide.createIcons();
@@ -1103,7 +1216,7 @@
 
         document.getElementById('booking-service').addEventListener('change', updateBookingCalculation);
 
-        // ENVÍO DEL FORMULARIO DE RESERVA HACIA FIREBASE Y POSTURALAB
+        // ENVÍO DEL FORMULARIO DE RESERVA HACIA FIREBASE
         document.getElementById('booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!selectedSlot) return;
@@ -1179,7 +1292,7 @@
                 <p><strong>Servicio:</strong> ${service.name}</p>
                 <p><strong>Día y hora:</strong> ${readableDate} · ${selectedSlot.time} hs ${selectedSlot.isSpecial ? '(Horario Especial)' : ''}</p>
                 <p><strong>Motivo:</strong> ${reason}</p>
-                <p class="pt-1 border-t border-nude text-sm font-semibold text-terracota">Valor informado: ${priceText}</p>
+                <p class="pt-1.5 border-t border-carbon/12 text-sm font-semibold text-terracota">Valor informado: ${priceText}</p>
             `;
 
             document.getElementById('booking-name').value = '';
@@ -1220,10 +1333,10 @@
             document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
 
             document.querySelectorAll('.admin-tab-btn').forEach(btn => {
-                btn.className = 'admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-blanco-calido text-carbon border border-nude hover:bg-nude/40 flex items-center gap-2';
+                btn.className = 'admin-tab-btn px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-blanco-calido text-carbon border border-carbon/12 hover:bg-nude flex items-center gap-2';
             });
             const activeBtn = document.getElementById(`tab-btn-${tabName}`);
-            activeBtn.className = 'admin-tab-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all bg-carbon text-blanco-calido shadow-xs flex items-center gap-2';
+            activeBtn.className = 'admin-tab-btn px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-carbon text-blanco-calido shadow-editorial flex items-center gap-2';
 
             if (tabName === 'agenda') renderAdminBookings();
             if (tabName === 'schedule') renderAdminScheduleConfig();
@@ -1302,7 +1415,7 @@
             filtered.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
 
             if (filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-carbon/60 py-8 text-center bg-greige/50 rounded-2xl">No hay turnos agendados ni horarios bloqueados para mostrar.</p>`;
+                container.innerHTML = `<p class="text-xs text-carbon/65 py-8 text-center bg-greige rounded-2xl border border-carbon/10">No hay turnos agendados ni horarios bloqueados para mostrar.</p>`;
                 return;
             }
 
@@ -1311,7 +1424,7 @@
                 const readableDate = bk.date.split('-').reverse().join('/');
                 const card = document.createElement('div');
                 card.className = `p-4 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                    bk.isManualBlock ? 'bg-greige/70 border-nude' : bk.isSpecialHour ? 'bg-terracota/5 border-terracota/30' : 'bg-blanco-calido border-nude'
+                    bk.isManualBlock ? 'bg-greige border-carbon/12' : bk.isSpecialHour ? 'bg-terracota/8 border-terracota/35' : 'bg-blanco-calido border-carbon/12'
                 }`;
 
                 card.innerHTML = `
@@ -1328,7 +1441,7 @@
                         ${!bk.isManualBlock ? `<p class="text-xs text-carbon/75"><strong>Motivo:</strong> ${bk.reason}</p>` : ''}
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="deleteBooking('${bk.id}')" class="px-3.5 py-2 rounded-xl border border-terracota/40 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
+                        <button onclick="deleteBooking('${bk.id}')" class="px-3.5 py-2 rounded-xl border border-terracota/45 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                             <span>Liberar horario</span>
                         </button>
@@ -1361,7 +1474,7 @@
             daysNames.forEach(d => {
                 const checked = config.workingDays.includes(d.val);
                 const label = document.createElement('label');
-                label.className = 'cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-nude bg-greige/50 text-xs font-medium';
+                label.className = 'cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-carbon/12 bg-greige text-xs font-medium';
                 label.innerHTML = `
                     <input type="checkbox" value="${d.val}" class="working-day-chk accent-terracota" ${checked ? 'checked' : ''}>
                     <span>${d.label}</span>
@@ -1399,21 +1512,21 @@
 
             services.forEach((srv) => {
                 const item = document.createElement('div');
-                item.className = 'p-4 rounded-2xl bg-greige/60 border border-nude space-y-3';
+                item.className = 'p-4 rounded-2xl bg-greige border border-carbon/12 space-y-3';
                 item.innerHTML = `
                     <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
                         <div class="sm:col-span-8">
-                            <label class="block text-[11px] font-semibold text-carbon/70 mb-1">Nombre del servicio</label>
-                            <input type="text" id="edit-name-${srv.id}" value="${srv.name}" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-nude text-xs font-medium">
+                            <label class="block text-[11px] font-semibold text-carbon/75 mb-1">Nombre del servicio</label>
+                            <input type="text" id="edit-name-${srv.id}" value="${srv.name}" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-carbon/15 text-xs font-medium">
                         </div>
                         <div class="sm:col-span-4">
-                            <label class="block text-[11px] font-semibold text-carbon/70 mb-1">Precio ($)</label>
-                            <input type="number" id="edit-price-${srv.id}" value="${srv.price}" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-nude text-xs font-semibold text-terracota">
+                            <label class="block text-[11px] font-semibold text-carbon/75 mb-1">Precio ($)</label>
+                            <input type="number" id="edit-price-${srv.id}" value="${srv.price}" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-carbon/15 text-xs font-semibold text-terracota">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[11px] font-semibold text-carbon/70 mb-1">Descripción</label>
-                        <textarea id="edit-desc-${srv.id}" rows="2" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-nude text-xs resize-none">${srv.description}</textarea>
+                        <label class="block text-[11px] font-semibold text-carbon/75 mb-1">Descripción</label>
+                        <textarea id="edit-desc-${srv.id}" rows="2" class="w-full px-3 py-2 rounded-xl bg-blanco-calido border border-carbon/15 text-xs resize-none">${srv.description}</textarea>
                     </div>
                     <div class="flex items-center justify-end gap-2 pt-1">
                         ${services.length > 1 ? `
@@ -1474,6 +1587,7 @@
         });
 
         window.addEventListener('DOMContentLoaded', () => {
+            updateFloatingWhatsappLink();
             renderLandingServices();
             lucide.createIcons();
         });
