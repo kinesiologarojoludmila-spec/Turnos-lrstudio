@@ -50,7 +50,6 @@
         .font-editorial {
             font-family: 'Cormorant Garamond', serif;
         }
-        /* Trama sutil de grilla postural estilo PosturaLab */
         .bg-posture-grid {
             background-size: 36px 36px;
             background-image: 
@@ -140,9 +139,8 @@
     <!-- ==================== VISTA 1: LANDING PAGE ==================== -->
     <main id="view-landing" class="block">
         
-        <!-- SECCIÓN HERO (Fondo greige + grilla técnica) -->
+        <!-- SECCIÓN HERO -->
         <section class="relative overflow-hidden pt-12 pb-24 sm:pt-20 sm:pb-28 bg-greige bg-posture-grid border-b border-carbon/10">
-            <!-- Halo decorativo cálido -->
             <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-nude blur-3xl opacity-90 pointer-events-none"></div>
 
             <div class="max-w-6xl mx-auto px-5 sm:px-8 relative">
@@ -173,7 +171,6 @@
                             </a>
                         </div>
 
-                        <!-- Indicadores de confianza estilo ficha técnica -->
                         <div class="pt-7 grid grid-cols-3 gap-4 sm:gap-6 max-w-lg mx-auto lg:mx-0 border-t border-carbon/12">
                             <div class="border-l-2 border-terracota pl-3.5 text-left">
                                 <p class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon leading-none">+10 años</p>
@@ -193,7 +190,6 @@
                     <!-- Columna Arte Postural Minimalista (5 cols) -->
                     <div class="lg:col-span-5 flex justify-center">
                         <div class="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-[2rem] bg-blanco-calido border border-carbon/12 p-5 shadow-editorial flex flex-col justify-between overflow-hidden">
-                            <!-- Cabecera técnica estilo PosturaLab -->
                             <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold z-10 px-1">
                                 <span class="flex items-center gap-1.5">
                                     <span class="w-1.5 h-1.5 rounded-full bg-oliva"></span>
@@ -202,7 +198,6 @@
                                 <span>Análisis 01</span>
                             </div>
 
-                            <!-- SVG Biomecánico & Orgánico -->
                             <div class="relative flex-1 flex items-center justify-center my-2 rounded-2xl bg-nude/55 border border-carbon/10 overflow-hidden">
                                 <svg viewBox="0 0 400 460" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                                     <defs>
@@ -216,35 +211,28 @@
                                         </linearGradient>
                                     </defs>
                                     
-                                    <!-- Retícula de calibración postural -->
                                     <line x1="200" y1="25" x2="200" y2="435" stroke="#6B705C" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.5"/>
                                     <line x1="65" y1="145" x2="335" y2="145" stroke="#2F2E2C" stroke-width="0.65" stroke-dasharray="3 3" opacity="0.25"/>
                                     <line x1="65" y1="245" x2="335" y2="245" stroke="#2F2E2C" stroke-width="0.65" stroke-dasharray="3 3" opacity="0.25"/>
                                     <line x1="65" y1="345" x2="335" y2="345" stroke="#2F2E2C" stroke-width="0.65" stroke-dasharray="3 3" opacity="0.25"/>
 
-                                    <!-- Arco orgánico -->
                                     <path d="M 75 415 L 75 205 A 125 125 0 0 1 325 205 L 325 415 Z" fill="#EAE3D9" opacity="0.85"/>
                                     
-                                    <!-- Formas flotantes -->
                                     <path class="animate-float" d="M 118 370 C 95 295, 142 200, 218 195 C 290 190, 318 270, 285 345 C 260 398, 142 425, 118 370 Z" fill="url(#olivaGrad)"/>
                                     <circle class="animate-float-delayed" cx="242" cy="148" r="62" fill="url(#terracotaGrad)"/>
                                     
-                                    <!-- Curva raquídea -->
                                     <path d="M 196 68 Q 232 175, 188 260 T 204 415" fill="none" stroke="#2F2E2C" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
                                     
-                                    <!-- Nodos de referencia anatómica -->
                                     <circle cx="208" cy="145" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.5"/>
                                     <circle cx="196" cy="245" r="5.5" fill="#C27D63" stroke="#FAF9F6" stroke-width="1.5"/>
                                     <circle cx="197" cy="345" r="4.5" fill="#FAF9F6" stroke="#2F2E2C" stroke-width="1.5"/>
                                     
-                                    <!-- Marcas de medición laterales -->
                                     <text x="72" y="140" fill="#2F2E2C" font-size="8" font-family="Montserrat" font-weight="500" opacity="0.65">CINTURA ESCAPULAR</text>
                                     <text x="72" y="240" fill="#2F2E2C" font-size="8" font-family="Montserrat" font-weight="500" opacity="0.65">CENTRO DE GRAVEDAD</text>
                                     <text x="72" y="340" fill="#2F2E2C" font-size="8" font-family="Montserrat" font-weight="500" opacity="0.65">APOYO PLANTAR</text>
                                 </svg>
                             </div>
 
-                            <!-- Tarjeta inferior integrada -->
                             <div class="bg-greige border border-carbon/10 rounded-2xl px-4 py-3 flex items-center justify-between z-10">
                                 <div>
                                     <p class="text-xs font-semibold text-carbon">Evaluación & Cadenas Miofasciales</p>
@@ -261,7 +249,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN SERVICIOS (Fondo nude más profundo para resaltar tarjetas blanco-calido) -->
+        <!-- SECCIÓN SERVICIOS -->
         <section id="servicios" class="py-24 bg-nude/75 border-b border-carbon/10">
             <div class="max-w-6xl mx-auto px-5 sm:px-8">
                 <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 border-b border-carbon/12 pb-8">
@@ -279,19 +267,15 @@
                     </p>
                 </div>
 
-                <!-- Contenedor de tarjetas de servicios renderizadas por JS -->
-                <div id="landing-services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-7">
-                    <!-- Se llena dinámicamente -->
-                </div>
+                <div id="landing-services-grid" class="grid grid-cols-1 md:grid-cols-3 gap-7"></div>
             </div>
         </section>
 
-        <!-- SECCIÓN QUIÉN SOY (Fondo greige con tarjetas blanco-calido) -->
+        <!-- SECCIÓN QUIÉN SOY -->
         <section id="sobre-mi" class="py-24 bg-greige">
             <div class="max-w-6xl mx-auto px-5 sm:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
                     
-                    <!-- Presentación Ludmila (5 cols) -->
                     <div class="lg:col-span-5 space-y-6">
                         <span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-oliva font-semibold">
                             <span class="w-4 h-px bg-oliva"></span>
@@ -319,9 +303,7 @@
                         </div>
                     </div>
 
-                    <!-- Bloques Misión, Visión y Valores (7 cols) -->
                     <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <!-- Misión -->
                         <div class="bg-blanco-calido p-7 sm:p-8 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-3.5">
                             <div class="flex items-center justify-between">
                                 <div class="w-10 h-10 rounded-xl bg-terracota/15 text-terracota flex items-center justify-center">
@@ -335,7 +317,6 @@
                             </p>
                         </div>
 
-                        <!-- Visión -->
                         <div class="bg-blanco-calido p-7 sm:p-8 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-3.5">
                             <div class="flex items-center justify-between">
                                 <div class="w-10 h-10 rounded-xl bg-oliva/15 text-oliva flex items-center justify-center">
@@ -349,7 +330,6 @@
                             </p>
                         </div>
 
-                        <!-- Valores -->
                         <div class="sm:col-span-2 bg-blanco-calido p-7 sm:p-8 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-5">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-3">
@@ -407,14 +387,13 @@
     <section id="view-booking" class="hidden min-h-[85vh] py-10 sm:py-14 bg-greige bg-posture-grid">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Barra superior de navegación -->
             <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-5 border-b border-carbon/12">
                 <button onclick="navigateTo('landing')" class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.12em] text-oliva hover:text-carbon font-medium bg-blanco-calido px-4 py-2.5 rounded-full border border-carbon/12 shadow-editorial transition-colors">
                     <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
                     <span>Volver al estudio</span>
                 </button>
                 <div class="text-right">
-                    <span class="text-[10px] uppercase tracking-[0.22em] text-terracota-dark font-semibold">Agenda Online</span>
+                    <span class="text-[10px] uppercase tracking-[0.22em] text-terracota-dark font-semibold">Agenda Online · Próximos 30 días</span>
                     <h1 class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon">Consulta | Turnos</h1>
                 </div>
             </div>
@@ -424,20 +403,17 @@
                 <!-- COLUMNA IZQUIERDA: Fecha y Grilla de Horarios (7 cols) -->
                 <div class="lg:col-span-7 bg-blanco-calido rounded-[1.75rem] border border-carbon/12 p-6 sm:p-8 shadow-editorial space-y-6">
                     
-                    <!-- Selector de Fecha -->
                     <div>
                         <label for="booking-date" class="block text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold mb-2.5">
-                            01 · Seleccioná el día de tu consulta
+                            01 · Seleccioná el día de tu consulta (hasta 1 mes de anticipación)
                         </label>
                         <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                             <input type="date" id="booking-date" class="w-full sm:w-auto px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-carbon text-sm font-medium focus:outline-none focus:border-terracota transition-colors">
                             <span id="booking-day-label" class="text-sm text-carbon font-medium capitalize"></span>
                         </div>
-                        <p id="booking-schedule-info" class="text-xs text-oliva mt-2.5 flex items-center gap-1.5">
-                        </p>
+                        <p id="booking-schedule-info" class="text-xs text-oliva mt-2.5 flex items-center gap-1.5"></p>
                     </div>
 
-                    <!-- Leyenda de estados -->
                     <div class="flex flex-wrap items-center gap-4 py-2.5 px-3.5 rounded-xl bg-greige border border-carbon/10 text-[11px]">
                         <div class="flex items-center gap-1.5">
                             <span class="w-2.5 h-2.5 rounded-full bg-oliva"></span>
@@ -449,11 +425,10 @@
                         </div>
                         <div class="flex items-center gap-1.5">
                             <span class="w-2.5 h-2.5 rounded-full bg-nude border border-carbon/30"></span>
-                            <span class="text-carbon/55 line-through">Ocupado</span>
+                            <span class="text-carbon/55 line-through">Ocupado / No disponible</span>
                         </div>
                     </div>
 
-                    <!-- Grilla de Horarios -->
                     <div>
                         <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
                             <label class="block text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold">
@@ -465,8 +440,7 @@
                             </label>
                         </div>
 
-                        <div id="time-slots-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                        </div>
+                        <div id="time-slots-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5"></div>
                     </div>
                 </div>
 
@@ -478,27 +452,22 @@
                     </div>
                     
                     <form id="booking-form" class="space-y-4">
-                        <!-- Servicio -->
                         <div>
                             <label for="booking-service" class="block text-xs font-medium text-carbon/85 mb-1.5">Servicio requerido *</label>
-                            <select id="booking-service" required class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota">
-                            </select>
+                            <select id="booking-service" required class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota"></select>
                             <p id="booking-service-desc" class="text-[11px] text-carbon/65 mt-1.5 leading-relaxed font-light"></p>
                         </div>
 
-                        <!-- Nombre y Apellido -->
                         <div>
                             <label for="booking-name" class="block text-xs font-medium text-carbon/85 mb-1.5">Nombre y Apellido *</label>
                             <input type="text" id="booking-name" required placeholder="Ej. Sofía Martínez" class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota">
                         </div>
 
-                        <!-- Motivo de consulta -->
                         <div>
                             <label for="booking-reason" class="block text-xs font-medium text-carbon/85 mb-1.5">Motivo de la consulta *</label>
                             <textarea id="booking-reason" rows="2" required placeholder="Contame brevemente qué te trae a consulta (ej. dolor lumbar, control de pisada...)" class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota resize-none"></textarea>
                         </div>
 
-                        <!-- Tarjeta de Cálculo de Precio en Tiempo Real -->
                         <div class="p-4 rounded-2xl bg-greige border border-carbon/12 space-y-2.5">
                             <div class="flex justify-between text-xs text-carbon/75">
                                 <span>Fecha y hora elegida:</span>
@@ -520,7 +489,6 @@
                             </div>
                         </div>
 
-                        <!-- Alerta cuando es horario fuera de rango -->
                         <div id="special-hour-notice" class="hidden p-3.5 rounded-2xl bg-terracota/12 border border-terracota/35 text-xs text-carbon space-y-1">
                             <p class="font-semibold text-terracota-dark flex items-center gap-1.5">
                                 <i data-lucide="clock-alert" class="w-4 h-4"></i>
@@ -546,7 +514,6 @@
     <section id="view-admin" class="hidden min-h-[85vh] py-10 bg-greige">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Header del Panel -->
             <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-carbon/12">
                 <div>
                     <div class="flex items-center gap-2.5">
@@ -561,7 +528,6 @@
                 </button>
             </div>
 
-            <!-- Pestañas de Navegación Admin -->
             <div class="flex flex-wrap gap-2.5 mb-8">
                 <button onclick="switchAdminTab('agenda')" id="tab-btn-agenda" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-carbon text-blanco-calido shadow-editorial flex items-center gap-2">
                     <i data-lucide="calendar-days" class="w-4 h-4"></i>
@@ -577,33 +543,41 @@
                 </button>
             </div>
 
-            <!-- PESTAÑA 1: AGENDA Y BLOQUEO MANUAL -->
+            <!-- PESTAÑA 1: AGENDA Y BLOQUEO MANUAL POR FRANJA VARIABLE -->
             <div id="admin-tab-agenda" class="admin-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
                 <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-4 h-fit">
                     <h3 class="font-editorial text-xl font-semibold text-carbon flex items-center gap-2">
                         <i data-lucide="ban" class="w-4 h-4 text-terracota"></i>
-                        <span>Tachar Horario Manualmente</span>
+                        <span>Tachar Franja Horaria</span>
                     </h3>
                     <p class="text-xs text-carbon/75 leading-relaxed font-light">
-                        Bloqueá un horario para que aparezca tachado en la agenda pública (por turnos dados por teléfono o compromisos personales).
+                        Elegí una fecha y un rango horario (ej. de 09:00 a 12:00 o de 14:00 a 17:00) para tachar esos turnos en la agenda pública.
                     </p>
                     <form id="manual-block-form" class="space-y-3.5">
                         <div>
                             <label class="block text-xs font-medium text-carbon/80 mb-1">Fecha *</label>
                             <input type="date" id="block-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
                         </div>
-                        <div>
-                            <label class="block text-xs font-medium text-carbon/80 mb-1">Hora *</label>
-                            <select id="block-time" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
-                            </select>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-carbon/80 mb-1">Desde *</label>
+                                <select id="block-start-time" required class="w-full px-3 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota"></select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-carbon/80 mb-1">Hasta *</label>
+                                <select id="block-end-time" required class="w-full px-3 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota"></select>
+                            </div>
                         </div>
+                        <p id="block-range-preview" class="text-[11px] text-oliva font-medium bg-greige px-3 py-2 rounded-xl border border-carbon/10">
+                            Se tacharán los turnos comprendidos en esa franja.
+                        </p>
                         <div>
-                            <label class="block text-xs font-medium text-carbon/80 mb-1">Etiqueta / Paciente (opcional)</label>
-                            <input type="text" id="block-note" placeholder="Ej. Bloqueado personal / Turno WhatsApp" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
+                            <label class="block text-xs font-medium text-carbon/80 mb-1">Etiqueta / Motivo (opcional)</label>
+                            <input type="text" id="block-note" placeholder="Ej. Bloqueado personal / Turnos externos" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
                         </div>
-                        <button type="submit" class="w-full bg-oliva hover:bg-oliva-light text-blanco-calido py-3 rounded-full text-xs uppercase tracking-wider font-medium transition-colors">
-                            Tachar en la Agenda
+                        <button type="submit" id="btn-block-range" class="w-full bg-oliva hover:bg-oliva-light text-blanco-calido py-3 rounded-full text-xs uppercase tracking-wider font-medium transition-colors">
+                            Tachar Franja en Agenda
                         </button>
                     </form>
                 </div>
@@ -612,7 +586,7 @@
                     <div class="flex flex-wrap items-center justify-between gap-3 border-b border-carbon/12 pb-4">
                         <div>
                             <h3 class="font-editorial text-xl font-semibold text-carbon">Turnos Agendados y Horarios Tachados</h3>
-                            <p class="text-xs text-carbon/65 font-light">Detalle completo visible solo para vos.</p>
+                            <p class="text-xs text-carbon/65 font-light">Sincronizado con la nube · Podés liberar cualquier horario en un clic.</p>
                         </div>
                         <div class="flex items-center gap-2">
                             <input type="date" id="admin-filter-date" class="px-3 py-1.5 rounded-xl bg-greige border border-carbon/15 text-xs">
@@ -620,8 +594,7 @@
                         </div>
                     </div>
 
-                    <div id="admin-bookings-list" class="space-y-3">
-                    </div>
+                    <div id="admin-bookings-list" class="space-y-3"></div>
                 </div>
             </div>
 
@@ -637,8 +610,7 @@
                 <form id="schedule-config-form" class="space-y-6">
                     <div>
                         <label class="block text-[11px] uppercase tracking-wider text-oliva font-semibold mb-2.5">Días de atención habitual</label>
-                        <div class="flex flex-wrap gap-2" id="working-days-checkboxes">
-                        </div>
+                        <div class="flex flex-wrap gap-2" id="working-days-checkboxes"></div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -719,8 +691,7 @@
                         <h3 class="font-editorial text-xl font-semibold text-carbon">Servicios Activos y Precios</h3>
                         <p class="text-xs text-carbon/65 font-light">Modificá los valores o textos. Los precios se muestran únicamente al reservar turno.</p>
                     </div>
-                    <div id="admin-services-list" class="space-y-4">
-                    </div>
+                    <div id="admin-services-list" class="space-y-4"></div>
                 </div>
             </div>
 
@@ -800,8 +771,7 @@
                 </div>
             </div>
 
-            <div id="success-modal-details" class="p-4 rounded-2xl bg-greige border border-carbon/12 text-xs space-y-2 text-carbon/85">
-            </div>
+            <div id="success-modal-details" class="p-4 rounded-2xl bg-greige border border-carbon/12 text-xs space-y-2 text-carbon/85"></div>
 
             <div class="space-y-2.5 pt-1">
                 <a id="whatsapp-confirm-link" href="#" target="_blank" rel="noopener noreferrer" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 px-5 rounded-full font-medium text-sm transition-all shadow-editorial flex items-center justify-center gap-2">
@@ -823,7 +793,6 @@
 
     <!-- ==================== LÓGICA JAVASCRIPT & FIREBASE ==================== -->
     <script>
-        // --- 1. ESTADO INICIAL Y DATOS POR DEFECTO ---
         const STORAGE_KEYS = {
             SERVICES: 'ludmila_studio_services_v1',
             CONFIG: 'ludmila_studio_config_v1',
@@ -875,7 +844,6 @@
 
         let selectedSlot = null;
 
-        // --- 2. FUNCIONES DE UTILIDAD ---
         function saveServices() {
             localStorage.setItem(STORAGE_KEYS.SERVICES, JSON.stringify(services));
         }
@@ -908,6 +876,13 @@
             return `${y}-${m}-${d}`;
         }
 
+        // Calcula la fecha límite exacta de 1 mes desde hoy
+        function getMaxBookingDateISO() {
+            const maxDate = new Date();
+            maxDate.setMonth(maxDate.getMonth() + 1);
+            return formatDateISO(maxDate);
+        }
+
         function formatDateReadable(isoStr) {
             if (!isoStr) return '';
             const [y, m, d] = isoStr.split('-').map(Number);
@@ -935,7 +910,7 @@
             }, 3000);
         }
 
-        // --- 3. NAVEGACIÓN SPA ---
+        // --- NAVEGACIÓN SPA ---
         function navigateTo(viewName, sectionId = null) {
             document.getElementById('view-landing').classList.add('hidden');
             document.getElementById('view-booking').classList.add('hidden');
@@ -963,7 +938,7 @@
             lucide.createIcons();
         }
 
-        // --- 4. RENDERIZADO DE LANDING PAGE (ESTILO FICHA CLÍNICA POSTURALAB) ---
+        // --- RENDERIZADO DE LANDING PAGE ---
         function renderLandingServices() {
             const container = document.getElementById('landing-services-grid');
             container.innerHTML = '';
@@ -1018,13 +993,17 @@
             }
         }
 
-        // --- 5. VISTA DE RESERVA DE TURNOS (PACIENTES) ---
+        // --- VISTA DE RESERVA DE TURNOS (PACIENTES) ---
         function initBookingView() {
             const dateInput = document.getElementById('booking-date');
             const today = new Date();
             const todayStr = formatDateISO(today);
+            const maxStr = getMaxBookingDateISO();
+
             dateInput.min = todayStr;
-            if (!dateInput.value) {
+            dateInput.max = maxStr;
+
+            if (!dateInput.value || dateInput.value < todayStr || dateInput.value > maxStr) {
                 const tomorrow = new Date(today);
                 tomorrow.setDate(today.getDate() + 1);
                 dateInput.value = formatDateISO(tomorrow);
@@ -1108,7 +1087,7 @@
                             <span class="text-sm font-semibold text-carbon/50 line-through">${timeStr} hs</span>
                             <i data-lucide="x-circle" class="w-3.5 h-3.5 text-carbon/40"></i>
                         </div>
-                        <span class="text-[10px] uppercase tracking-wider font-medium text-carbon/50 mt-1">Ocupado</span>
+                        <span class="text-[10px] uppercase tracking-wider font-medium text-carbon/50 mt-1">No disponible</span>
                     `;
                 } else {
                     const baseClasses = 'p-3 rounded-xl border text-left transition-all flex flex-col justify-between ';
@@ -1202,7 +1181,19 @@
             lucide.createIcons();
         }
 
-        document.getElementById('booking-date').addEventListener('change', () => {
+        // Validación estricta de fecha (no permite fechas pasadas ni mayores a 1 mes)
+        document.getElementById('booking-date').addEventListener('change', (e) => {
+            const todayStr = formatDateISO(new Date());
+            const maxStr = getMaxBookingDateISO();
+
+            if (e.target.value < todayStr) {
+                e.target.value = todayStr;
+                showToast('No podés elegir una fecha pasada.');
+            } else if (e.target.value > maxStr) {
+                e.target.value = maxStr;
+                showToast('Los turnos se habilitan hasta con 1 mes de anticipación.');
+            }
+
             selectedSlot = null;
             renderTimeSlots();
             updateBookingCalculation();
@@ -1305,7 +1296,7 @@
             lucide.createIcons();
         });
 
-        // --- 6. PANEL DE ADMINISTRACIÓN PROFESIONAL ---
+        // --- PANEL DE ADMINISTRACIÓN PROFESIONAL ---
         function openAdminGate() {
             document.getElementById('pin-input').value = '';
             document.getElementById('pin-error').classList.add('hidden');
@@ -1352,53 +1343,142 @@
         }
 
         function populateBlockTimeOptions() {
-            const select = document.getElementById('block-time');
-            select.innerHTML = '';
+            const startSelect = document.getElementById('block-start-time');
+            const endSelect = document.getElementById('block-end-time');
+            if (!startSelect || !endSelect) return;
+
+            startSelect.innerHTML = '';
+            endSelect.innerHTML = '';
+
             const step = Number(config.slotDuration) || 60;
-            for (let mins = 8 * 60; mins < 21 * 60; mins += step) {
+            const dayStart = 8 * 60;
+            const dayEnd = 21 * 60;
+
+            for (let mins = dayStart; mins < dayEnd; mins += step) {
                 const t = minutesToTime(mins);
                 const opt = document.createElement('option');
                 opt.value = t;
                 opt.textContent = `${t} hs`;
-                select.appendChild(opt);
+                startSelect.appendChild(opt);
             }
+
+            for (let mins = dayStart + step; mins <= dayEnd; mins += step) {
+                const t = minutesToTime(mins);
+                const opt = document.createElement('option');
+                opt.value = t;
+                opt.textContent = `${t} hs`;
+                endSelect.appendChild(opt);
+            }
+
+            // Valor inicial cómodo (ej. 09:00 a 12:00 si existen)
+            if (Array.from(startSelect.options).some(o => o.value === '09:00')) startSelect.value = '09:00';
+            if (Array.from(endSelect.options).some(o => o.value === '12:00')) endSelect.value = '12:00';
+
+            updateBlockRangePreview();
         }
+
+        function updateBlockRangePreview() {
+            const startVal = document.getElementById('block-start-time').value;
+            const endVal = document.getElementById('block-end-time').value;
+            const previewEl = document.getElementById('block-range-preview');
+            if (!startVal || !endVal || !previewEl) return;
+
+            const startMins = timeToMinutes(startVal);
+            const endMins = timeToMinutes(endVal);
+            const step = Number(config.slotDuration) || 60;
+
+            if (endMins <= startMins) {
+                previewEl.textContent = 'La hora de finalización debe ser posterior a la de inicio.';
+                previewEl.className = 'text-[11px] text-terracota-dark font-medium bg-terracota/10 px-3 py-2 rounded-xl border border-terracota/30';
+                return;
+            }
+
+            const slots = [];
+            for (let m = startMins; m < endMins; m += step) {
+                slots.push(`${minutesToTime(m)} hs`);
+            }
+
+            previewEl.textContent = `Turnos a tachar (${slots.length}): ${slots.join(', ')}`;
+            previewEl.className = 'text-[11px] text-oliva font-medium bg-greige px-3 py-2 rounded-xl border border-carbon/10';
+        }
+
+        document.getElementById('block-start-time').addEventListener('change', () => {
+            const startMins = timeToMinutes(document.getElementById('block-start-time').value);
+            const endSelect = document.getElementById('block-end-time');
+            const step = Number(config.slotDuration) || 60;
+
+            if (timeToMinutes(endSelect.value) <= startMins) {
+                const nextSlot = minutesToTime(startMins + step);
+                if (Array.from(endSelect.options).some(o => o.value === nextSlot)) {
+                    endSelect.value = nextSlot;
+                }
+            }
+            updateBlockRangePreview();
+        });
+
+        document.getElementById('block-end-time').addEventListener('change', updateBlockRangePreview);
 
         document.getElementById('manual-block-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const date = document.getElementById('block-date').value;
-            const time = document.getElementById('block-time').value;
-            const note = document.getElementById('block-note').value.trim() || 'Bloqueado por Ludmila';
+            const startVal = document.getElementById('block-start-time').value;
+            const endVal = document.getElementById('block-end-time').value;
+            const note = document.getElementById('block-note').value.trim() || `Bloqueado (${startVal} a ${endVal} hs)`;
 
-            const exists = bookings.some(b => b.date === date && b.time === time) ||
-                           window.horariosNube.some(h => h.fecha === date && h.hora === time);
-            if (exists) {
-                showToast('Ese horario ya está ocupado o tachado.');
+            const startMins = timeToMinutes(startVal);
+            const endMins = timeToMinutes(endVal);
+            const step = Number(config.slotDuration) || 60;
+
+            if (endMins <= startMins) {
+                showToast('La hora de finalización debe ser mayor a la de inicio.');
                 return;
             }
 
-            if (typeof window.bloquearHorarioNube === 'function') {
-                await window.bloquearHorarioNube(date, time);
+            const btn = document.getElementById('btn-block-range');
+            btn.disabled = true;
+            btn.textContent = 'Tachando franja...';
+
+            let tachadosCount = 0;
+
+            for (let m = startMins; m < endMins; m += step) {
+                const timeSlot = minutesToTime(m);
+                const exists = bookings.some(b => b.date === date && b.time === timeSlot) ||
+                               window.horariosNube.some(h => h.fecha === date && h.hora === timeSlot);
+
+                if (!exists) {
+                    if (typeof window.bloquearHorarioNube === 'function') {
+                        await window.bloquearHorarioNube(date, timeSlot, note);
+                    }
+
+                    bookings.push({
+                        id: 'blk-' + Date.now() + '-' + m,
+                        date,
+                        time: timeSlot,
+                        patientName: note,
+                        serviceId: 'manual',
+                        serviceName: `Franja tachada (${startVal} a ${endVal} hs)`,
+                        reason: 'No disponible en agenda',
+                        price: 0,
+                        isSpecialHour: false,
+                        isManualBlock: true,
+                        status: 'Bloqueado'
+                    });
+                    tachadosCount++;
+                }
             }
 
-            bookings.push({
-                id: 'blk-' + Date.now(),
-                date,
-                time,
-                patientName: note,
-                serviceId: 'manual',
-                serviceName: 'Horario Bloqueado Manualmente',
-                reason: 'No disponible en agenda',
-                price: 0,
-                isSpecialHour: false,
-                isManualBlock: true,
-                status: 'Bloqueado'
-            });
+            btn.disabled = false;
+            btn.textContent = 'Tachar Franja en Agenda';
+
+            if (tachadosCount === 0) {
+                showToast('Todos los turnos de esa franja ya estaban ocupados o tachados.');
+                return;
+            }
 
             saveBookings();
             document.getElementById('block-note').value = '';
             renderAdminBookings();
-            showToast('Horario tachado en la agenda');
+            showToast(`Se tacharon ${tachadosCount} turno(s) de ${startVal} a ${endVal} hs`);
         });
 
         document.getElementById('admin-filter-date').addEventListener('change', renderAdminBookings);
@@ -1407,7 +1487,34 @@
             const container = document.getElementById('admin-bookings-list');
             const filterDate = document.getElementById('admin-filter-date').value;
 
-            let filtered = [...bookings];
+            // Combinamos reservas locales con horarios bloqueados en la nube para ver todo sincronizado
+            const mapaUnificado = new Map();
+
+            bookings.forEach(b => {
+                mapaUnificado.set(`${b.date}_${b.time}`, b);
+            });
+
+            window.horariosNube.forEach(h => {
+                const clave = `${h.fecha}_${h.hora}`;
+                if (!mapaUnificado.has(clave)) {
+                    mapaUnificado.set(clave, {
+                        id: 'cloud-' + h.id,
+                        cloudDocId: h.id,
+                        date: h.fecha,
+                        time: h.hora,
+                        patientName: h.motivo || 'Ocupado / Bloqueado en Nube',
+                        serviceName: 'Franja Tachada en Agenda',
+                        reason: 'Sincronizado en Firebase',
+                        price: 0,
+                        isSpecialHour: false,
+                        isManualBlock: true
+                    });
+                } else {
+                    mapaUnificado.get(clave).cloudDocId = h.id;
+                }
+            });
+
+            let filtered = Array.from(mapaUnificado.values());
             if (filterDate) {
                 filtered = filtered.filter(b => b.date === filterDate);
             }
@@ -1435,13 +1542,13 @@
                             </span>
                             <span class="text-sm font-semibold text-carbon">${bk.patientName}</span>
                             ${bk.isSpecialHour ? `<span class="px-2 py-0.5 rounded-full bg-terracota/20 text-terracota-dark text-[10px] font-semibold">Horario Especial</span>` : ''}
-                            ${bk.isManualBlock ? `<span class="px-2 py-0.5 rounded-full bg-oliva/20 text-oliva text-[10px] font-semibold">Bloqueo Manual</span>` : ''}
+                            ${bk.isManualBlock ? `<span class="px-2 py-0.5 rounded-full bg-oliva/20 text-oliva text-[10px] font-semibold">Tachado</span>` : ''}
                         </div>
                         <p class="text-xs font-medium text-oliva">${bk.serviceName} ${bk.price > 0 ? `· <strong>${formatCurrency(bk.price)}</strong>` : ''}</p>
                         ${!bk.isManualBlock ? `<p class="text-xs text-carbon/75"><strong>Motivo:</strong> ${bk.reason}</p>` : ''}
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="deleteBooking('${bk.id}')" class="px-3.5 py-2 rounded-xl border border-terracota/45 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
+                        <button onclick="deleteBooking('${bk.id}', '${bk.date}', '${bk.time}')" class="px-3.5 py-2 rounded-xl border border-terracota/45 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                             <span>Liberar horario</span>
                         </button>
@@ -1452,11 +1559,16 @@
             lucide.createIcons();
         }
 
-        function deleteBooking(id) {
-            bookings = bookings.filter(b => b.id !== id);
+        async function deleteBooking(id, date, time) {
+            bookings = bookings.filter(b => b.id !== id && !(b.date === date && b.time === time));
             saveBookings();
+
+            if (typeof window.liberarHorarioNube === 'function') {
+                await window.liberarHorarioNube(date, time);
+            }
+
             renderAdminBookings();
-            showToast('Horario liberado nuevamente');
+            showToast('Horario liberado nuevamente en toda la agenda');
         }
 
         function renderAdminScheduleConfig() {
@@ -1596,7 +1708,7 @@
     <!-- ==================== CONEXIÓN FIREBASE EN TIEMPO REAL ==================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, where, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDE2i8RM8dBno0uQKb-qXEdRn81cYMqVl0",
@@ -1613,23 +1725,43 @@
 
         onSnapshot(collection(db, "horarios_ocupados"), (snapshot) => {
             window.horariosNube = [];
-            snapshot.forEach((doc) => {
-                window.horariosNube.push(doc.data());
+            snapshot.forEach((documento) => {
+                window.horariosNube.push({ id: documento.id, ...documento.data() });
             });
             if (typeof renderTimeSlots === "function") {
                 renderTimeSlots();
             }
+            if (typeof renderAdminBookings === "function" && !document.getElementById('view-admin').classList.contains('hidden')) {
+                renderAdminBookings();
+            }
         });
 
-        window.bloquearHorarioNube = async function(fecha, hora) {
+        window.bloquearHorarioNube = async function(fecha, hora, motivo = "Bloqueado por Ludmila") {
             try {
                 await addDoc(collection(db, "horarios_ocupados"), {
                     fecha,
                     hora,
+                    motivo,
                     ocupado: true
                 });
             } catch (error) {
                 console.error("Error al bloquear horario en nube:", error);
+            }
+        };
+
+        window.liberarHorarioNube = async function(fecha, hora) {
+            try {
+                const q = query(
+                    collection(db, "horarios_ocupados"),
+                    where("fecha", "==", fecha),
+                    where("hora", "==", hora)
+                );
+                const snap = await getDocs(q);
+                for (const d of snap.docs) {
+                    await deleteDoc(doc(db, "horarios_ocupados", d.id));
+                }
+            } catch (error) {
+                console.error("Error al liberar horario en nube:", error);
             }
         };
 
@@ -1638,6 +1770,7 @@
                 await addDoc(collection(db, "horarios_ocupados"), {
                     fecha: datosTurno.fecha,
                     hora: datosTurno.hora,
+                    motivo: `${datosTurno.nombre} ${datosTurno.apellido}`.trim(),
                     ocupado: true
                 });
 
