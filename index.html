@@ -92,7 +92,6 @@
     <!-- ==================== NAVBAR GLOBAL ==================== -->
     <header class="sticky top-0 z-40 bg-greige/90 backdrop-blur-md border-b border-carbon/10 transition-all">
         <div class="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
-            <!-- Logo Textual -->
             <a href="#" onclick="navigateTo('landing'); return false;" class="group flex items-center gap-3.5">
                 <div class="w-9 h-9 rounded-xl bg-blanco-calido border border-carbon/12 flex items-center justify-center text-terracota group-hover:border-terracota/60 transition-colors shadow-xs">
                     <span class="font-editorial text-xl font-semibold tracking-tighter">LR</span>
@@ -146,7 +145,6 @@
             <div class="max-w-6xl mx-auto px-5 sm:px-8 relative">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
                     
-                    <!-- Columna Texto (7 cols) -->
                     <div class="lg:col-span-7 space-y-7 text-center lg:text-left">
                         <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-blanco-calido border border-carbon/12 shadow-editorial text-oliva text-[10px] uppercase tracking-[0.18em] font-semibold">
                             <span class="w-1.5 h-1.5 rounded-full bg-terracota animate-pulse"></span>
@@ -187,7 +185,6 @@
                         </div>
                     </div>
 
-                    <!-- Columna Arte Postural Minimalista (5 cols) -->
                     <div class="lg:col-span-5 flex justify-center">
                         <div class="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-[2rem] bg-blanco-calido border border-carbon/12 p-5 shadow-editorial flex flex-col justify-between overflow-hidden">
                             <div class="flex items-center justify-between text-[10px] uppercase tracking-[0.18em] text-oliva font-semibold z-10 px-1">
@@ -400,7 +397,6 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
-                <!-- COLUMNA IZQUIERDA: Fecha y Grilla de Horarios (7 cols) -->
                 <div class="lg:col-span-7 bg-blanco-calido rounded-[1.75rem] border border-carbon/12 p-6 sm:p-8 shadow-editorial space-y-6">
                     
                     <div>
@@ -444,7 +440,6 @@
                     </div>
                 </div>
 
-                <!-- COLUMNA DERECHA: Formulario y Resumen de Precio (5 cols) -->
                 <div class="lg:col-span-5 bg-blanco-calido rounded-[1.75rem] border border-carbon/12 p-6 sm:p-8 shadow-editorial space-y-5 sticky top-24">
                     <div class="border-b border-carbon/12 pb-3.5 flex items-center justify-between">
                         <h2 class="font-editorial text-2xl font-semibold text-carbon">Detalle de tu reserva</h2>
@@ -876,7 +871,6 @@
             return `${y}-${m}-${d}`;
         }
 
-        // Calcula la fecha límite exacta de 1 mes desde hoy
         function getMaxBookingDateISO() {
             const maxDate = new Date();
             maxDate.setMonth(maxDate.getMonth() + 1);
@@ -907,7 +901,7 @@
             toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
                 toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+            }, 3500);
         }
 
         // --- NAVEGACIÓN SPA ---
@@ -1181,7 +1175,6 @@
             lucide.createIcons();
         }
 
-        // Validación estricta de fecha (no permite fechas pasadas ni mayores a 1 mes)
         document.getElementById('booking-date').addEventListener('change', (e) => {
             const todayStr = formatDateISO(new Date());
             const maxStr = getMaxBookingDateISO();
@@ -1370,7 +1363,6 @@
                 endSelect.appendChild(opt);
             }
 
-            // Valor inicial cómodo (ej. 09:00 a 12:00 si existen)
             if (Array.from(startSelect.options).some(o => o.value === '09:00')) startSelect.value = '09:00';
             if (Array.from(endSelect.options).some(o => o.value === '12:00')) endSelect.value = '12:00';
 
@@ -1487,30 +1479,31 @@
             const container = document.getElementById('admin-bookings-list');
             const filterDate = document.getElementById('admin-filter-date').value;
 
-            // Combinamos reservas locales con horarios bloqueados en la nube para ver todo sincronizado
             const mapaUnificado = new Map();
 
-            bookings.forEach(b => {
-                mapaUnificado.set(`${b.date}_${b.time}`, b);
-            });
-
+            // Primero cargamos lo que está en la nube (fuente de verdad en tiempo real)
             window.horariosNube.forEach(h => {
                 const clave = `${h.fecha}_${h.hora}`;
+                const localMatch = bookings.find(b => b.date === h.fecha && b.time === h.hora);
+                mapaUnificado.set(clave, {
+                    id: localMatch ? localMatch.id : ('cloud-' + h.id),
+                    cloudDocId: h.id,
+                    date: h.fecha,
+                    time: h.hora,
+                    patientName: localMatch ? localMatch.patientName : (h.motivo || 'Ocupado / Bloqueado'),
+                    serviceName: localMatch ? localMatch.serviceName : 'Franja Tachada en Agenda',
+                    reason: localMatch ? localMatch.reason : 'Sincronizado en Firebase',
+                    price: localMatch ? localMatch.price : 0,
+                    isSpecialHour: localMatch ? localMatch.isSpecialHour : false,
+                    isManualBlock: localMatch ? localMatch.isManualBlock : true
+                });
+            });
+
+            // Sumamos reservas locales que aún no se hayan sincronizado
+            bookings.forEach(b => {
+                const clave = `${b.date}_${b.time}`;
                 if (!mapaUnificado.has(clave)) {
-                    mapaUnificado.set(clave, {
-                        id: 'cloud-' + h.id,
-                        cloudDocId: h.id,
-                        date: h.fecha,
-                        time: h.hora,
-                        patientName: h.motivo || 'Ocupado / Bloqueado en Nube',
-                        serviceName: 'Franja Tachada en Agenda',
-                        reason: 'Sincronizado en Firebase',
-                        price: 0,
-                        isSpecialHour: false,
-                        isManualBlock: true
-                    });
-                } else {
-                    mapaUnificado.get(clave).cloudDocId = h.id;
+                    mapaUnificado.set(clave, { ...b, cloudDocId: '' });
                 }
             });
 
@@ -1548,7 +1541,7 @@
                         ${!bk.isManualBlock ? `<p class="text-xs text-carbon/75"><strong>Motivo:</strong> ${bk.reason}</p>` : ''}
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="deleteBooking('${bk.id}', '${bk.date}', '${bk.time}')" class="px-3.5 py-2 rounded-xl border border-terracota/45 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
+                        <button onclick="deleteBooking(this, '${bk.id}', '${bk.date}', '${bk.time}', '${bk.cloudDocId || ''}')" class="px-3.5 py-2 rounded-xl border border-terracota/45 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
                             <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
                             <span>Liberar horario</span>
                         </button>
@@ -1559,16 +1552,34 @@
             lucide.createIcons();
         }
 
-        async function deleteBooking(id, date, time) {
+        async function deleteBooking(btnEl, id, date, time, cloudDocId) {
+            if (btnEl) {
+                btnEl.disabled = true;
+                btnEl.innerHTML = `<span>Liberando...</span>`;
+            }
+
+            // 1. Borramos de Firebase primero
+            let eliminadoEnNube = true;
+            if (typeof window.liberarHorarioNube === 'function') {
+                eliminadoEnNube = await window.liberarHorarioNube(date, time, cloudDocId);
+            }
+
+            if (!eliminadoEnNube) {
+                if (btnEl) {
+                    btnEl.disabled = false;
+                    btnEl.innerHTML = `<span>Reintentar</span>`;
+                }
+                showToast('Firebase bloqueó el borrado. Revisá las Reglas de Firestore.');
+                return;
+            }
+
+            // 2. Borramos de memoria local
             bookings = bookings.filter(b => b.id !== id && !(b.date === date && b.time === time));
             saveBookings();
 
-            if (typeof window.liberarHorarioNube === 'function') {
-                await window.liberarHorarioNube(date, time);
-            }
-
             renderAdminBookings();
-            showToast('Horario liberado nuevamente en toda la agenda');
+            renderTimeSlots();
+            showToast('Horario liberado correctamente');
         }
 
         function renderAdminScheduleConfig() {
@@ -1749,8 +1760,14 @@
             }
         };
 
-        window.liberarHorarioNube = async function(fecha, hora) {
+        window.liberarHorarioNube = async function(fecha, hora, cloudDocId = "") {
             try {
+                // 1. Borrado directo por ID del documento si lo tenemos
+                if (cloudDocId) {
+                    await deleteDoc(doc(db, "horarios_ocupados", cloudDocId));
+                }
+
+                // 2. Búsqueda de respaldo por fecha y hora para eliminar cualquier duplicado
                 const q = query(
                     collection(db, "horarios_ocupados"),
                     where("fecha", "==", fecha),
@@ -1760,8 +1777,10 @@
                 for (const d of snap.docs) {
                     await deleteDoc(doc(db, "horarios_ocupados", d.id));
                 }
+                return true;
             } catch (error) {
                 console.error("Error al liberar horario en nube:", error);
+                return false;
             }
         };
 
