@@ -108,8 +108,9 @@
             </a>
 
             <!-- Navegación Desktop -->
-            <nav class="hidden md:flex items-center gap-8 text-[11px] uppercase tracking-[0.16em] font-medium text-carbon/80">
+            <nav class="hidden md:flex items-center gap-7 text-[11px] uppercase tracking-[0.16em] font-medium text-carbon/80">
                 <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors py-1">Especialidades</a>
+                <a href="#recursos" onclick="navigateTo('landing', 'recursos')" class="hover:text-terracota transition-colors py-1">Recursos</a>
                 <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors py-1">Sobre Mí</a>
                 <div class="h-4 w-px bg-carbon/15"></div>
                 <button onclick="navigateTo('booking')" class="bg-carbon hover:bg-terracota text-blanco-calido px-6 py-3 rounded-full transition-all duration-300 shadow-editorial flex items-center gap-2.5 text-[11px] uppercase tracking-[0.15em] font-medium group">
@@ -124,6 +125,9 @@
 
             <!-- Botones Móvil -->
             <div class="flex md:hidden items-center gap-2">
+                <a href="#recursos" onclick="navigateTo('landing', 'recursos')" class="px-3 py-2 rounded-full text-[10px] uppercase tracking-[0.12em] font-medium text-oliva bg-blanco-calido/80 border border-carbon/12">
+                    Recursos
+                </a>
                 <button onclick="navigateTo('booking')" class="bg-carbon text-blanco-calido px-4 py-2.5 rounded-full text-[10px] uppercase tracking-[0.14em] font-medium shadow-editorial flex items-center gap-1.5">
                     <span>Turnos</span>
                     <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-terracota"></i>
@@ -164,8 +168,8 @@
                                 <span>Agendar Consulta</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
-                            <a href="#servicios" class="w-full sm:w-auto px-7 py-4 rounded-full bg-blanco-calido border border-carbon/12 hover:border-oliva/60 text-carbon/85 hover:bg-nude/60 transition-colors text-xs uppercase tracking-[0.14em] font-medium text-center">
-                                Explorar Especialidades
+                            <a href="#recursos" class="w-full sm:w-auto px-7 py-4 rounded-full bg-blanco-calido border border-carbon/12 hover:border-oliva/60 text-carbon/85 hover:bg-nude/60 transition-colors text-xs uppercase tracking-[0.14em] font-medium text-center">
+                                Guías & Recursos
                             </a>
                         </div>
 
@@ -268,6 +272,45 @@
             </div>
         </section>
 
+        <!-- SECCIÓN RECURSOS, ARTÍCULOS Y GUÍAS DE EJERCICIOS -->
+        <section id="recursos" class="py-24 bg-blanco-calido border-b border-carbon/10">
+            <div class="max-w-6xl mx-auto px-5 sm:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 border-b border-carbon/12 pb-8">
+                    <div class="space-y-2.5 max-w-xl">
+                        <span class="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.24em] text-oliva font-semibold">
+                            <span class="w-4 h-px bg-oliva"></span>
+                            Biblioteca del Estudio
+                        </span>
+                        <h2 class="font-editorial text-3xl sm:text-4xl lg:text-[2.75rem] font-medium text-carbon leading-tight">
+                            Recursos, Artículos & <span class="italic text-terracota">Guías de Ejercicios</span>
+                        </h2>
+                    </div>
+                    <p class="text-xs sm:text-sm text-carbon/70 font-light leading-relaxed max-w-md">
+                        Material educativo, rutinas prácticas y documentos descargables preparados para acompañar tu proceso postural en casa.
+                    </p>
+                </div>
+
+                <!-- Filtros de Categoría -->
+                <div class="flex flex-wrap items-center gap-2 mb-9" id="resource-filters">
+                    <button onclick="filterResources('Todos')" data-cat="Todos" class="res-filter-btn px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium bg-carbon text-blanco-calido transition-all">
+                        Todos
+                    </button>
+                    <button onclick="filterResources('Guía de Ejercicios')" data-cat="Guía de Ejercicios" class="res-filter-btn px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium bg-greige text-carbon/80 hover:bg-nude border border-carbon/10 transition-all">
+                        Guías de Ejercicios
+                    </button>
+                    <button onclick="filterResources('Artículo')" data-cat="Artículo" class="res-filter-btn px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium bg-greige text-carbon/80 hover:bg-nude border border-carbon/10 transition-all">
+                        Artículos
+                    </button>
+                    <button onclick="filterResources('PDF Descargable')" data-cat="PDF Descargable" class="res-filter-btn px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium bg-greige text-carbon/80 hover:bg-nude border border-carbon/10 transition-all">
+                        PDFs
+                    </button>
+                </div>
+
+                <!-- Grilla de Recursos -->
+                <div id="landing-resources-grid" class="grid grid-cols-1 md:grid-cols-3 gap-7"></div>
+            </div>
+        </section>
+
         <!-- SECCIÓN QUIÉN SOY -->
         <section id="sobre-mi" class="py-24 bg-greige">
             <div class="max-w-6xl mx-auto px-5 sm:px-8">
@@ -282,21 +325,34 @@
                             Hola, soy <span class="italic text-terracota">Ludmila Rojo</span>
                         </h2>
                         <p class="text-sm text-carbon/85 leading-relaxed font-normal">
-                            Soy Licenciada en Kinesiología y Fisiatría con más de <strong class="font-semibold text-carbon">10 años de trayectoria</strong> acompañando a personas en el cuidado de su postura, el alivio del dolor crónico y la mejora de su calidad de movimiento.
+                            Soy Licenciada en Kinesiología y Fisiatría con más de <strong class="font-semibold text-carbon">10 años de trayectoria</strong> acompañando a personas adultas en el cuidado de su postura, el alivio del dolor crónico y la mejora de su calidad de movimiento.
                         </p>
                         <p class="text-sm text-carbon/75 leading-relaxed font-light">
                             En mi estudio de Olavarría creé un espacio cálido, pausado y libre de apuros. Entiendo que cada cuerpo cuenta una historia distinta; por eso, mi enfoque combina la biomecánica precisa —como el análisis de la pisada y plantillas Ebers— con técnicas manuales e invasivas como la punción seca.
                         </p>
-                        <div class="pt-2">
+                        <div class="pt-2 space-y-3">
                             <div class="flex items-center gap-4 bg-blanco-calido p-4 rounded-2xl border border-carbon/12 shadow-editorial">
                                 <div class="w-11 h-11 rounded-xl bg-oliva/15 text-oliva flex items-center justify-center shrink-0">
                                     <i data-lucide="award" class="w-5 h-5"></i>
                                 </div>
                                 <div>
                                     <p class="text-xs font-semibold text-carbon">Lic. Ludmila Rojo</p>
-                                    <p class="text-[11px] text-oliva font-normal mt-0.5">Más información en mi instagram <span class="font-semibold">@lic.rojoludmila</span></p>
+                                    <p class="text-[11px] text-oliva font-normal mt-0.5">Kinesiología Postural & Biomecánica · Olavarría</p>
                                 </div>
                             </div>
+
+                            <a href="https://instagram.com/TU_USUARIO" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-blanco-calido hover:bg-nude/60 p-4 rounded-2xl border border-carbon/12 hover:border-terracota/50 shadow-editorial transition-all group">
+                                <div class="flex items-center gap-3.5">
+                                    <div class="w-10 h-10 rounded-xl bg-terracota/15 text-terracota flex items-center justify-center shrink-0 group-hover:bg-terracota group-hover:text-blanco-calido transition-colors">
+                                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs font-semibold text-carbon">Seguime en Instagram</p>
+                                        <p class="text-[11px] text-oliva font-normal">@TU_USUARIO · Consejos y novedades del estudio</p>
+                                    </div>
+                                </div>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4 text-terracota"></i>
+                            </a>
                         </div>
                     </div>
 
@@ -536,6 +592,10 @@
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
                     <span>3. Servicios y Precios</span>
                 </button>
+                <button onclick="switchAdminTab('resources')" id="tab-btn-resources" class="admin-tab-btn px-5 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all bg-blanco-calido text-carbon border border-carbon/12 hover:bg-nude flex items-center gap-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>4. Recursos y Guías</span>
+                </button>
             </div>
 
             <!-- PESTAÑA 1: AGENDA Y BLOQUEO MANUAL POR FRANJA VARIABLE -->
@@ -690,6 +750,57 @@
                 </div>
             </div>
 
+            <!-- PESTAÑA 4: GESTIÓN DE RECURSOS, ARTÍCULOS Y GUÍAS -->
+            <div id="admin-tab-resources" class="admin-tab-content hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <div class="lg:col-span-5 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-4 h-fit">
+                    <h3 class="font-editorial text-xl font-semibold text-carbon flex items-center gap-2">
+                        <i data-lucide="file-plus-2" class="w-4 h-4 text-terracota"></i>
+                        <span>Publicar Recurso o Guía</span>
+                    </h3>
+                    <p class="text-xs text-carbon/75 leading-relaxed font-light">
+                        Publicá artículos de lectura directa en la web o pegá el enlace de un PDF (Google Drive / Dropbox) con guías de ejercicios.
+                    </p>
+                    <form id="add-resource-form" class="space-y-3.5">
+                        <div>
+                            <label class="block text-xs font-medium text-carbon/80 mb-1">Título del recurso *</label>
+                            <input type="text" id="res-title" required placeholder="Ej. Guía de movilidad cervical diaria" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-carbon/80 mb-1">Categoría *</label>
+                            <select id="res-category" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
+                                <option value="Guía de Ejercicios">Guía de Ejercicios</option>
+                                <option value="Artículo">Artículo</option>
+                                <option value="PDF Descargable">PDF Descargable</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-carbon/80 mb-1">Resumen corto (para la tarjeta) *</label>
+                            <textarea id="res-summary" rows="2" required placeholder="Breve descripción de lo que va a encontrar el paciente..." class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm resize-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-carbon/80 mb-1">Contenido del artículo / Indicaciones (opcional si subís PDF)</label>
+                            <textarea id="res-content" rows="5" placeholder="Escribí aquí el artículo completo o el paso a paso de los ejercicios..." class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm resize-y"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-carbon/80 mb-1">Enlace al PDF / Drive (opcional)</label>
+                            <input type="url" id="res-pdf-url" placeholder="https://drive.google.com/file/d/..." class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm">
+                        </div>
+                        <button type="submit" id="btn-publish-resource" class="w-full bg-terracota hover:bg-terracota-dark text-blanco-calido py-3 rounded-full text-xs uppercase tracking-wider font-medium transition-colors">
+                            Publicar en la Web
+                        </button>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-7 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-4">
+                    <div class="border-b border-carbon/12 pb-3">
+                        <h3 class="font-editorial text-xl font-semibold text-carbon">Recursos Publicados</h3>
+                        <p class="text-xs text-carbon/65 font-light">Sincronizado con la nube · Visible inmediatamente en la página principal.</p>
+                    </div>
+                    <div id="admin-resources-list" class="space-y-3"></div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -701,9 +812,14 @@
                 <p class="text-[10px] uppercase tracking-[0.22em] text-oliva mt-1 font-medium">Studio · Kinesiología & Postura · Olavarría</p>
             </div>
             
-            <div class="flex flex-wrap items-center justify-center gap-7 text-[11px] uppercase tracking-[0.15em] font-medium">
+            <div class="flex flex-wrap items-center justify-center gap-6 text-[11px] uppercase tracking-[0.15em] font-medium">
                 <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors">Especialidades</a>
+                <a href="#recursos" onclick="navigateTo('landing', 'recursos')" class="hover:text-terracota transition-colors">Recursos</a>
                 <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors">Sobre Mí</a>
+                <a href="https://instagram.com/TU_USUARIO" target="_blank" rel="noopener noreferrer" class="hover:text-terracota transition-colors inline-flex items-center gap-1.5">
+                    <i data-lucide="instagram" class="w-3.5 h-3.5 text-terracota"></i>
+                    <span>Instagram</span>
+                </a>
                 <button onclick="navigateTo('booking')" class="text-terracota-dark font-semibold hover:underline">Consulta | Turnos</button>
             </div>
 
@@ -713,41 +829,70 @@
         </div>
     </footer>
 
-    <!-- ==================== BOTÓN FLOTANTE DE WHATSAPP e instagram ==================== -->
     <!-- ==================== BOTONES FLOTANTES (INSTAGRAM + WHATSAPP) ==================== -->
-<div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-    
-    <!-- Botón Flotante Instagram -->
-    <a href="https://instagram.com/lic.rojoludmila?igshid=MzRlODBiNWFlZA=="
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Seguinos en Instagram"
-       class="group flex items-center gap-3 bg-blanco-calido hover:bg-nude text-carbon pl-4 pr-3 py-2.5 rounded-full shadow-editorial hover:shadow-card-hover border border-carbon/15 transition-all duration-300">
-        <span class="hidden sm:inline text-[11px] uppercase tracking-[0.14em] font-medium text-carbon/90">
-            Instagram
-        </span>
-        <span class="flex items-center justify-center w-8 h-8 rounded-full bg-terracota text-blanco-calido shrink-0 group-hover:scale-105 transition-transform">
-            <i data-lucide="instagram" class="w-4 h-4"></i>
-        </span>
-    </a>
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+        
+        <!-- Botón Flotante Instagram -->
+        <a href="https://instagram.com/TU_USUARIO"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Seguinos en Instagram"
+           class="group flex items-center gap-3 bg-blanco-calido hover:bg-nude text-carbon pl-4 pr-3 py-2.5 rounded-full shadow-editorial hover:shadow-card-hover border border-carbon/15 transition-all duration-300">
+            <span class="hidden sm:inline text-[11px] uppercase tracking-[0.14em] font-medium text-carbon/90">
+                Instagram
+            </span>
+            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-terracota text-blanco-calido shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+            </span>
+        </a>
 
-    <!-- Botón Flotante WhatsApp -->
-    <a id="floating-whatsapp-btn"
-       href="https://wa.me/5492284323833?text=Hola%20Ludmila%2C%20te%20escribo%20desde%20la%20web%20de%20Ludmila%20Rojo%20Studio%20para%20hacerte%20una%20consulta."
-       target="_blank"
-       rel="noopener noreferrer"
-       aria-label="Consultar por WhatsApp"
-       class="group flex items-center gap-3 bg-carbon hover:bg-oliva text-blanco-calido pl-4 pr-3.5 py-3 rounded-full shadow-editorial hover:shadow-card-hover border border-blanco-calido/15 transition-all duration-300">
-        <span class="hidden sm:inline text-[11px] uppercase tracking-[0.14em] font-medium text-blanco-calido/95">
-            Consultas
-        </span>
-        <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#25D366] text-white shrink-0 group-hover:scale-105 transition-transform">
-            <i data-lucide="message-circle" class="w-4 h-4 fill-current"></i>
-            <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-terracota ring-2 ring-carbon"></span>
-        </span>
-    </a>
+        <!-- Botón Flotante WhatsApp -->
+        <a id="floating-whatsapp-btn"
+           href="https://wa.me/5492284323833?text=Hola%20Ludmila%2C%20te%20escribo%20desde%20la%20web%20de%20Ludmila%20Rojo%20Studio%20para%20hacerte%20una%20consulta."
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Consultar por WhatsApp"
+           class="group flex items-center gap-3 bg-carbon hover:bg-oliva text-blanco-calido pl-4 pr-3.5 py-3 rounded-full shadow-editorial hover:shadow-card-hover border border-blanco-calido/15 transition-all duration-300">
+            <span class="hidden sm:inline text-[11px] uppercase tracking-[0.14em] font-medium text-blanco-calido/95">
+                Consultas
+            </span>
+            <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#25D366] text-white shrink-0 group-hover:scale-105 transition-transform">
+                <i data-lucide="message-circle" class="w-4 h-4 fill-current"></i>
+                <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-terracota ring-2 ring-carbon"></span>
+            </span>
+        </a>
 
-</div>
+    </div>
+
+    <!-- ==================== MODAL: LECTOR DE ARTÍCULO / RECURSO ==================== -->
+    <div id="modal-resource-reader" class="hidden fixed inset-0 z-50 bg-carbon/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-blanco-calido rounded-[1.75rem] border border-carbon/15 max-w-2xl w-full max-h-[88vh] flex flex-col shadow-xl overflow-hidden">
+            <div class="p-6 sm:p-7 border-b border-carbon/12 flex items-start justify-between gap-4 bg-greige">
+                <div class="space-y-1.5">
+                    <span id="reader-category" class="inline-block px-3 py-0.5 rounded-full bg-oliva/15 text-oliva text-[10px] uppercase tracking-[0.16em] font-semibold"></span>
+                    <h3 id="reader-title" class="font-editorial text-2xl sm:text-3xl font-semibold text-carbon leading-snug"></h3>
+                </div>
+                <button onclick="closeModal('modal-resource-reader')" class="p-2 rounded-full bg-blanco-calido border border-carbon/12 text-carbon/70 hover:text-carbon shrink-0" aria-label="Cerrar">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="p-6 sm:p-7 overflow-y-auto space-y-5 text-sm text-carbon/85 leading-relaxed font-light">
+                <p id="reader-summary" class="font-medium text-carbon text-sm bg-greige/70 p-4 rounded-2xl border border-carbon/10"></p>
+                <div id="reader-content" class="whitespace-pre-line space-y-3"></div>
+            </div>
+
+            <div class="p-5 border-t border-carbon/12 bg-greige flex flex-wrap items-center justify-between gap-3">
+                <a id="reader-pdf-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden bg-terracota hover:bg-terracota-dark text-blanco-calido px-5 py-2.5 rounded-full text-xs uppercase tracking-wider font-medium inline-flex items-center gap-2 transition-colors">
+                    <i data-lucide="file-down" class="w-4 h-4"></i>
+                    <span>Abrir / Descargar PDF</span>
+                </a>
+                <button onclick="closeModal('modal-resource-reader')" class="ml-auto px-5 py-2.5 rounded-full border border-carbon/15 bg-blanco-calido text-xs font-medium text-carbon hover:bg-nude">
+                    Cerrar lectura
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- ==================== MODAL: ACCESO PIN PROFESIONAL ==================== -->
     <div id="modal-pin" class="hidden fixed inset-0 z-50 bg-carbon/60 backdrop-blur-xs flex items-center justify-center p-4">
@@ -764,7 +909,7 @@
             </div>
             <form id="pin-form" class="space-y-4">
                 <input type="password" id="pin-input" maxlength="4" placeholder="••••" required class="w-40 mx-auto block text-center tracking-[0.6em] text-xl font-semibold px-4 py-3 rounded-2xl bg-greige border border-carbon/15 focus:outline-none focus:border-terracota">
-                <p id="pin-error" class="hidden text-xs text-terracota-dark font-medium">PIN incorrecto. Vuelve a intentarlo.</p>
+                <p id="pin-error" class="hidden text-xs text-terracota-dark font-medium">PIN incorrecto. Volvé a intentarlo.</p>
                 <div class="flex gap-3 pt-1">
                     <button type="button" onclick="closeModal('modal-pin')" class="flex-1 py-2.5 rounded-full border border-carbon/15 text-xs font-medium text-carbon/75 hover:bg-greige">Cancelar</button>
                     <button type="submit" class="flex-1 py-2.5 rounded-full bg-carbon text-blanco-calido text-xs font-medium hover:bg-carbon/90">Ingresar</button>
@@ -806,12 +951,13 @@
         <span id="toast-message">Cambios guardados</span>
     </div>
 
-    <!-- ==================== LÓGICA JAVASCRIPT & FIREBASE ==================== -->
+    <!-- ==================== LÓGICA JAVASCRIPT ==================== -->
     <script>
         const STORAGE_KEYS = {
             SERVICES: 'ludmila_studio_services_v1',
             CONFIG: 'ludmila_studio_config_v1',
-            BOOKINGS: 'ludmila_studio_bookings_v1'
+            BOOKINGS: 'ludmila_studio_bookings_v1',
+            RESOURCES: 'ludmila_studio_resources_v1'
         };
 
         const DEFAULT_SERVICES = [
@@ -842,6 +988,33 @@
             }
         ];
 
+        const DEFAULT_RESOURCES = [
+            {
+                id: 'res-default-1',
+                title: 'Pausa Activa y Liberación Cervical para Oficina',
+                category: 'Guía de Ejercicios',
+                summary: 'Secuencia de 5 minutos para descomprimir la cintura escapular y aliviar la tensión acumulada frente a pantallas.',
+                content: '1. Respiración diafragmática (1 minuto): Sentado con los apoyos isquiáticos firmes, inhalá profundo expandiendo costillas bajas y exhalá largo soltando los hombros.\n\n2. Retracción cervical suave (8 repeticiones): Llevá el mentón suavemente hacia atrás sin inclinar la cabeza, sosteniendo 3 segundos.\n\n3. Movilidad escapular (10 círculos): Dibujá círculos amplios y lentos con los hombros hacia atrás y abajo.\n\n4. Inclinación lateral asistida (20 segundos por lado): Dejá caer la oreja hacia el hombro manteniendo el brazo contrario relajado hacia el piso.',
+                pdfUrl: ''
+            },
+            {
+                id: 'res-default-2',
+                title: '¿Cómo influye la pisada en el dolor lumbar?',
+                category: 'Artículo',
+                summary: 'La relación ascendente entre el apoyo plantar, la distribución de cargas y la tensión en la columna baja.',
+                content: 'El pie es nuestro primer punto de contacto con el suelo y funciona como un captor postural clave. Cuando existe un apoyo asimétrico —como un descenso del arco interno o una sobrecarga en el antepié—, toda la cadena ascendente (tobillo, rodilla, pelvis y columna lumbar) realiza micro-compensaciones continuas para mantener la mirada horizontal.\n\nPor eso, evaluar la postura sin observar la pisada en estática y en movimiento deja una parte fundamental del diagnóstico sin responder.',
+                pdfUrl: ''
+            },
+            {
+                id: 'res-default-3',
+                title: 'Despertar Plantar y Movilidad del Pie',
+                category: 'Guía de Ejercicios',
+                summary: 'Ejercicios simples descalzo para activar la musculatura intrínseca del pie y mejorar la estabilidad.',
+                content: '1. Masaje con pelota (2 minutos por pie): Hacé rodar una pelota semiblanda desde el talón hasta la base de los dedos buscando zonas de tensión.\n\n2. Apertura de dedos (10 repeticiones): Intentá separar los dedos entre sí apoyando toda la planta en el suelo.\n\n3. Elevación controlada de talones (3 series de 10): Subí lentamente repartiendo el peso de forma pareja entre el dedo gordo y el quinto metatarsiano.',
+                pdfUrl: ''
+            }
+        ];
+
         const DEFAULT_CONFIG = {
             workingDays: [1, 2, 3, 4, 5],
             startTime: '09:00',
@@ -855,9 +1028,12 @@
         let services = JSON.parse(localStorage.getItem(STORAGE_KEYS.SERVICES)) || DEFAULT_SERVICES;
         let config = JSON.parse(localStorage.getItem(STORAGE_KEYS.CONFIG)) || DEFAULT_CONFIG;
         let bookings = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS)) || [];
+        let localResources = JSON.parse(localStorage.getItem(STORAGE_KEYS.RESOURCES)) || DEFAULT_RESOURCES;
         window.horariosNube = window.horariosNube || [];
+        window.recursosNube = window.recursosNube || [];
 
         let selectedSlot = null;
+        let currentResourceFilter = 'Todos';
 
         function saveServices() {
             localStorage.setItem(STORAGE_KEYS.SERVICES, JSON.stringify(services));
@@ -868,6 +1044,9 @@
         }
         function saveBookings() {
             localStorage.setItem(STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
+        }
+        function saveLocalResources() {
+            localStorage.setItem(STORAGE_KEYS.RESOURCES, JSON.stringify(localResources));
         }
 
         function updateFloatingWhatsappLink() {
@@ -934,6 +1113,7 @@
 
             if (viewName === 'landing') {
                 renderLandingServices();
+                renderLandingResources();
                 if (sectionId) {
                     setTimeout(() => {
                         const el = document.getElementById(sectionId);
@@ -952,7 +1132,7 @@
             lucide.createIcons();
         }
 
-        // --- RENDERIZADO DE LANDING PAGE ---
+        // --- RENDERIZADO DE SERVICIOS ---
         function renderLandingServices() {
             const container = document.getElementById('landing-services-grid');
             container.innerHTML = '';
@@ -1005,6 +1185,102 @@
                 select.value = serviceId;
                 updateBookingCalculation();
             }
+        }
+
+        // --- RENDERIZADO Y LECTOR DE RECURSOS ---
+        function getAllResources() {
+            return window.recursosNube.length > 0 ? window.recursosNube : localResources;
+        }
+
+        function filterResources(category) {
+            currentResourceFilter = category;
+            document.querySelectorAll('.res-filter-btn').forEach(btn => {
+                if (btn.dataset.cat === category) {
+                    btn.className = 'res-filter-btn px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium bg-carbon text-blanco-calido transition-all';
+                } else {
+                    btn.className = 'res-filter-btn px-4 py-2 rounded-full text-[11px] uppercase tracking-wider font-medium bg-greige text-carbon/80 hover:bg-nude border border-carbon/10 transition-all';
+                }
+            });
+            renderLandingResources();
+        }
+
+        function renderLandingResources() {
+            const container = document.getElementById('landing-resources-grid');
+            if (!container) return;
+
+            let list = getAllResources();
+            if (currentResourceFilter !== 'Todos') {
+                list = list.filter(r => r.category === currentResourceFilter);
+            }
+
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-xs text-carbon/60 py-10 text-center bg-greige rounded-2xl border border-carbon/10">Todavía no hay publicaciones en esta categoría.</p>`;
+                return;
+            }
+
+            list.forEach((res) => {
+                const isPdf = Boolean(res.pdfUrl && res.pdfUrl.trim() !== '');
+                const iconName = res.category === 'Guía de Ejercicios' ? 'dumbbell' : res.category === 'PDF Descargable' ? 'file-text' : 'book-open';
+
+                const card = document.createElement('div');
+                card.className = 'bg-greige/70 hover:bg-greige border border-carbon/12 rounded-[1.75rem] p-7 flex flex-col justify-between transition-all duration-300 hover:border-oliva/60 shadow-editorial group';
+                card.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blanco-calido border border-carbon/10 text-[10px] uppercase tracking-[0.14em] font-semibold text-oliva">
+                                <i data-lucide="${iconName}" class="w-3 h-3 text-terracota"></i>
+                                ${res.category}
+                            </span>
+                            ${isPdf ? `<span class="text-[10px] uppercase tracking-wider font-semibold text-terracota-dark">PDF</span>` : ''}
+                        </div>
+                        <h3 class="font-editorial text-2xl font-semibold text-carbon leading-snug">
+                            ${res.title}
+                        </h3>
+                        <p class="text-xs sm:text-[13px] text-carbon/75 leading-relaxed font-light">
+                            ${res.summary}
+                        </p>
+                    </div>
+                    <div class="pt-5 mt-6 border-t border-carbon/10 flex items-center justify-between gap-2">
+                        ${res.content ? `
+                            <button onclick="openResourceReader('${res.id}')" class="text-[11px] uppercase tracking-[0.14em] font-semibold text-carbon hover:text-terracota inline-flex items-center gap-1.5 transition-colors">
+                                <span>Leer guía</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        ` : '<span></span>'}
+                        ${isPdf ? `
+                            <a href="${res.pdfUrl}" target="_blank" rel="noopener noreferrer" class="text-[11px] uppercase tracking-[0.14em] font-semibold text-terracota-dark hover:text-terracota inline-flex items-center gap-1.5 transition-colors">
+                                <i data-lucide="file-down" class="w-3.5 h-3.5"></i>
+                                <span>Ver PDF</span>
+                            </a>
+                        ` : ''}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function openResourceReader(resourceId) {
+            const res = getAllResources().find(r => r.id === resourceId);
+            if (!res) return;
+
+            document.getElementById('reader-category').textContent = res.category;
+            document.getElementById('reader-title').textContent = res.title;
+            document.getElementById('reader-summary').textContent = res.summary;
+            document.getElementById('reader-content').textContent = res.content || 'Descargá el archivo PDF adjunto para ver el contenido completo.';
+
+            const pdfBtn = document.getElementById('reader-pdf-btn');
+            if (res.pdfUrl && res.pdfUrl.trim() !== '') {
+                pdfBtn.href = res.pdfUrl;
+                pdfBtn.classList.remove('hidden');
+            } else {
+                pdfBtn.classList.add('hidden');
+            }
+
+            document.getElementById('modal-resource-reader').classList.remove('hidden');
+            lucide.createIcons();
         }
 
         // --- VISTA DE RESERVA DE TURNOS (PACIENTES) ---
@@ -1220,7 +1496,6 @@
 
         document.getElementById('booking-service').addEventListener('change', updateBookingCalculation);
 
-        // ENVÍO DEL FORMULARIO DE RESERVA HACIA FIREBASE
         document.getElementById('booking-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!selectedSlot) return;
@@ -1324,7 +1599,7 @@
         document.getElementById('pin-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const pin = document.getElementById('pin-input').value;
-            if (pin === '8467') {
+            if (pin === '1234') {
                 closeModal('modal-pin');
                 navigateTo('admin');
             } else {
@@ -1345,6 +1620,7 @@
             if (tabName === 'agenda') renderAdminBookings();
             if (tabName === 'schedule') renderAdminScheduleConfig();
             if (tabName === 'services') renderAdminServices();
+            if (tabName === 'resources') renderAdminResources();
             lucide.createIcons();
         }
 
@@ -1501,7 +1777,6 @@
 
             const mapaUnificado = new Map();
 
-            // Primero cargamos lo que está en la nube (fuente de verdad en tiempo real)
             window.horariosNube.forEach(h => {
                 const clave = `${h.fecha}_${h.hora}`;
                 const localMatch = bookings.find(b => b.date === h.fecha && b.time === h.hora);
@@ -1519,7 +1794,6 @@
                 });
             });
 
-            // Sumamos reservas locales que aún no se hayan sincronizado
             bookings.forEach(b => {
                 const clave = `${b.date}_${b.time}`;
                 if (!mapaUnificado.has(clave)) {
@@ -1578,7 +1852,6 @@
                 btnEl.innerHTML = `<span>Liberando...</span>`;
             }
 
-            // 1. Borramos de Firebase primero
             let eliminadoEnNube = true;
             if (typeof window.liberarHorarioNube === 'function') {
                 eliminadoEnNube = await window.liberarHorarioNube(date, time, cloudDocId);
@@ -1593,7 +1866,6 @@
                 return;
             }
 
-            // 2. Borramos de memoria local
             bookings = bookings.filter(b => b.id !== id && !(b.date === date && b.time === time));
             saveBookings();
 
@@ -1729,9 +2001,95 @@
             showToast('Nuevo servicio agregado');
         });
 
+        // --- ADMINISTRACIÓN DE RECURSOS Y GUÍAS ---
+        document.getElementById('add-resource-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('res-title').value.trim();
+            const category = document.getElementById('res-category').value;
+            const summary = document.getElementById('res-summary').value.trim();
+            const content = document.getElementById('res-content').value.trim();
+            const pdfUrl = document.getElementById('res-pdf-url').value.trim();
+
+            const btn = document.getElementById('btn-publish-resource');
+            btn.disabled = true;
+            btn.textContent = 'Publicando...';
+
+            const nuevoRecurso = {
+                title,
+                category,
+                summary,
+                content,
+                pdfUrl,
+                createdAt: new Date().toISOString()
+            };
+
+            if (typeof window.crearRecursoNube === 'function') {
+                await window.crearRecursoNube(nuevoRecurso);
+            } else {
+                localResources.unshift({ id: 'res-' + Date.now(), ...nuevoRecurso });
+                saveLocalResources();
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Publicar en la Web';
+            document.getElementById('add-resource-form').reset();
+            renderAdminResources();
+            renderLandingResources();
+            showToast('Recurso publicado correctamente');
+        });
+
+        function renderAdminResources() {
+            const container = document.getElementById('admin-resources-list');
+            if (!container) return;
+
+            const list = getAllResources();
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="text-xs text-carbon/65 py-8 text-center bg-greige rounded-2xl border border-carbon/10">No hay recursos publicados todavía.</p>`;
+                return;
+            }
+
+            list.forEach((res) => {
+                const item = document.createElement('div');
+                item.className = 'p-4 rounded-2xl bg-greige border border-carbon/12 flex flex-col sm:flex-row sm:items-center justify-between gap-4';
+                item.innerHTML = `
+                    <div class="space-y-1">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full bg-oliva/15 text-oliva text-[10px] font-semibold uppercase tracking-wider">
+                                ${res.category}
+                            </span>
+                            <span class="text-sm font-semibold text-carbon">${res.title}</span>
+                        </div>
+                        <p class="text-xs text-carbon/70 font-light">${res.summary}</p>
+                        ${res.pdfUrl ? `<p class="text-[11px] text-terracota-dark font-medium truncate max-w-md">PDF: ${res.pdfUrl}</p>` : ''}
+                    </div>
+                    <button onclick="removeResource('${res.id}')" class="px-3.5 py-2 rounded-xl border border-terracota/45 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5 shrink-0">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        <span>Eliminar</span>
+                    </button>
+                `;
+                container.appendChild(item);
+            });
+            lucide.createIcons();
+        }
+
+        async function removeResource(id) {
+            if (typeof window.eliminarRecursoNube === 'function' && window.recursosNube.some(r => r.id === id)) {
+                await window.eliminarRecursoNube(id);
+            } else {
+                localResources = localResources.filter(r => r.id !== id);
+                saveLocalResources();
+            }
+            renderAdminResources();
+            renderLandingResources();
+            showToast('Recurso eliminado');
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             updateFloatingWhatsappLink();
             renderLandingServices();
+            renderLandingResources();
             lucide.createIcons();
         });
     </script>
@@ -1754,6 +2112,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Escucha en tiempo real de horarios ocupados
         onSnapshot(collection(db, "horarios_ocupados"), (snapshot) => {
             window.horariosNube = [];
             snapshot.forEach((documento) => {
@@ -1766,6 +2125,41 @@
                 renderAdminBookings();
             }
         });
+
+        // Escucha en tiempo real de recursos y guías
+        onSnapshot(collection(db, "recursos"), (snapshot) => {
+            window.recursosNube = [];
+            snapshot.forEach((documento) => {
+                window.recursosNube.push({ id: documento.id, ...documento.data() });
+            });
+            window.recursosNube.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+            if (typeof renderLandingResources === "function") {
+                renderLandingResources();
+            }
+            if (typeof renderAdminResources === "function" && !document.getElementById('view-admin').classList.contains('hidden')) {
+                renderAdminResources();
+            }
+        });
+
+        window.crearRecursoNube = async function(recurso) {
+            try {
+                await addDoc(collection(db, "recursos"), recurso);
+                return true;
+            } catch (error) {
+                console.error("Error al publicar recurso en Firebase:", error);
+                return false;
+            }
+        };
+
+        window.eliminarRecursoNube = async function(docId) {
+            try {
+                await deleteDoc(doc(db, "recursos", docId));
+                return true;
+            } catch (error) {
+                console.error("Error al eliminar recurso en Firebase:", error);
+                return false;
+            }
+        };
 
         window.bloquearHorarioNube = async function(fecha, hora, motivo = "Bloqueado por Ludmila") {
             try {
@@ -1782,12 +2176,10 @@
 
         window.liberarHorarioNube = async function(fecha, hora, cloudDocId = "") {
             try {
-                // 1. Borrado directo por ID del documento si lo tenemos
                 if (cloudDocId) {
                     await deleteDoc(doc(db, "horarios_ocupados", cloudDocId));
                 }
 
-                // 2. Búsqueda de respaldo por fecha y hora para eliminar cualquier duplicado
                 const q = query(
                     collection(db, "horarios_ocupados"),
                     where("fecha", "==", fecha),
