@@ -90,9 +90,10 @@
 <body class="antialiased selection:bg-terracota/25 selection:text-carbon">
 
     <!-- ==================== NAVBAR GLOBAL ==================== -->
-    <header class="sticky top-0 z-40 bg-greige/90 backdrop-blur-md border-b border-carbon/10 transition-all">
+    <!-- ==================== NAVBAR GLOBAL ==================== -->
+    <header class="sticky top-0 z-40 bg-greige/95 backdrop-blur-md border-b border-carbon/10 transition-all">
         <div class="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
-            <a href="#" onclick="navigateTo('landing'); return false;" class="group flex items-center gap-3.5">
+            <a href="#" onclick="navigateTo('landing'); closeMobileMenu(); return false;" class="group flex items-center gap-3.5">
                 <div class="w-9 h-9 rounded-xl bg-blanco-calido border border-carbon/12 flex items-center justify-center text-terracota group-hover:border-terracota/60 transition-colors shadow-xs">
                     <span class="font-editorial text-xl font-semibold tracking-tighter">LR</span>
                 </div>
@@ -123,19 +124,40 @@
                 </button>
             </nav>
 
-            <!-- Botones Móvil -->
-            <div class="flex md:hidden items-center gap-2">
-                <a href="#recursos" onclick="navigateTo('landing', 'recursos')" class="px-3 py-2 rounded-full text-[10px] uppercase tracking-[0.12em] font-medium text-oliva bg-blanco-calido/80 border border-carbon/12">
-                    Recursos
+            <!-- Botón Menú Hamburguesa (Móvil) -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Abrir menú" aria-expanded="false" class="md:hidden p-2.5 rounded-xl bg-blanco-calido border border-carbon/12 text-carbon hover:border-terracota/60 transition-colors">
+                <i id="mobile-menu-icon-open" data-lucide="menu" class="w-5 h-5"></i>
+                <i id="mobile-menu-icon-close" data-lucide="x" class="w-5 h-5 hidden"></i>
+            </button>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-blanco-calido border-b border-carbon/12 px-5 pt-4 pb-6 shadow-editorial">
+            <nav class="flex flex-col space-y-1 text-xs uppercase tracking-[0.16em] font-medium text-carbon/85">
+                <a href="#servicios" onclick="navigateTo('landing', 'servicios'); closeMobileMenu();" class="py-3 px-3 rounded-xl hover:bg-greige hover:text-terracota transition-colors flex items-center justify-between">
+                    <span>Especialidades</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-carbon/35"></i>
                 </a>
-                <button onclick="navigateTo('booking')" class="bg-carbon text-blanco-calido px-4 py-2.5 rounded-full text-[10px] uppercase tracking-[0.14em] font-medium shadow-editorial flex items-center gap-1.5">
-                    <span>Turnos</span>
-                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-terracota"></i>
-                </button>
-                <button onclick="openAdminGate()" class="p-2.5 text-oliva bg-blanco-calido/80 border border-carbon/12 rounded-full" aria-label="Gestión">
-                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                </button>
-            </div>
+                <a href="#recursos" onclick="navigateTo('landing', 'recursos'); closeMobileMenu();" class="py-3 px-3 rounded-xl hover:bg-greige hover:text-terracota transition-colors flex items-center justify-between">
+                    <span>Recursos & Guías</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-carbon/35"></i>
+                </a>
+                <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi'); closeMobileMenu();" class="py-3 px-3 rounded-xl hover:bg-greige hover:text-terracota transition-colors flex items-center justify-between">
+                    <span>Sobre Mí</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-carbon/35"></i>
+                </a>
+
+                <div class="pt-3 mt-2 border-t border-carbon/10 flex flex-col gap-2.5">
+                    <button onclick="navigateTo('booking'); closeMobileMenu();" class="w-full bg-carbon hover:bg-terracota text-blanco-calido py-3.5 px-5 rounded-full transition-colors shadow-editorial flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.15em] font-medium">
+                        <i data-lucide="calendar" class="w-4 h-4 text-terracota"></i>
+                        <span>Consulta | Turnos</span>
+                    </button>
+                    <button onclick="openAdminGate(); closeMobileMenu();" class="w-full py-3 px-5 rounded-full border border-carbon/12 bg-greige text-oliva hover:text-carbon transition-colors flex items-center justify-center gap-2 text-[11px] normal-case tracking-normal font-medium">
+                        <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                        <span>Panel de Gestión</span>
+                    </button>
+                </div>
+            </nav>
         </div>
     </header>
 
@@ -341,14 +363,14 @@
                                 </div>
                             </div>
 
-                            <a href="https://instagram.com/TU_USUARIO" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-blanco-calido hover:bg-nude/60 p-4 rounded-2xl border border-carbon/12 hover:border-terracota/50 shadow-editorial transition-all group">
+                            <a href="https://instagram.com/lic.rojoludmila" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-blanco-calido hover:bg-nude/60 p-4 rounded-2xl border border-carbon/12 hover:border-terracota/50 shadow-editorial transition-all group">
                                 <div class="flex items-center gap-3.5">
                                     <div class="w-10 h-10 rounded-xl bg-terracota/15 text-terracota flex items-center justify-center shrink-0 group-hover:bg-terracota group-hover:text-blanco-calido transition-colors">
                                         <i data-lucide="instagram" class="w-4 h-4"></i>
                                     </div>
                                     <div>
                                         <p class="text-xs font-semibold text-carbon">Seguime en Instagram</p>
-                                        <p class="text-[11px] text-oliva font-normal">@TU_USUARIO · Consejos y novedades del estudio</p>
+                                        <p class="text-[11px] text-oliva font-normal">@lic.rojoludmila · Consejos y novedades del estudio</p>
                                     </div>
                                 </div>
                                 <i data-lucide="arrow-up-right" class="w-4 h-4 text-terracota"></i>
@@ -599,58 +621,81 @@
             </div>
 
             <!-- PESTAÑA 1: AGENDA Y BLOQUEO MANUAL POR FRANJA VARIABLE -->
-            <div id="admin-tab-agenda" class="admin-tab-content grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- PESTAÑA 1: AGENDA SEMANAL VISUAL -->
+            <div id="admin-tab-agenda" class="admin-tab-content space-y-6">
                 
-                <div class="lg:col-span-4 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-4 h-fit">
-                    <h3 class="font-editorial text-xl font-semibold text-carbon flex items-center gap-2">
-                        <i data-lucide="ban" class="w-4 h-4 text-terracota"></i>
-                        <span>Tachar Franja Horaria</span>
-                    </h3>
-                    <p class="text-xs text-carbon/75 leading-relaxed font-light">
-                        Elegí una fecha y un rango horario (ej. de 09:00 a 12:00 o de 14:00 a 17:00) para tachar esos turnos en la agenda pública.
-                    </p>
-                    <form id="manual-block-form" class="space-y-3.5">
+                <!-- Barra superior: Navegación de Semana + Leyenda + Tachar Franja -->
+                <div class="bg-blanco-calido p-5 sm:p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-5">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-carbon/12 pb-4">
                         <div>
-                            <label class="block text-xs font-medium text-carbon/80 mb-1">Fecha *</label>
-                            <input type="date" id="block-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
+                            <h3 class="font-editorial text-2xl font-semibold text-carbon">Agenda Semanal del Estudio</h3>
+                            <p class="text-xs text-carbon/65 font-light mt-0.5">
+                                Hacé clic sobre cualquier celda <strong class="text-oliva">Disponible</strong> para tacharla, o sobre un turno <strong class="text-terracota-dark">Tachado/Reservado</strong> para liberarlo.
+                            </p>
                         </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-xs font-medium text-carbon/80 mb-1">Desde *</label>
-                                <select id="block-start-time" required class="w-full px-3 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota"></select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-medium text-carbon/80 mb-1">Hasta *</label>
-                                <select id="block-end-time" required class="w-full px-3 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota"></select>
-                            </div>
-                        </div>
-                        <p id="block-range-preview" class="text-[11px] text-oliva font-medium bg-greige px-3 py-2 rounded-xl border border-carbon/10">
-                            Se tacharán los turnos comprendidos en esa franja.
-                        </p>
-                        <div>
-                            <label class="block text-xs font-medium text-carbon/80 mb-1">Etiqueta / Motivo (opcional)</label>
-                            <input type="text" id="block-note" placeholder="Ej. Bloqueado personal / Turnos externos" class="w-full px-3.5 py-2.5 rounded-xl bg-greige border border-carbon/15 text-sm focus:outline-none focus:border-terracota">
-                        </div>
-                        <button type="submit" id="btn-block-range" class="w-full bg-oliva hover:bg-oliva-light text-blanco-calido py-3 rounded-full text-xs uppercase tracking-wider font-medium transition-colors">
-                            Tachar Franja en Agenda
-                        </button>
-                    </form>
-                </div>
 
-                <div class="lg:col-span-8 bg-blanco-calido p-6 rounded-[1.75rem] border border-carbon/12 shadow-editorial space-y-5">
-                    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-carbon/12 pb-4">
-                        <div>
-                            <h3 class="font-editorial text-xl font-semibold text-carbon">Turnos Agendados y Horarios Tachados</h3>
-                            <p class="text-xs text-carbon/65 font-light">Sincronizado con la nube · Podés liberar cualquier horario en un clic.</p>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <input type="date" id="admin-filter-date" class="px-3 py-1.5 rounded-xl bg-greige border border-carbon/15 text-xs">
-                            <button onclick="document.getElementById('admin-filter-date').value=''; renderAdminBookings();" class="text-xs text-terracota-dark font-medium hover:underline">Ver todos</button>
+                        <!-- Selector de Semana -->
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button type="button" onclick="changeAdminWeek(-7)" class="p-2.5 rounded-xl bg-greige hover:bg-nude border border-carbon/12 text-carbon transition-colors" title="Semana anterior">
+                                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                            </button>
+                            <button type="button" onclick="goToCurrentAdminWeek()" class="px-3.5 py-2 rounded-xl bg-greige hover:bg-nude border border-carbon/12 text-xs font-medium text-carbon transition-colors">
+                                Hoy
+                            </button>
+                            <span id="admin-week-range-label" class="px-4 py-2 rounded-xl bg-carbon text-blanco-calido text-xs font-semibold min-w-[190px] text-center">
+                                Semana actual
+                            </span>
+                            <button type="button" onclick="changeAdminWeek(7)" class="p-2.5 rounded-xl bg-greige hover:bg-nude border border-carbon/12 text-carbon transition-colors" title="Semana siguiente">
+                                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                            </button>
                         </div>
                     </div>
 
-                    <div id="admin-bookings-list" class="space-y-3"></div>
+                    <!-- Leyenda + Tachar franja rápida -->
+                    <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+                        <div class="flex flex-wrap items-center gap-4 text-[11px]">
+                            <span class="inline-flex items-center gap-1.5 font-medium text-oliva">
+                                <span class="w-3 h-3 rounded-md bg-oliva/20 border border-oliva/50"></span> Disponible (habitual)
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 font-medium text-carbon/70">
+                                <span class="w-3 h-3 rounded-md bg-greige border border-carbon/20"></span> Fuera de horario
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 font-medium text-terracota-dark">
+                                <span class="w-3 h-3 rounded-md bg-terracota/20 border border-terracota/60"></span> Turno paciente
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 font-medium text-carbon/60">
+                                <span class="w-3 h-3 rounded-md slot-tachado border border-carbon/25"></span> Tachado / Bloqueado
+                            </span>
+                        </div>
+
+                        <!-- Formulario compacto para tachar múltiples horas de golpe -->
+                        <form id="manual-block-form" class="flex flex-wrap items-center gap-2 bg-greige p-2.5 rounded-2xl border border-carbon/10">
+                            <span class="text-[11px] font-semibold text-carbon/80 px-1.5 flex items-center gap-1">
+                                <i data-lucide="ban" class="w-3.5 h-3.5 text-terracota"></i> Tachar franja:
+                            </span>
+                            <input type="date" id="block-date" required class="px-2.5 py-1.5 rounded-xl bg-blanco-calido border border-carbon/15 text-xs">
+                            <select id="block-start-time" required class="px-2.5 py-1.5 rounded-xl bg-blanco-calido border border-carbon/15 text-xs"></select>
+                            <span class="text-xs text-carbon/50">a</span>
+                            <select id="block-end-time" required class="px-2.5 py-1.5 rounded-xl bg-blanco-calido border border-carbon/15 text-xs"></select>
+                            <input type="text" id="block-note" placeholder="Motivo (opcional)" class="px-2.5 py-1.5 rounded-xl bg-blanco-calido border border-carbon/15 text-xs w-36">
+                            <button type="submit" id="btn-block-range" class="bg-oliva hover:bg-oliva-light text-blanco-calido px-3.5 py-1.5 rounded-xl text-xs font-medium transition-colors">
+                                Tachar
+                            </button>
+                            <span id="block-range-preview" class="hidden"></span>
+                        </form>
+                    </div>
                 </div>
+
+                <!-- Grilla Semanal (Tabla con scroll horizontal en celular) -->
+                <div class="bg-blanco-calido rounded-[1.75rem] border border-carbon/12 shadow-editorial overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[780px] border-collapse text-left">
+                            <thead id="admin-weekly-thead" class="bg-greige border-b border-carbon/12"></thead>
+                            <tbody id="admin-weekly-tbody" class="divide-y divide-carbon/10"></tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
 
             <!-- PESTAÑA 2: HORARIOS Y TARIFA DIFERENCIAL -->
@@ -816,7 +861,7 @@
                 <a href="#servicios" onclick="navigateTo('landing', 'servicios')" class="hover:text-terracota transition-colors">Especialidades</a>
                 <a href="#recursos" onclick="navigateTo('landing', 'recursos')" class="hover:text-terracota transition-colors">Recursos</a>
                 <a href="#sobre-mi" onclick="navigateTo('landing', 'sobre-mi')" class="hover:text-terracota transition-colors">Sobre Mí</a>
-                <a href="https://instagram.com/TU_USUARIO" target="_blank" rel="noopener noreferrer" class="hover:text-terracota transition-colors inline-flex items-center gap-1.5">
+                <a href="https://instagram.com/lic.rojoludmila" target="_blank" rel="noopener noreferrer" class="hover:text-terracota transition-colors inline-flex items-center gap-1.5">
                     <i data-lucide="instagram" class="w-3.5 h-3.5 text-terracota"></i>
                     <span>Instagram</span>
                 </a>
@@ -833,6 +878,7 @@
     <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
         
         <!-- Botón Flotante Instagram -->
+        <!-- Botón Flotante Instagram -->
         <a href="https://instagram.com/TU_USUARIO"
            target="_blank"
            rel="noopener noreferrer"
@@ -842,7 +888,11 @@
                 Instagram
             </span>
             <span class="flex items-center justify-center w-8 h-8 rounded-full bg-terracota text-blanco-calido shrink-0 group-hover:scale-105 transition-transform">
-                <i data-lucide="instagram" class="w-4 h-4"></i>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
             </span>
         </a>
 
@@ -1104,6 +1154,36 @@
         }
 
         // --- NAVEGACIÓN SPA ---
+        // --- MENÚ HAMBURGUESA MÓVIL ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const iconOpen = document.getElementById('mobile-menu-icon-open');
+            const iconClose = document.getElementById('mobile-menu-icon-close');
+
+            const isHidden = menu.classList.contains('hidden');
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                iconOpen.classList.add('hidden');
+                iconClose.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                closeMobileMenu();
+            }
+        }
+
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const iconOpen = document.getElementById('mobile-menu-icon-open');
+            const iconClose = document.getElementById('mobile-menu-icon-close');
+
+            if (menu) menu.classList.add('hidden');
+            if (iconOpen) iconOpen.classList.remove('hidden');
+            if (iconClose) iconClose.classList.add('hidden');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        }
+
         function navigateTo(viewName, sectionId = null) {
             document.getElementById('view-landing').classList.add('hidden');
             document.getElementById('view-booking').classList.add('hidden');
@@ -1599,7 +1679,7 @@
         document.getElementById('pin-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const pin = document.getElementById('pin-input').value;
-            if (pin === '1234') {
+            if (pin === '8467') {
                 closeModal('modal-pin');
                 navigateTo('admin');
             } else {
@@ -1769,12 +1849,32 @@
             showToast(`Se tacharon ${tachadosCount} turno(s) de ${startVal} a ${endVal} hs`);
         });
 
-        document.getElementById('admin-filter-date').addEventListener('change', renderAdminBookings);
+        let adminWeekStart = getMondayOfWeek(new Date());
+
+        function getMondayOfWeek(dateObj) {
+            const d = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+            const day = d.getDay();
+            const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+            return new Date(d.setDate(diff));
+        }
+
+        function changeAdminWeek(daysOffset) {
+            adminWeekStart.setDate(adminWeekStart.getDate() + daysOffset);
+            renderAdminBookings();
+        }
+
+        function goToCurrentAdminWeek() {
+            adminWeekStart = getMondayOfWeek(new Date());
+            renderAdminBookings();
+        }
 
         function renderAdminBookings() {
-            const container = document.getElementById('admin-bookings-list');
-            const filterDate = document.getElementById('admin-filter-date').value;
+            const thead = document.getElementById('admin-weekly-thead');
+            const tbody = document.getElementById('admin-weekly-tbody');
+            const rangeLabel = document.getElementById('admin-week-range-label');
+            if (!thead || !tbody) return;
 
+            // Construir mapa unificado de ocupación (Nube + Local)
             const mapaUnificado = new Map();
 
             window.horariosNube.forEach(h => {
@@ -1785,12 +1885,12 @@
                     cloudDocId: h.id,
                     date: h.fecha,
                     time: h.hora,
-                    patientName: localMatch ? localMatch.patientName : (h.motivo || 'Ocupado / Bloqueado'),
-                    serviceName: localMatch ? localMatch.serviceName : 'Franja Tachada en Agenda',
-                    reason: localMatch ? localMatch.reason : 'Sincronizado en Firebase',
+                    patientName: localMatch ? localMatch.patientName : (h.motivo || 'Tachado'),
+                    serviceName: localMatch ? localMatch.serviceName : 'Bloqueado',
+                    reason: localMatch ? localMatch.reason : '',
                     price: localMatch ? localMatch.price : 0,
                     isSpecialHour: localMatch ? localMatch.isSpecialHour : false,
-                    isManualBlock: localMatch ? localMatch.isManualBlock : true
+                    isManualBlock: localMatch ? localMatch.isManualBlock : !localMatch
                 });
             });
 
@@ -1801,49 +1901,180 @@
                 }
             });
 
-            let filtered = Array.from(mapaUnificado.values());
-            if (filterDate) {
-                filtered = filtered.filter(b => b.date === filterDate);
+            // Generar los 6 días de la semana (Lunes a Sábado)
+            const weekDays = [];
+            const dayNamesShort = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            const todayISO = formatDateISO(new Date());
+
+            for (let i = 0; i < 6; i++) {
+                const d = new Date(adminWeekStart);
+                d.setDate(adminWeekStart.getDate() + i);
+                weekDays.push({
+                    dateObj: d,
+                    iso: formatDateISO(d),
+                    dayOfWeek: d.getDay(),
+                    dayName: dayNamesShort[d.getDay()],
+                    dayNum: String(d.getDate()).padStart(2, '0'),
+                    monthNum: String(d.getMonth() + 1).padStart(2, '0'),
+                    isToday: formatDateISO(d) === todayISO
+                });
             }
 
-            filtered.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+            if (rangeLabel) {
+                const first = weekDays[0];
+                const last = weekDays[5];
+                rangeLabel.textContent = `${first.dayNum}/${first.monthNum} al ${last.dayNum}/${last.monthNum}/${last.dateObj.getFullYear()}`;
+            }
 
-            if (filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-carbon/65 py-8 text-center bg-greige rounded-2xl border border-carbon/10">No hay turnos agendados ni horarios bloqueados para mostrar.</p>`;
+            // Encabezado de columnas (Hora + Lunes a Sábado)
+            thead.innerHTML = `
+                <tr>
+                    <th class="p-3.5 text-[11px] uppercase tracking-wider font-semibold text-oliva w-20 text-center border-r border-carbon/10">Hora</th>
+                    ${weekDays.map(d => `
+                        <th class="p-3 text-center border-r border-carbon/10 last:border-r-0 ${d.isToday ? 'bg-terracota/12' : ''}">
+                            <div class="text-[10px] uppercase tracking-widest ${d.isToday ? 'text-terracota-dark font-bold' : 'text-oliva font-semibold'}">${d.dayName}</div>
+                            <div class="font-editorial text-lg font-semibold ${d.isToday ? 'text-terracota-dark' : 'text-carbon'} leading-tight">${d.dayNum}/${d.monthNum}</div>
+                        </th>
+                    `).join('')}
+                </tr>
+            `;
+
+            // Filas horarias (08:00 a 20:00 según duración configurada)
+            const dayStart = 8 * 60;
+            const dayEnd = 21 * 60;
+            const step = Number(config.slotDuration) || 60;
+            const habitStartMins = timeToMinutes(config.startTime);
+            const habitEndMins = timeToMinutes(config.endTime);
+
+            tbody.innerHTML = '';
+
+            for (let mins = dayStart; mins < dayEnd; mins += step) {
+                const timeStr = minutesToTime(mins);
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-greige/40 transition-colors';
+
+                let rowHtml = `
+                    <td class="p-3 text-xs font-semibold text-carbon/80 text-center bg-greige/60 border-r border-carbon/10">
+                        ${timeStr} hs
+                    </td>
+                `;
+
+                weekDays.forEach(d => {
+                    const clave = `${d.iso}_${timeStr}`;
+                    const item = mapaUnificado.get(clave);
+                    const isRegularHour = config.workingDays.includes(d.dayOfWeek) && (mins >= habitStartMins) && (mins < habitEndMins);
+
+                    if (item) {
+                        const isTachado = item.isManualBlock;
+                        const cellBg = isTachado
+                            ? 'slot-tachado border-carbon/20 text-carbon/75'
+                            : 'bg-terracota/15 border-terracota/45 text-carbon';
+
+                        rowHtml += `
+                            <td class="p-1.5 border-r border-carbon/10 last:border-r-0 align-top">
+                                <button type="button"
+                                    onclick="deleteBooking(this, '${item.id}', '${d.iso}', '${timeStr}', '${item.cloudDocId || ''}')"
+                                    title="Clic para liberar este horario"
+                                    class="w-full min-h-[58px] p-2 rounded-xl border ${cellBg} text-left transition-all hover:opacity-85 group flex flex-col justify-between">
+                                    <div class="flex items-start justify-between gap-1">
+                                        <span class="text-[11px] font-semibold leading-tight line-clamp-1 ${isTachado ? 'line-through text-carbon/65' : 'text-carbon'}">
+                                            ${item.patientName}
+                                        </span>
+                                        <i data-lucide="x" class="w-3 h-3 text-terracota-dark opacity-60 group-hover:opacity-100 shrink-0"></i>
+                                    </div>
+                                    <span class="text-[10px] leading-tight line-clamp-1 ${isTachado ? 'text-carbon/55' : 'text-terracota-dark font-medium'}">
+                                        ${isTachado ? 'Tachado · Liberar' : item.serviceName}
+                                    </span>
+                                </button>
+                            </td>
+                        `;
+                    } else {
+                        const freeBg = isRegularHour
+                            ? 'bg-oliva/10 hover:bg-oliva/20 border-oliva/30 text-oliva'
+                            : 'bg-greige/50 hover:bg-nude/70 border-carbon/10 text-carbon/50';
+
+                        rowHtml += `
+                            <td class="p-1.5 border-r border-carbon/10 last:border-r-0 align-top">
+                                <button type="button"
+                                    onclick="quickToggleBlockCell(this, '${d.iso}', '${timeStr}')"
+                                    title="Clic para tachar este horario"
+                                    class="w-full min-h-[58px] p-2 rounded-xl border border-dashed ${freeBg} text-left transition-all group flex flex-col justify-between">
+                                    <span class="text-[11px] font-medium flex items-center justify-between">
+                                        <span>${isRegularHour ? 'Disponible' : 'Especial'}</span>
+                                        <i data-lucide="ban" class="w-3 h-3 opacity-0 group-hover:opacity-70 text-terracota transition-opacity"></i>
+                                    </span>
+                                    <span class="text-[9px] uppercase tracking-wider opacity-60 group-hover:opacity-100">
+                                        Clic para tachar
+                                    </span>
+                                </button>
+                            </td>
+                        `;
+                    }
+                });
+
+                tr.innerHTML = rowHtml;
+                tbody.appendChild(tr);
+            }
+
+            lucide.createIcons();
+        }
+
+        async function quickToggleBlockCell(btnEl, date, time) {
+            if (btnEl) {
+                btnEl.disabled = true;
+                btnEl.innerHTML = `<span class="text-[11px] text-oliva">Tachando...</span>`;
+            }
+
+            if (typeof window.bloquearHorarioNube === 'function') {
+                await window.bloquearHorarioNube(date, time, 'Tachado desde agenda semanal');
+            }
+
+            bookings.push({
+                id: 'blk-' + Date.now(),
+                date,
+                time,
+                patientName: 'Tachado',
+                serviceId: 'manual',
+                serviceName: 'No disponible',
+                reason: 'Bloqueado manualmente',
+                price: 0,
+                isSpecialHour: false,
+                isManualBlock: true,
+                status: 'Bloqueado'
+            });
+            saveBookings();
+
+            renderAdminBookings();
+            renderTimeSlots();
+            showToast(`Horario ${time} hs tachado`);
+        }
+
+        async function deleteBooking(btnEl, id, date, time, cloudDocId) {
+            if (btnEl) {
+                btnEl.disabled = true;
+                btnEl.innerHTML = `<span class="text-[11px]">Liberando...</span>`;
+            }
+
+            let eliminadoEnNube = true;
+            if (typeof window.liberarHorarioNube === 'function') {
+                eliminadoEnNube = await window.liberarHorarioNube(date, time, cloudDocId);
+            }
+
+            if (!eliminadoEnNube) {
+                if (btnEl) {
+                    btnEl.disabled = false;
+                    btnEl.innerHTML = `<span class="text-[11px] text-terracota-dark">Reintentar</span>`;
+                }
+                showToast('Firebase bloqueó el borrado. Revisá las Reglas de Firestore.');
                 return;
             }
 
-            container.innerHTML = '';
-            filtered.forEach(bk => {
-                const readableDate = bk.date.split('-').reverse().join('/');
-                const card = document.createElement('div');
-                card.className = `p-4 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
-                    bk.isManualBlock ? 'bg-greige border-carbon/12' : bk.isSpecialHour ? 'bg-terracota/8 border-terracota/35' : 'bg-blanco-calido border-carbon/12'
-                }`;
+            bookings = bookings.filter(b => b.id !== id && !(b.date === date && b.time === time));
+            saveBookings();
 
-                card.innerHTML = `
-                    <div class="space-y-1">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-2.5 py-0.5 rounded-lg bg-carbon text-blanco-calido text-xs font-semibold">
-                                ${readableDate} · ${bk.time} hs
-                            </span>
-                            <span class="text-sm font-semibold text-carbon">${bk.patientName}</span>
-                            ${bk.isSpecialHour ? `<span class="px-2 py-0.5 rounded-full bg-terracota/20 text-terracota-dark text-[10px] font-semibold">Horario Especial</span>` : ''}
-                            ${bk.isManualBlock ? `<span class="px-2 py-0.5 rounded-full bg-oliva/20 text-oliva text-[10px] font-semibold">Tachado</span>` : ''}
-                        </div>
-                        <p class="text-xs font-medium text-oliva">${bk.serviceName} ${bk.price > 0 ? `· <strong>${formatCurrency(bk.price)}</strong>` : ''}</p>
-                        ${!bk.isManualBlock ? `<p class="text-xs text-carbon/75"><strong>Motivo:</strong> ${bk.reason}</p>` : ''}
-                    </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="deleteBooking(this, '${bk.id}', '${bk.date}', '${bk.time}', '${bk.cloudDocId || ''}')" class="px-3.5 py-2 rounded-xl border border-terracota/45 text-terracota-dark hover:bg-terracota hover:text-blanco-calido text-xs font-medium transition-colors flex items-center gap-1.5">
-                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                            <span>Liberar horario</span>
-                        </button>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-            lucide.createIcons();
+            renderAdminBookings();
+            renderTimeSlots();
+            showToast('Horario liberado');
         }
 
         async function deleteBooking(btnEl, id, date, time, cloudDocId) {
