@@ -531,6 +531,15 @@
                             <p id="booking-service-desc" class="text-[11px] text-carbon/65 mt-1.5 leading-relaxed font-light"></p>
                         </div>
 
+                        <!-- Cartel de Indicaciones Previas según el Servicio -->
+                        <div id="service-prep-box" class="hidden p-4 rounded-2xl bg-oliva/10 border border-oliva/30 text-xs text-carbon space-y-1.5">
+    <p class="font-semibold text-oliva flex items-center gap-1.5 uppercase tracking-wider text-[10px]">
+        <i data-lucide="shirt" class="w-3.5 h-3.5 text-terracota"></i>
+        <span>¿Cómo asistir a esta sesión?</span>
+    </p>
+    <div id="service-prep-text" class="text-[11px] text-carbon/85 leading-relaxed font-normal whitespace-pre-line"></div>
+                        </div>
+
                         <div>
                             <label for="booking-name" class="block text-xs font-medium text-carbon/85 mb-1.5">Nombre y Apellido *</label>
                             <input type="text" id="booking-name" required placeholder="Ej. Sofía Martínez" class="w-full px-4 py-3 rounded-xl bg-greige border border-carbon/15 text-sm text-carbon focus:outline-none focus:border-terracota">
@@ -1017,6 +1026,16 @@
                 tag: 'Diagnóstico Biomecánico',
                 price: 50000,
                 description: 'Análisis postural integral estático y dinámico, complementado con estudio biomecánico de la marcha en cinta para detectar desequilibrios y sobrecargas.',
+                prepNotes: '• Concurrir con ropa deportiva ajustada al cuerpo, o calza y top deportivo (short en caso de hombres).\n• Traer el calzado de uso habitual donde vas a usar las plantillas.\n• Si requerís una plantilla para deporte y otra para uso diario, traé ambos calzados.',
+                icon: 'scan-line'
+            },
+             {
+                id: 'srv-postura',
+                name: 'Evaluación de la Postura',
+                tag: 'Diagnóstico Biomecánico',
+                price: 35000,
+                description: 'Análisis postural integral estático y dinámico.',
+                prepNotes: '• Concurrir con ropa deportiva ajustada al cuerpo, o calza y top deportivo (short en caso de hombres).',
                 icon: 'scan-line'
             },
             {
@@ -1026,6 +1045,7 @@
                 price: 200000,
                 priceLabel: 'Consultar',
                 description: 'Diseño y confección de plantillas ortopédicas a medida con tecnología Ebers, adaptadas exactamente a los resultados de tu estudio de la pisada.',
+                prepNotes: '• Concurrir con ropa deportiva ajustada al cuerpo, o calza y top deportivo (short en caso de hombres).\n• Traer el calzado de uso habitual donde vas a usar las plantillas.\n• Si requerís una plantilla para deporte y otra para uso diario, traé ambos calzados.',
                 icon: 'footprints'
             },
             {
@@ -1034,6 +1054,7 @@
                 tag: 'Terapia Miofascial',
                 price: 35000,
                 description: 'Técnica de fisioterapia invasiva de alta precisión para desactivar puntos gatillo miofasciales, aliviar contracturas rebeldes y reducir el dolor muscular.',
+                prepNotes: '• Concurrir con ropa cómoda.\n• No usar corpiños deportivos si la zona de dolor es dorsal, cervical o de hombros.\n• Traer short o calza corta en caso de presentar dolor en miembros inferiores.',
                 icon: 'target'
             }
         ];
@@ -1506,6 +1527,17 @@
             if (!service) return;
 
             document.getElementById('booking-service-desc').textContent = service.description;
+
+            const prepBox = document.getElementById('service-prep-box');
+            const prepText = document.getElementById('service-prep-text');
+            if (prepBox && prepText) {
+                if (service.prepNotes && service.prepNotes.trim() !== '') {
+                    prepText.textContent = service.prepNotes;
+                    prepBox.classList.remove('hidden');
+                } else {
+                    prepBox.classList.add('hidden');
+                }
+            }
 
             const basePrice = Number(service.price) || 0;
             let surcharge = 0;
